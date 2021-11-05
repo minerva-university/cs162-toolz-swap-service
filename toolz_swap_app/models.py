@@ -13,14 +13,6 @@ class Tool(models.Model):
     def __str__(self):
         return self.toolName
 
-class Swaps(models.Model):
-    borrowerId =  models.ForeignKey(
-        User, on_delete=models.CASCADE, null=True, blank=True)
-    lenderId =  models.ForeignKey(
-        User, on_delete=models.CASCADE, null=True, blank=True)
-    toolId =  models.ForeignKey(
-        Tool, on_delete=models.CASCADE, null=True, blank=True)
-    date = models.DateTimeField(auto_now_add=True)
 
 class Listing(models.Model):
     lenderId =  models.ForeignKey(
@@ -29,3 +21,15 @@ class Listing(models.Model):
         Tool, on_delete=models.CASCADE, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     expires = models.DateTimeField()
+
+
+class Swaps(models.Model):
+    borrowerId =  models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, blank=True)
+    toolId =  models.ForeignKey(
+        Tool, on_delete=models.CASCADE, null=True, blank=True)
+    listingId = models.ForeignKey(
+        Listing, on_delete=models.CASCADE, null=True, blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+    expires = models.DateTimeField()
+
