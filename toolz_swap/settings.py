@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -80,11 +82,15 @@ WSGI_APPLICATION = 'toolz_swap.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-#TODO Use PostgreSQL
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get("TOOLZ_APP_DB"),
+        'USER': os.environ.get("POSTGRES_USERNAME"),
+        'PASSWORD': os.environ.get("TOOLZ_APP_DB_PASSWORD"),
+        'HOST': 'localhost',
+        'PORT': 5432,
     }
 }
 
