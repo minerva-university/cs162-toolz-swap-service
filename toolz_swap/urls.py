@@ -28,4 +28,5 @@ urlpatterns = [
     #TODO add url patterns from toolz_swap_app
     path('toolz-swap/', include('toolz_swap_app.urls')),
     path('', RedirectView.as_view(url='toolz-swap/')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

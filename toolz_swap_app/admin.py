@@ -2,9 +2,9 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User, Tool, Listing, Swaps
 
-class CustomeUserAdmin(UserAdmin):
+class CustomUserAdmin(UserAdmin):
     pass
-admin.site.register(User, CustomeUserAdmin)
+admin.site.register(User, CustomUserAdmin)
 
 class ListingsInstanceInline(admin.TabularInline):
     model = Listing

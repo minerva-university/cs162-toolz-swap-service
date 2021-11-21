@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 import uuid
 
 class User(AbstractUser):
-    pass
+    username = models.CharField(max_length=40, unique=True)
 
 class Tool(models.Model):
     tool_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular tool')
