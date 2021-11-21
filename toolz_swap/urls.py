@@ -18,10 +18,14 @@ from django.urls import path
 from django.urls import include
 from django.views.generic import RedirectView
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     #TODO permanently redirect root url to 'toolz-swap'
     #TODO add url patterns from toolz_swap_app
-    
-]
+    path('toolz-swap/', include('toolz_swap_app.urls')),
+    path('', RedirectView.as_view(url='toolz-swap/')),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
