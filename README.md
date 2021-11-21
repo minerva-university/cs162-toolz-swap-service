@@ -13,12 +13,14 @@ export POSTGRES_USERNAME=
 export TOOLZ_APP_DB_PASSWORD=
 ```
 For Windows: <br>
+
+Create .env file in your project directory and fill in the environmental variables. The usage of `python-dotenv` library in the codebase will take care of importing and using them. This adheres to the 12-factor app principles.
 ```
-SET DJANGO_SECRET_KEY=
-SET DEBUG=
-SET TOOLZ_APP_DB=
-SET POSTGRES_USERNAME=
-SET TOOLZ_APP_DB_PASSWORD=
+DJANGO_SECRET_KEY=
+DEBUG=
+TOOLZ_APP_DB=
+POSTGRES_USERNAME=
+TOOLZ_APP_DB_PASSWORD=
 ```
 You can reach out in the group chat if you need the values for the environment variables
 
@@ -26,3 +28,12 @@ You can reach out in the group chat if you need the values for the environment v
 7. Once the dependencies are installed, run the command `python manage.py makemigrations` followed by `python manage.py migrate`. 
 8. From your terminal,run the command `python manage.py runserver`. <br>
 Navigate to the url http://127.0.0.1:8000/ to view the app locally. 
+
+## Database
+1. Once you create the database `toolz_app_db`, and also figure out the Postres connection (using the right credentials in the .env file), you may want to insert some test data to test the application. Here are the next steps after you can view the app successfully at http://127.0.0.1:8000/
+2. Setup a superuser by running `python3 manage.py createsuperuser`(you might need to use `python manage.py createsuperuser` if using Windows). You will be prompted to enter a username, email address, and strong password.
+3. Once this command completes a new superuser will have been added to the database. Now restart the development server so we can test the login: `python3 manage.py runserver`
+4. Go login to the site, open the /admin URL (e.g. http://127.0.0.1:8000/admin) and enter your new superuser userid and password credentials
+5. From here on, you can proceed to adding, deleting, and modifying the data. 
+6. For more about using the Admin page, go here: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Admin_site 
+7. For more about authentication and creating regular users for testing, go here: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication 

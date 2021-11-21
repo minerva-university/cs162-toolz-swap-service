@@ -9,9 +9,6 @@ def index(request):
     num_books = Tool.objects.all().count()
     num_instances = Listing.objects.all().count()
 
-    # Available books (status = 'a')
-    #num_instances_available = BookInstance.objects.filter(status__exact='a').count()
-
     # The 'all()' is implied by default.
     num_users = User.objects.count()
 
@@ -21,5 +18,7 @@ def index(request):
         'num_authors': num_users,
     }
 
+    # this does not actually use the context data for now. This is here just to demonstrate 
+    # the use of views.py and how it interacts with models.py
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'homepage.html', context=context)
