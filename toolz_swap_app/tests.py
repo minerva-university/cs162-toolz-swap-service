@@ -85,5 +85,3 @@ class TestDatabase(TestCase):
 # TODO: Test Listings
 # TODO: Test Swaps
 # TODO: Test users
-# TODO: Test interactions and foreign keys
-# TODO: ADD SOME LOGIC (transactions)

@@ -43,4 +43,3 @@ class Swaps(models.Model):
 
     def __str__(self):
         return "<borrowerId: {} - listingId: {}>".format(self.borrowerId, self.listingId)
-
