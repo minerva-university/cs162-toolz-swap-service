@@ -17,7 +17,7 @@ class Tool(models.Model):
         ordering = ['toolName']
 
     def __str__(self):
-        return self.toolName
+        return "<Name:{} - Brand:{} - Model:{}>".format(self.toolName, self.toolBrand, self.toolModel)
 
 class Listing(models.Model):
     #listing_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular listing')
@@ -28,6 +28,9 @@ class Listing(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     expires = models.DateTimeField()
 
+    def __str__(self):
+        return f"<lenderId:{self.lenderId} - toolId:{self.toolId}"
+
 
 class Swaps(models.Model):
     #swaps_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular swap')
@@ -37,4 +40,7 @@ class Swaps(models.Model):
         Listing, on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     expires = models.DateTimeField()
+
+    def __str__(self):
+        return "<borrowerId: {} - listingId: {}>".format(self.borrowerId, self.listingId)
 

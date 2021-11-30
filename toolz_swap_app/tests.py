@@ -44,13 +44,16 @@ class TestInteractions(TestCase):
         swap_2 = Swaps.objects.create(borrowerId = test_user_1, listingId=listing_3, expires=datetime.date(2022, 1, 1))
 
     def test_check_queries(self):
+        '''
+        Simply quieries the entries.
+
+        If failed, then there is something wrong with the set up of the test
+        '''
+
         users = User.objects.all()
+        tools = Tool.objects.all()
         listings = Listing.objects.all()
         swaps = Swaps.objects.all()
-
-        print(users)
-        print(listings)
-        print(swaps)
 
         self.assertTrue(True)
 
@@ -62,10 +65,15 @@ class TestInteractions(TestCase):
         
         '''
         swap_1 = Swaps.objects.all()[0]
-        queried_listing = Listing.objects.filter(id=swap_1.id)
-        print(queried_listing.lenderId)
 
-        self.assertTrue(True)
+        lender = swap_1.listingId.lenderId
+        borrower = swap_1.borrowerId
+
+        first_user = User.objects.all()[0]
+        second_user = User.objects.all()[1]
+
+        self.assertEqual((first_user.id, first_user.first_name), (lender.id, lender.first_name))
+        self.assertEqual((second_user.id, second_user.first_name), (borrower.id, borrower.first_name))
 
 # TODO: Test Listings
 # TODO: Test Swaps
