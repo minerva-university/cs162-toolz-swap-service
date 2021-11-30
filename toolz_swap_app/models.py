@@ -7,7 +7,7 @@ class User(AbstractUser):
     USERNAME_FIELD = 'username'
 
 class Tool(models.Model):
-    tool_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular tool')
+    #tool_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular tool')
     toolName = models.CharField(max_length=200)
     toolBrand = models.CharField(max_length=200, null=True, blank=True)
     toolModel = models.CharField(max_length=200, null=True, blank=True)
@@ -20,7 +20,7 @@ class Tool(models.Model):
         return self.toolName
 
 class Listing(models.Model):
-    listing_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular listing')
+    #listing_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular listing')
     lenderId =  models.ForeignKey(
         User, on_delete=models.RESTRICT, null=True)
     toolId =  models.ForeignKey(
@@ -30,7 +30,7 @@ class Listing(models.Model):
 
 
 class Swaps(models.Model):
-    swaps_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular swap')
+    #swaps_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular swap')
     borrowerId =  models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)
     listingId = models.ForeignKey(
