@@ -1,7 +1,9 @@
 from django.urls import path
 from . import views
+from rest_framework import routers
+from toolz_swap_app.api import ToolViewSet
 
-urlpatterns = [
-    # when the user is on the '/' path, it calles the index function from views.py
-    path('', views.index, name='index'),
-]
+router = routers.DefaultRouter()
+router.register('api/tool', ToolViewSet, 'tool')
+
+urlpatterns = router.urls
