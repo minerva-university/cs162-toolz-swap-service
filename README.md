@@ -44,8 +44,11 @@ In new bash terminal:
 - docker exec -it toolz_swap_back bash
 - python manage.py migrate
 - python manage.py createsuperuser
-
+CTRL+C
+docker-compose up
 yarn
 yarn start
 
 localhost:3000 
+
+docker-compose down
