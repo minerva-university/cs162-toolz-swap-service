@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  postgres_db:
+    container_name: postgres_db
+    image: postgres:alpine
+    ports:
+    - 5432:5432
+    environment:
+      POSTGRES_DB: "toolz_app_db_1"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+    networks:
+      - appnet
+    deploy:
+      restart_policy:
+        condition: "on-failure"
+        
+  toolz_swap_back:
+    restart: always
+    container_name: toolz_swap_back
+    build:
+      context: ./toolz_swap_back/
+      dockerfile: Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000 
+    env_file: .env
+    ports:
+      - "8000:8000"
+    depends_on: 
+      - postgres_db
+    networks:
+      - appnet
+
+  
+
+
+
+networks:
+  appnet:
+    driver: bridge

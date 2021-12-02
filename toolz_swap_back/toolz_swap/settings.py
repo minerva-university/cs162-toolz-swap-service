@@ -96,7 +96,7 @@ DATABASES = {
         'NAME': os.environ.get("TOOLZ_APP_DB"),
         'USER': os.environ.get("POSTGRES_USERNAME"),
         'PASSWORD': os.environ.get("TOOLZ_APP_DB_PASSWORD"),
-        'HOST': 'localhost',
+        'HOST': 'postgres_db',
         'PORT': 5432,
     }
 }

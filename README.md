@@ -37,3 +37,15 @@ Once you create the database `toolz_app_db` and also figure out the Postres conn
 4. From here on, you can proceed to adding, deleting, and modifying the data. 
 5. For more about using the Admin page, go here: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Admin_site 
 6. For more about authentication and creating regular users for testing, go here: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication 
+
+
+docker-compose up
+In new bash terminal:
+- docker exec -it toolz_swap_back bash
+- python manage.py migrate
+- python manage.py createsuperuser
+
+yarn
+yarn start
+
+localhost:3000 
