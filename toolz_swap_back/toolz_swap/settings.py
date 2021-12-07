@@ -36,7 +36,7 @@ else:
     DEBUG  = False
 
 ALLOWED_HOSTS = [
-    '127.0.0.1'
+    '127.0.0.1', 'localhost'
 ]
 
 
@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'toolz_swap_app', #register new app
+    'rest_framework',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -60,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'toolz_swap.urls'
@@ -90,10 +93,10 @@ WSGI_APPLICATION = 'toolz_swap.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get("TOOLZ_APP_DB"),
+        'NAME': os.environ.get("TOOLZ_APP_DB_DOCKER"),
         'USER': os.environ.get("POSTGRES_USERNAME"),
         'PASSWORD': os.environ.get("TOOLZ_APP_DB_PASSWORD"),
-        'HOST': 'localhost',
+        'HOST': os.environ.get("DB_HOST_DOCKER"),
         'PORT': 5432,
     }
 }
@@ -157,3 +160,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
+
+CORS_ALLOWED_ORIGINS  = [
+     'http://localhost:3000'
+]

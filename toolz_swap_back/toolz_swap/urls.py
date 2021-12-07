@@ -14,12 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.urls import include
 from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
-
+from rest_framework import routers
+from toolz_swap_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,11 +28,9 @@ urlpatterns = [
     # if we are on the toolz-swap/ path, it loads urls for the toolz_swap_app
     path('toolz-swap/', include('toolz_swap_app.urls')),
 
-    # when landing on '/', redirecdts to 'toolz-swap/'
-    path('', RedirectView.as_view(url='toolz-swap/')),
-
     # enables authentication URLs provided by Django such as login and logout
     path('accounts/', include('django.contrib.auth.urls')),
 
+    path('', include('toolz_swap_app.urls')),
     # enables serving static pages in development
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
