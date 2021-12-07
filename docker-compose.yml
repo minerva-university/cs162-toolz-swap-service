@@ -2,12 +2,12 @@ version: '3'
 
 services:
   postgres_db:
-    container_name: postgres_db
+    container_name: postgres_db_toolz
     image: postgres:alpine
     ports:
     - 5432:5432
     environment:
-      POSTGRES_DB: "toolz_app_db"
+      POSTGRES_DB: "toolz_app_db_docker"
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "password"
     networks:
