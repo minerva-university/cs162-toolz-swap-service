@@ -1,58 +1,157 @@
 # toolz-swap-service
-## Local Setup
-1. Clone this repository on your local machine either using the command line or github desktop. When making changes, please don't work on the `main` branch. Create a new branch and work from there. 
-2. You should have PostgreSQL client installed locally. You can download that here: https://postgresapp.com/. It is preferred that you download the Mac app as it is convenient to use. 
-3. Once you have PostgreSQL setup, in your terminal run the command `psql CREATE DATABASE toolz_app_db;` to create a database for the app
-4. Create a python virtual environment. You can find more information on how to create one here: https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/. Please use Python3 as this is the version of Python we are using for this project. 
-5. You will need to set environment variables for the following. If you're using the Terminal in Mac, your .env file would look like this: <br>
+
+## Setup
+The project as is, is configured for a docker setup. For local setup, please see warning to change HOST in settings.
+
+### Virtual Environment
+
+```For Windows (bash)
+py -3 -m venv <name_of_environment> 
 ```
-export DJANGO_SECRET_KEY=
-export DEBUG=
-export TOOLZ_APP_DB=
-export POSTGRES_USERNAME=
-export TOOLZ_APP_DB_PASSWORD=
+```bash
+source <name_of_environment>/Scripts/activate
 ```
-For Windows: <br>
-
-Create .env file in your project directory and fill in the environmental variables. The usage of `python-dotenv` library in the codebase will take care of importing and using them. This adheres to the 12-factor app principles.
-```
-DJANGO_SECRET_KEY=
-DEBUG=
-TOOLZ_APP_DB=
-POSTGRES_USERNAME=
-TOOLZ_APP_DB_PASSWORD=
-```
-You can reach out in the group chat if you need the values for the environment variables
-
-6. From the root directory, install the app's dependencies by runnig the command `pip install -r requirements.txt`
-7. Once the dependencies are installed, run the command `python manage.py makemigrations` followed by `python manage.py migrate`. 
-8. From your terminal,run the command `python manage.py runserver`. <br>
-Navigate to the url http://127.0.0.1:8000/ to view the app locally. 
-
-## Database
-Once you create the database `toolz_app_db` and also figure out the Postres connection (using the right credentials in the .env file), you may want to insert some test data to test the application. Here are the next steps after you can view the app successfully at http://127.0.0.1:8000/ :
-1. Setup a superuser by running `python3 manage.py createsuperuser`(you might need to use `python manage.py createsuperuser` if using Windows). You will be prompted to enter a username, email address, and strong password.
-2. Once this command completes a new superuser will have been added to the database. Now restart the development server so we can test the login: `python3 manage.py runserver`
-3. Go login to the site, open the /admin URL (e.g. http://127.0.0.1:8000/admin) and enter your new superuser userid and password credentials
-4. From here on, you can proceed to adding, deleting, and modifying the data. 
-5. For more about using the Admin page, go here: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Admin_site 
-6. For more about authentication and creating regular users for testing, go here: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication 
-
-
-docker-compose build
-docker-compose up
-In new bash terminal:
-- docker exec -it toolz_swap_back bash
-- python manage.py migrate
-- python manage.py createsuperuser
-CTRL+C first bash terminal
-docker-compose up
-
-cd toolz_swap_front
-yarn
-yarn start
-
-localhost:3000 
-
-docker-compose down
+To deactivate virtual environment:
+```bash
 deactivate
+```
+### Environment Variables
+
+At the root of you directory, you should create a .env file with the following content:
+
+DJANGO_SECRET_KEY=""
+DEBUG="true"
+TOOLZ_APP_DB=toolz_app_db_local
+POSTGRES_USERNAME=postgres
+TOOLZ_APP_DB_PASSWORD=password
+TOOLZ_APP_DB=toolz_app_db_local
+DB_HOST=localhost
+TOOLZ_APP_DB_DOCKER=toolz_app_db_docker
+DB_HOST_DOCKER=postgres_db_toolz
+
+Please reach out for the DJANGO_SECRET_KEY variable
+
+### Local
+
+If you already have postgres installed and working, this way is probably faster:
+
+Make sure database HOST in toolz_swap_back/toolz_app/settings.py is set to os.environ.get("DB_HOST")
+Make sure database NAME in toolz_swap_back/toolz_app/settings.py is set to os.environ.get("TOOLZ_APP_DB")
+
+1. Install and setup postgres. Create a database called "toolz_app_db_local". For help, see here: https://www.youtube.com/watch?
+v=uoJjDbL-Y_E
+2. Enter virtual environment (see above)
+3. Enter toolz_swap_back directory:
+```bash
+cd toolz_swap_back
+```
+4. Install requirements.txt after entering virtual environment (see above)
+```bash
+pip install -r requirements.txt
+```
+5. Make migrations
+```bash
+python manage.py makemigrations
+```
+6. Migrate migrations
+```bash
+python manage.py migrate
+```
+7. Run app. Should be accessible at http://localhost:8000
+```bash
+python manage.py runserver
+```
+### Docker-Compose Setup
+
+Make sure database HOST in toolz_swap_back/toolz_app/settings.py is set to os.environ.get("DB_HOST_DOCKER")
+Make sure database NAME in toolz_swap_back/toolz_app/settings.py is set to os.environ.get("TOOLZ_APP_DB_DOCKER")
+
+1. Install Docker for you device
+2. In a bash terminal at root of project, run the following. This might take a minute or so. When completed will exit terminal
+```bash
+docker-compose build
+```
+3. Let this load and run in background
+```bash
+docker-compose up
+```
+4. In a new bash terminal run the following. It should open a terminal to engage with Django app
+```bash
+docker exec -it toolz_swap_back bash
+```
+5. Make migrations
+```bash
+python manage.py makemigrations
+```
+6. Migrate
+```bash
+python manage.py migrate
+```
+7. Going back to previous terminal, pres CTRL+C to exit "docker-compose up" job
+8. Reload by running "docker-compose up" again
+9. You should be able to open app at http://localhost:8000 
+10. After you finish with the app, you should tear it all down:
+```bash
+docker-compose down
+```
+### Starting React frontend
+
+1. From the root of the directory, enter 'toolz_swap_front' folder:
+```bash
+cd toolz_swap_front
+```
+2. Install the app. Yarn is recommended
+```bash
+yarn
+```
+or
+```bash
+npm install
+```
+3. Run the React app. Yarn is recommended
+```bash
+yarn start
+```
+or
+```bash
+npm start
+```
+4. App should be accessible and connected to django backend. Access app at http://localhost:3000
+
+### Django API
+
+For any of the models, by visiting http://localhost:8000/api/<name_of_model> you can access a form that allows you to post and create objects. You can even select foreign key objects if they are already created. It is using these endpoints that a frontend application will be able to communicate with our application. Feel free to submit information here and see that the entries show up in your postgres database. This is how you know everything is set up correctly. (Note: the uuid field does not need to be filled out, it does so automatically)
+
+### django-admin
+
+There is a django-admin page but its incredibly rudimentary right now. However, if you'd like to access the admin page:
+
+```bash
+python manage.py createsuperuser
+```
+
+Follow the prompt to create superuser. Then, simply log in at http://localhost:8000/admin .
+
+### Important notes
+
+At some point, you may or may not have to run the following command, if you see errors related to DJANGO_SETTINGS_MODULE
+
+To open django interactive terminal through docker:
+```
+docker exec -it toolz_swap_back bash
+```
+
+To open python interactive shell:
+```
+python manage.py shell
+```
+
+To set settings location
+```
+export DJANGO_SETTINGS_MODULE=toolz_app.settings
+```
+
+To delete all data in tables and restart:
+```
+python manage.py flush
+```
