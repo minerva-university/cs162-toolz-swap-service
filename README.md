@@ -157,3 +157,9 @@ To delete all data in tables and restart:
 ```
 python manage.py flush
 ```
+
+If you're getting errors related to postgres connection try killing all connections:
+```
+netstat -ano | findstr :<PORT>
+taskkill /PID <PID> /F
+```
