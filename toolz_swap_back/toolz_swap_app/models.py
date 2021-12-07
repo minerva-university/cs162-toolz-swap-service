@@ -18,10 +18,10 @@ class Tool(models.Model):
         ordering = ['toolName']
 
     def __str__(self):
-        return self.toolName
+        return "<ID: {} - Name:{} - Brand:{} - Model:{}>".format(self.id, self.toolName, self.toolBrand, self.toolModel)
 
 class Listing(models.Model):
-    listing_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular listing')
+    #listing_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular listing')
     lenderId =  models.ForeignKey(
         User, on_delete=models.RESTRICT, null=True)
     toolId =  models.ForeignKey(
@@ -29,9 +29,12 @@ class Listing(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     expires = models.DateTimeField()
 
+    def __str__(self):
+        return f"<lenderId:{self.lenderId} - toolId:{self.toolId}"
+
 
 class Swaps(models.Model):
-    swaps_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular swap')
+    #swaps_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular swap')
     borrowerId =  models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)
     listingId = models.ForeignKey(
@@ -39,3 +42,5 @@ class Swaps(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     expires = models.DateTimeField()
 
+    def __str__(self):
+        return "<borrowerId: {} - listingId: {}>".format(self.borrowerId, self.listingId)
