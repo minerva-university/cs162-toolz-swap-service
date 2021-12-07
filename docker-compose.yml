@@ -18,9 +18,9 @@ services:
         
   toolz_swap_back:
     restart: always
-    container_name: toolz_swap_back
+    container_name: server
     build:
-      context: ./toolz_swap_back/
+      context: server/
       dockerfile: Dockerfile
     command: python manage.py runserver 0.0.0.0:8000 
     env_file: .env

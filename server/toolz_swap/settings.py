@@ -21,24 +21,22 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
-#SECRET_KEY = 'temp_key'
+# SECRET_KEY = 'temp_key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get("DEBUG") == 'true':
     DEBUG = True
 else:
-    DEBUG  = False
+    DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1', 'localhost'
 ]
-
 
 # Application definition
 
@@ -49,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'toolz_swap_app', #register new app
+    'toolz_swap_app',  # register new app
     'rest_framework',
     'corsheaders'
 ]
@@ -85,7 +83,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'toolz_swap.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -96,11 +93,10 @@ DATABASES = {
         'NAME': os.environ.get("TOOLZ_APP_DB"),
         'USER': os.environ.get("POSTGRES_USERNAME"),
         'PASSWORD': os.environ.get("TOOLZ_APP_DB_PASSWORD"),
-        'HOST': 'postgres_db',
+        'HOST': 'localhost',
         'PORT': 5432,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -120,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -134,7 +129,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -147,12 +141,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#Add Django default authentication backend
+# Add Django default authentication backend
 AUTHENTICATION_BACKENDS = (
-        'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
-#use User model for authentication
+# use User model for authentication
 AUTH_USER_MODEL = 'toolz_swap_app.User'
 
 MEDIA_URL = '/media/'
@@ -161,6 +155,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
 
-CORS_ALLOWED_ORIGINS  = [
-     'http://localhost:3000'
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000'
 ]
