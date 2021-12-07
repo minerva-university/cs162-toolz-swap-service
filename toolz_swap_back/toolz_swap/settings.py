@@ -93,10 +93,10 @@ WSGI_APPLICATION = 'toolz_swap.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get("TOOLZ_APP_DB"),
+        'NAME': os.environ.get("TOOLZ_APP_DB_DOCKER"),
         'USER': os.environ.get("POSTGRES_USERNAME"),
         'PASSWORD': os.environ.get("TOOLZ_APP_DB_PASSWORD"),
-        'HOST': 'postgres_db',
+        'HOST': os.environ.get("DB_HOST_DOCKER"),
         'PORT': 5432,
     }
 }
