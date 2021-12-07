@@ -7,18 +7,15 @@ class User(AbstractUser):
     USERNAME_FIELD = 'username'
 
 class Tool(models.Model):
-    tool_id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, help_text='Unique ID for this particular tool')
+    toolId = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular tool')
     toolName = models.CharField(max_length=200)
     toolBrand = models.CharField(max_length=200, null=True, blank=True)
     toolModel = models.CharField(max_length=200, null=True, blank=True)
     toolCondition = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 
-    class Meta:
-        ordering = ['toolName']
-
     def __str__(self):
-        return "<ID: {} - Name:{} - Brand:{} - Model:{}>".format(self.id, self.toolName, self.toolBrand, self.toolModel)
+        return "<ID: {} - Name:{} - Brand:{} - Model:{}>".format(self.toolId, self.toolName, self.toolBrand, self.toolModel)
 
 class Listing(models.Model):
     #listing_id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, help_text='Unique ID for this particular listing')
