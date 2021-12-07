@@ -19,6 +19,7 @@ deactivate
 
 At the root of you directory, you should create a .env file with the following content:
 
+```
 DJANGO_SECRET_KEY=""
 DEBUG="true"
 TOOLZ_APP_DB=toolz_app_db_local
@@ -28,6 +29,7 @@ TOOLZ_APP_DB=toolz_app_db_local
 DB_HOST=localhost
 TOOLZ_APP_DB_DOCKER=toolz_app_db_docker
 DB_HOST_DOCKER=postgres_db_toolz
+```
 
 Please reach out for the DJANGO_SECRET_KEY variable
 
