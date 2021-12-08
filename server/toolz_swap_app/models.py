@@ -1,10 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from phonenumber_field.modelfields import PhoneNumberField
 import uuid
 
 
 class User(AbstractUser):
-    pass
+    phone = PhoneNumberField(unique=True, default='')
+    address = models.CharField(max_length=300, default='')
+    city = models.CharField(max_length=400, default='')
+    state = models.CharField(max_length=5, default='')
+    zipcode = models.IntegerField(null=True, default=0)
 
 
 class Tool(models.Model):
