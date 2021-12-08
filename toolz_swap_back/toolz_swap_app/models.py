@@ -38,8 +38,8 @@ class ToolModels(models.Model):
     year_released=models.IntegerField()
     
 class User(AbstractUser):
-    user_id = models.UUIDField(default=uuid.uuid4) 
-    username = models.CharField(max_length=40, unique=True, primary_key=True)
+    #user_id = models.UUIDField(default=uuid.uuid4) 
+    username = models.CharField(max_length=40, unique=True)
     USERNAME_FIELD = 'username'
 
     #first_name=models.CharField() 
