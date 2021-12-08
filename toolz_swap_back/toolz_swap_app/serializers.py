@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from .models import Tool
+#from .models import Tool
 
-class ToolSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tool
-        fields = ('toolId', 'toolName', 'toolBrand', 'toolModel', 'toolCondition', 'description')
+# the Tool model has been removed, so I commented this out for now:
+#class ToolSerializer(serializers.ModelSerializer):
+    #class Meta:
+        #model = Tool
+        #fields = ('toolId', 'toolName', 'toolBrand', 'toolModel', 'toolCondition', 'description')
