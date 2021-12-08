@@ -30,11 +30,20 @@ services:
       - postgres_db
     networks:
       - appnet
+  toolz_swap_front:
+    restart: always
+    container_name: toolz_swap_front
+    build:
+      context: ./toolz_swap_front/
+      dockerfile: Dockerfile
+    volumes: 
+      - react_build:/app_front/build 
+    ports: 
+      - "3000:3000"
 
   
-
-
-
+volumes:
+  react_build:
 networks:
   appnet:
     driver: bridge

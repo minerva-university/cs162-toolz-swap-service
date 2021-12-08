@@ -1,10 +1,8 @@
-FROM node:10-alpine as build-step
+FROM node:14.16.0-alpine 
 WORKDIR /app/app_front
-COPY package*.json .
+COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
-# Stage 2\
-FROM nginx:1.17.1-alpine
-COPY --from=build-step ./build /usr/share/nginx/html
+ENV PORT=3000
 EXPOSE 3000
+CMD ["npm", "start"]

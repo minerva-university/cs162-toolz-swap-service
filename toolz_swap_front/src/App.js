@@ -41,7 +41,7 @@ class App extends Component {
   }
   refreshList = () => {
     axios
-      .get("/api/tool/")
+      .get("http://localhost:8000/api/tool/")
       .then((res) => this.setState({ toolList: res.data }))
       .catch((err) => console.log(err));
   };
