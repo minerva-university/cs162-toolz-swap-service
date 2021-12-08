@@ -18,8 +18,7 @@ class ToolTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Listings)
 class ListingAdmin(admin.ModelAdmin):
-    list_display = ('lenderId', 'toolId', 'created', 'expires')
-
+    list_display = ('listing_id', 'title', 'owner', 'brand', 'model', 'tool_category')
 
 #admin.site.register(Tool)
 #admin.site.register(Listing)
