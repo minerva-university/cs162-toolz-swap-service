@@ -78,3 +78,4 @@ def users_view(request):
         return Response(serializer.data)
     elif request.method == 'POST':
         return signup(request)
+

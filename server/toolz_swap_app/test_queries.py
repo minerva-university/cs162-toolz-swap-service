@@ -1,5 +1,4 @@
 import datetime
-import requests
 
 from django.db.models import Count
 from django.test import TestCase
@@ -86,12 +85,7 @@ class TestDatabase(TestCase):
         Returns the tool id given a listing
 
         """
-        listing_1 = Listing.objects.all()[0]
-
-        queried_tool = listing_1.toolId
-        first_tool = Tool.objects.all()[0]
-
-        self.assertEqual(first_tool.id, queried_tool.id)
+        pass
 
     def test_num_listings(self):
         """Queries the number of listings in the database"""
@@ -110,7 +104,8 @@ class TestDatabase(TestCase):
         self.assertEqual(2, num_listings)
 
     def test_num_listings_for_tool(self):
-        """Queries the number of listinigs for a given tool (regardless of brand, meaning, if we search Drill, we should get all drill listings)"""
+        """Queries the number of listinigs for a given tool (regardless of brand, meaning, if we search Drill,
+        we should get all drill listings) """
 
         num_listings = Listing.objects.filter(toolId__toolName="Drill").count()
 
@@ -140,9 +135,10 @@ class TestDatabase(TestCase):
         self.assertEqual("Mike", most_lender_name)
         self.assertEqual("Kate", least_lender_name)
 
-    def test_signup_successful(self):
-        endpoint = ""
-        pass
+
+
+
+
 
 # TODO: Test Listings
 # TODO: Test Swaps
