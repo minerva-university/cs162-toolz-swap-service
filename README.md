@@ -33,7 +33,43 @@ DB_HOST_DOCKER=postgres_db_toolz
 
 Please reach out for the DJANGO_SECRET_KEY variable
 
-### Local
+### Docker-Compose Setup (recommended)
+
+Make sure database HOST in toolz_swap_back/toolz_app/settings.py is set to os.environ.get("DB_HOST_DOCKER")
+Make sure database NAME in toolz_swap_back/toolz_app/settings.py is set to os.environ.get("TOOLZ_APP_DB_DOCKER")
+
+1. Install Docker for you device
+2. In a bash terminal at root of project, run the following. This might take a minute or so. When completed will exit terminal
+```bash
+docker-compose build
+```
+3. Let this load and run in background
+```bash
+docker-compose up
+```
+4. In a new bash terminal run the following. It should open a terminal to engage with Django app
+```bash
+docker exec -it toolz_swap_back bash
+```
+5. Make migrations
+```bash
+python manage.py makemigrations
+```
+6. Migrate
+```bash
+python manage.py migrate
+```
+7. Going back to previous terminal, pres CTRL+C to exit "docker-compose up" job
+8. Reload by running "docker-compose up" again
+9. You should be able to open app at http://localhost:8000 
+10. You should be able to visit react client app at http://localhost:3000
+11. After you finish with the app, you should tear it all down and remove unecessary volumes:
+```bash
+docker-compose down
+docker volume rm <volume_id>
+```
+
+### Local Django setup
 
 If you already have postgres installed and working, this way is probably faster:
 
@@ -63,39 +99,7 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
-### Docker-Compose Setup
 
-Make sure database HOST in toolz_swap_back/toolz_app/settings.py is set to os.environ.get("DB_HOST_DOCKER")
-Make sure database NAME in toolz_swap_back/toolz_app/settings.py is set to os.environ.get("TOOLZ_APP_DB_DOCKER")
-
-1. Install Docker for you device
-2. In a bash terminal at root of project, run the following. This might take a minute or so. When completed will exit terminal
-```bash
-docker-compose build
-```
-3. Let this load and run in background
-```bash
-docker-compose up
-```
-4. In a new bash terminal run the following. It should open a terminal to engage with Django app
-```bash
-docker exec -it toolz_swap_back bash
-```
-5. Make migrations
-```bash
-python manage.py makemigrations
-```
-6. Migrate
-```bash
-python manage.py migrate
-```
-7. Going back to previous terminal, pres CTRL+C to exit "docker-compose up" job
-8. Reload by running "docker-compose up" again
-9. You should be able to open app at http://localhost:8000 
-10. After you finish with the app, you should tear it all down:
-```bash
-docker-compose down
-```
 ### Starting React frontend
 
 1. From the root of the directory, enter 'toolz_swap_front' folder:
