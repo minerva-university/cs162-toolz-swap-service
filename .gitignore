@@ -112,6 +112,9 @@ dmypy.json
 # VSCode project settings
 .vscode
 
+#IntelliJ project settings
+.idea
+
 # node_modules
 node_modules/
 postgres_data/
