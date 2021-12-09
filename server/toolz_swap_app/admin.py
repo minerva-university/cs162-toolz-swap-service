@@ -1,25 +1,28 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Listings, ToolTypes
+
+from .models import User, Listing, ToolType
+
 
 class CustomUserAdmin(UserAdmin):
     pass
+
+
 admin.site.register(User, CustomUserAdmin)
 
+
 class ListingsInstanceInline(admin.TabularInline):
-    model = Listings
+    model = Listing
+
 
 # Define the admin Tool class
-@admin.register(ToolTypes)
+@admin.register(ToolType)
 class ToolTypeAdmin(admin.ModelAdmin):
     list_display = ('tool_id', 'name', 'purpose', 'popularity')
     list_filter = ('name', 'purpose')
     inlines = [ListingsInstanceInline]
 
-@admin.register(Listings)
+
+@admin.register(Listing)
 class ListingAdmin(admin.ModelAdmin):
     list_display = ('listing_id', 'title', 'owner', 'brand', 'model', 'tool_category')
-
-#admin.site.register(Tool)
-#admin.site.register(Listing)
-#admin.site.register(Swaps)
