@@ -159,7 +159,6 @@ LOGIN_REDIRECT_URL = '/'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000'
 ]
-
 JWT_SECRET_KEY = os.environ.get("jwt_secret_key")
 
 
