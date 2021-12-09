@@ -13,7 +13,8 @@ class Cities(models.Model):
     name=models.CharField(max_length=200)
     population=models.IntegerField()
     size_sqkm=models.FloatField()
-
+class Nikita(models.Model):
+    name=models.CharField(max_length=100)
 class Neighborhoods(models.Model):
     neighborhood_id=models.UUIDField(primary_key=True, default=uuid.uuid4)
     name=models.CharField(max_length=200)
