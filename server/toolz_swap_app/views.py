@@ -1,15 +1,18 @@
 import jwt
 from django.conf import settings
+from django.http import HttpRequest
 from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from importlib import import_module
 
 from .forms import SignUpForm
 from .models import User
 from .serializers import UserSerializer
 
 JWT_SECRET_KEY = settings.JWT_SECRET_KEY
+SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 
 
 def signup(request):
@@ -35,21 +38,26 @@ def login(request):
     :param: request:rest_framework.request.Request
     :return: django-rest-framework Response object
     """
-    username = request.data['username']
-    password = request.data['password']
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        token = jwt.encode(
-            {
-                "member_id": username
-            },
-            key=JWT_SECRET_KEY,
-            algorithm="HS256"
-        )  # logged in requests must present this token as a credential in the Authentication header
-        request.session['token'] = token
-        request.session["user_id"] = user.id
-        return Response(request.session, status=status.HTTP_200_OK)
-    return Response(status=status.HTTP_403_FORBIDDEN)
+    try:
+        username = request.data['username']
+        password = request.data['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            token = jwt.encode(
+                {
+                    "member_id": username
+                },
+                key=JWT_SECRET_KEY,
+                algorithm="HS256"
+            )  # logged in requests must present this token as a credential in the Authentication header
+            session = SessionStore()
+            session["token"] = token
+            session["user_id"] = user.id
+            session["member_id"] = username
+            return Response(session, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_403_FORBIDDEN)
+    except KeyError as e:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
@@ -57,11 +65,9 @@ def logout(request):
     """
     Logs a User Out and deletes the user's session data
     """
-    request.session.flush()
-    response = {
-        "message": "Logout Successful"
-    }
-    return Response(response, status=status.HTTP_200_OK)
+    session = SessionStore()
+    session["message"] = "Logout Successful"
+    return Response(session, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', 'POST'])
@@ -78,4 +84,3 @@ def users_view(request):
         return Response(serializer.data)
     elif request.method == 'POST':
         return signup(request)
-
