@@ -112,3 +112,4 @@ dmypy.json
 # VSCode project settings
 .vscode
 
+toolz_swap_front/node_modules
