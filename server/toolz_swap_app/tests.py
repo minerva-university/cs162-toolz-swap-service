@@ -1,4 +1,5 @@
 import datetime
+import requests
 
 from django.db.models import Count
 from django.test import TestCase
@@ -138,6 +139,10 @@ class TestDatabase(TestCase):
 
         self.assertEqual("Mike", most_lender_name)
         self.assertEqual("Kate", least_lender_name)
+
+    def test_signup_successful(self):
+        endpoint = ""
+        pass
 
 # TODO: Test Listings
 # TODO: Test Swaps

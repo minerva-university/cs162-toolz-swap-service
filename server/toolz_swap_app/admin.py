@@ -11,11 +11,11 @@ class CustomUserAdmin(UserAdmin):
             'Extra User Details',
             {
                 'fields': (
-                    'phone',
-                    'address',
-                    'city',
-                    'state',
-                    'zipcode'
+                    #'phone',
+                    #'address',
+                    #'city',
+                    #'state',
+                    #'zipcode'
                 )
             }
         )

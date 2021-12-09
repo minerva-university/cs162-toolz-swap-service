@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'toolz_swap_app',  # register new app
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'phonenumbers'
 ]
 
 MIDDLEWARE = [
@@ -158,3 +159,8 @@ LOGIN_REDIRECT_URL = '/'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000'
 ]
+
+JWT_SECRET_KEY = os.environ.get("jwt_secret_key")
+
+
+

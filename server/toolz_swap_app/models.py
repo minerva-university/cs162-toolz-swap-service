@@ -5,11 +5,14 @@ import uuid
 
 
 class User(AbstractUser):
-    phone = PhoneNumberField(unique=True, default='')
+    """
+    #phone = PhoneNumberField(unique=True, default='')
     address = models.CharField(max_length=300, default='')
     city = models.CharField(max_length=400, default='')
     state = models.CharField(max_length=5, default='')
     zipcode = models.IntegerField(null=True, default=0)
+    """
+    pass
 
 
 class Tool(models.Model):
