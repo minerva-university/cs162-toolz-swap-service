@@ -15,6 +15,13 @@ class City(models.Model):
     population = models.IntegerField()
     size_sqkm = models.FloatField()
 
+    
+    def __str__(self):
+        return f"<city:{self.name}, \
+                population:{self.population},\
+                size_sqkm:{self.size_sqkm};"
+
+
 
 class Neighborhood(models.Model):
     neighborhood_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
@@ -23,6 +30,12 @@ class Neighborhood(models.Model):
     population = models.IntegerField()
     size_sqkm = models.FloatField()
 
+    def __str__(self):
+        return f"<neighborhood:{self.name}, \
+                city:{self.city}, \
+                population:{self.population},\
+                size_sqkm:{self.size_sqkm};"
+
 
 class ToolType(models.Model):
     tool_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
@@ -30,17 +43,31 @@ class ToolType(models.Model):
     purpose = models.TextField()
     popularity = models.CharField(max_length=200)
 
+    def __str__(self):
+        return f"<tool:{self.name}, \
+                purpose:{self.purpose},\
+                popularity:{self.popularity};"
+    
+
 
 class Brand(models.Model):
     brand_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
     logo = models.ImageField()
 
+    def __str__(self):
+        return f"<brand:{self.name};"
+    
+
+
 
 class ToolModel(models.Model):
     model_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
     year_released = models.IntegerField()
+    def __str__(self):
+        return f"<tool:{self.name}, \
+                year_released:{self.year_released};"
 
 
 class User(AbstractUser):
@@ -94,6 +121,11 @@ class ListingRequest(models.Model):
     renting_end = models.DateTimeField()
     approved = models.BooleanField()
 
+    def __str__(self):
+        return f"<listing:{self.listing}, \
+                author:{self.author},\
+                approved:{self.approved};"
+
 
 class ListingReview(models.Model):
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
@@ -108,6 +140,11 @@ class ListingReview(models.Model):
     review_likes = models.IntegerField()
     review_dislikes = models.IntegerField()
 
+    def __str__(self):
+        return f"<listing:{self.listing}, \
+                author:{self.author},\
+                rating:{self.rating};"
+
 
 class ListingImage(models.Model):
     image_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
@@ -116,3 +153,7 @@ class ListingImage(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField()
     top_image = models.BooleanField()
+
+    def __str__(self):
+        return f"<image_id:{self.image_id}, \
+                listing:{self.listing};"
