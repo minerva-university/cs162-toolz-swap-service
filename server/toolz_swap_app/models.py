@@ -3,12 +3,10 @@ import uuid
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import RegexValidator
 
 
 
-# TODO: Go through the comments and make other suggested changes, such as Phone number in User TODO: make
-#  nitty-gritty changes like null=True, blank=True, max_length=number, on_delete=SET_NULL/CASCADE/RESTRICT and others
-#  TODO: added choices of 1 to 5 for Rating in ListinsReviews 
 #  TODO: add Admin views in admin.py
 
 class City(models.Model):
@@ -72,7 +70,7 @@ class ToolModel(models.Model):
 
 
 class User(AbstractUser):
-    phone = models.CharField(max_length=200, blank=True)  # I left it as CharField for now but def. needs to be changed
+    phone = models.CharField(max_length=200, blank=True)  # leaving this as a charfield, since Django only supports US phones which will become problematic if we wanted to have international phone numbers
     address = models.CharField(max_length=200, blank=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True, blank=True)
     saved_places = models.ManyToManyField('Listing', related_name='saved_places')
