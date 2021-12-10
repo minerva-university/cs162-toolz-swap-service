@@ -2,12 +2,14 @@ import uuid
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 
 # TODO: Go through the comments and make other suggested changes, such as Phone number in User TODO: make
 #  nitty-gritty changes like null=True, blank=True, max_length=number, on_delete=SET_NULL/CASCADE/RESTRICT and others
-#  TODO: added choices of 1 to 5 for Rating in ListinsReviews TODO: add representation strings __str__ for the tables
-#   TODO: add Admin views in admin.py
+#  TODO: added choices of 1 to 5 for Rating in ListinsReviews 
+#  TODO: add Admin views in admin.py
 
 class City(models.Model):
     city_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
@@ -57,7 +59,6 @@ class Brand(models.Model):
 
     def __str__(self):
         return f"<brand:{self.name};"
-    
 
 
 
@@ -135,7 +136,8 @@ class ListingReview(models.Model):
     body = models.TextField()
     top_review = models.BooleanField()
     # this is the rating that a borrower can give to the Listing
-    rating = models.IntegerField()  # maybe add allowed integers later;
+    rating = models.IntegerField(default = 5, validators=[MaxValueValidator(5), MinValueValidator(1)])
+    
     # these are likes/dislikes for the review, such as if it was helpful
     review_likes = models.IntegerField()
     review_dislikes = models.IntegerField()
