@@ -10,6 +10,9 @@ from django.core.validators import RegexValidator
 #  TODO: add Admin views in admin.py
 
 class City(models.Model):
+    """
+    Stores information about the city related to user, listing.
+    """
     city_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
     population = models.IntegerField()
@@ -24,6 +27,9 @@ class City(models.Model):
 
 
 class Neighborhood(models.Model):
+    """
+    Stores information about a given neighborhood related to a listing.
+    """
     neighborhood_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
@@ -38,6 +44,9 @@ class Neighborhood(models.Model):
 
 
 class ToolType(models.Model):
+    """
+    Stores information about given tool type
+    """
     tool_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
     purpose = models.TextField()
@@ -51,6 +60,9 @@ class ToolType(models.Model):
 
 
 class Brand(models.Model):
+    """
+    Stores information about a given tool brand.
+    """
     brand_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
     logo = models.ImageField()
@@ -61,6 +73,9 @@ class Brand(models.Model):
 
 
 class ToolModel(models.Model):
+    """
+    Stores information about a tool's model and ist release date.
+    """
     model_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
     year_released = models.IntegerField()
@@ -70,6 +85,9 @@ class ToolModel(models.Model):
 
 
 class User(AbstractUser):
+    """
+    Stores our user information. Inherits basic attributes from Django's AbstractUser
+    """
     phone = models.CharField(max_length=200, blank=True)  # leaving this as a charfield, since Django only supports US phones which will become problematic if we wanted to have international phone numbers
     address = models.CharField(max_length=200, blank=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True, blank=True)
@@ -87,6 +105,9 @@ class User(AbstractUser):
 
 
 class Listing(models.Model):
+    """
+    Stores information about a given listing
+    """
     listing_id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True,
                                   help_text='Unique ID for this particular listing')
     title = models.CharField(max_length=200)
@@ -110,6 +131,9 @@ class Listing(models.Model):
 
 
 class ListingRequest(models.Model):
+    """
+    Stores information about a listing request (when the user requests a tool through the listing)
+    """
     request_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     created_on = models.DateTimeField()
@@ -127,6 +151,9 @@ class ListingRequest(models.Model):
 
 
 class ListingReview(models.Model):
+    """
+    Stores information about a listing review (after the renting is over and the tool is returned to the owner)
+    """
     review_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -147,6 +174,9 @@ class ListingReview(models.Model):
 
 
 class ListingImage(models.Model):
+    """
+    Stores listing image data.
+    """
     image_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
