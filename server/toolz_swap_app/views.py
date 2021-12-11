@@ -1,12 +1,13 @@
+from importlib import import_module
+
 import jwt
 from django.conf import settings
-from django.http import HttpRequest
 from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from importlib import import_module
 
+from .decorators import custom_login_required
 from .forms import SignUpForm
 from .models import User
 from .serializers import UserSerializer
@@ -14,7 +15,7 @@ from .serializers import UserSerializer
 JWT_SECRET_KEY = settings.JWT_SECRET_KEY
 SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 
-print(JWT_SECRET_KEY)
+
 def signup(request):
     """
     Creates a new user and stores in the database
@@ -79,8 +80,13 @@ def users_view(request):
     :returns django-rest-framework Response object
     """
     if request.method == 'GET':
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
+        return get_all_users(request)
     elif request.method == 'POST':
         return signup(request)
+
+
+@custom_login_required
+def get_all_users(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
