@@ -20,14 +20,14 @@ services:
     restart: always
     container_name: toolz_swap_back
     build:
-      context: ./toolz_swap_back/
+      context: ./server/
       dockerfile: Dockerfile
     command: python manage.py runserver 0.0.0.0:8000 
     env_file: .env
     # backend is not read-only in case you have to make migrations
     # any changes to toolz_app_back/toolz_app will require a re-build
     volumes: 
-      - ./toolz_swap_back/toolz_swap_app:/app/app_back/toolz_swap_app
+      - ./server/toolz_swap_app:/app/app_back/toolz_swap_app
     ports:
       - "8000:8000"
     depends_on: 
@@ -38,11 +38,11 @@ services:
     restart: always
     container_name: toolz_swap_front
     build:
-      context: ./toolz_swap_front/
+      context: ./client/
       dockerfile: Dockerfile 
     # create bind mount for react app to make development easier. Changes will reflect as soon as re-run docker-compose up
     volumes: 
-      - ./toolz_swap_front/src:/app/app_front/src:ro
+      - ./client/src:/app/app_front/src:ro
     ports: 
       - "3000:3000"
 

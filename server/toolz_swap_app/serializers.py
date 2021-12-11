@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'password', 'email', 'first_name', 'last_name')
 
 
-class ToolSerializer(serializers.ModelSerializer):
+class ToolTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ToolType
         fields = ('tool_id', 'toolName', 'toolBrand', 'toolModel', 'toolCondition')
