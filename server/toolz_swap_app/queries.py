@@ -46,3 +46,23 @@ def get_tool_by_id(tool_id):
 
 def get_all_tools_listed_by_owner(user_id):
     pass
+
+
+def get_all_tools_rented_by_user(user_id):
+    pass
+
+
+def get_reviews_for_listing(listing_id):
+    pass
+
+
+def get_average_review_ratings_for_tool(listing_id):
+    pass
+
+
+def get_average_review_ratings_for_user(user_id):
+    """
+    Should return the average for a user if the user has ever listed
+    else 0
+    """
+    pass
