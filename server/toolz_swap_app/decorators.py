@@ -17,8 +17,11 @@ def custom_login_required(function):
     """
 
     def wrapper(request, *args, **kwargs):
-        error = {
+        login_required_error = {
             "error": "Login Required!"
+        }
+        incorrect_credentials_error = {
+            "error": "Incorrect credentials passed for request!"
         }
         try:
             token = request.headers["Token"]
@@ -37,9 +40,9 @@ def custom_login_required(function):
             if presented_valid_credentials:  # User presented valid credentials
                 return function(request, *args, **kwargs)
             else:
-                return Response(error, status=status.HTTP_403_FORBIDDEN)
+                return Response(incorrect_credentials_error, status=status.HTTP_403_FORBIDDEN)
 
         except Exception as e:
-            print(e)
-            return Response(error, status=status.HTTP_403_FORBIDDEN)
+            print(e)  # user is logged in
+            return Response(login_required_error, status=status.HTTP_403_FORBIDDEN)
     return wrapper
