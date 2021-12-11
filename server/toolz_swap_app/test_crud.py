@@ -1,31 +1,25 @@
-from django.test import TestCase, RequestFactory
+from django.test import TestCase
+
+from .test_accessories import BASE_URL, signup_data, login_data, decoded_token, \
+    factory, _signup, header_with_valid_credentials
 from .views import users_view
 
 
 class TestUserCrud(TestCase):
     def setUp(self):
-        self.BASE_URL = "http://127.0.0.1:8000/"
-        self.endpoint = self.BASE_URL + 'api/users'
-        self.factory = RequestFactory()
-        self.signup_data = {
-            "username": "TestUser1",
-            "password1": "thisisatestuser",
-            "email": "test_user1@gmail.com",
-            "password2": "thisisatestuser"}
-
-    def _signup(self):
-        r = self.factory.post(self.endpoint, data=self.signup_data)
-        response = users_view(r)
-        self.assertEqual(response.status_code, 201)
-        return response
+        self.endpoint = BASE_URL + 'api/users'
+        self.factory = factory
+        self.login_data = login_data
+        self.signup_data = signup_data
+        self.decoded_token = decoded_token
 
     def test_signup_successful(self):
-        response = self._signup()
+        response = _signup()
         self.assertEqual(response.status_code, 201)
 
     def test_signup_for_existing_user_fails(self):
         #  User has been created, trying to signup with username should fail
-        self._signup()
+        _signup()
         r = self.factory.post(self.endpoint, data=self.signup_data)
         response = users_view(r)
         self.assertEqual(response.status_code, 400)
@@ -33,11 +27,22 @@ class TestUserCrud(TestCase):
         self.assertTrue("A user with that username already exists." in errors)
 
     def test_get_all_users_successful(self):
-        # Create a test User
-        self._signup()
-        #  User has been created, there should only be 1 user
-        r = self.factory.get(self.endpoint)
+        # you need to be logged in to call this endpoint
+        mock_request_headers = header_with_valid_credentials()  # sign up, login and add credentials
+        auth_header = {
+            "HTTP_Member-Id": mock_request_headers.headers["Member-Id"],
+            "HTTP_Token": mock_request_headers.headers["Token"],
+            "HTTP_User-Id": mock_request_headers.headers["User-Id"]
+        }
+
+        r = self.factory.get(self.endpoint, **auth_header)
         response = users_view(r)
         self.assertEqual(response.status_code, 200)
+        #  User has been created, there should only be 1 user
         self.assertTrue(len(response.data) == 1)
 
+    def test_get_all_users_unsuccessful(self):
+        # user attempts to call endpoint without being logged in
+        r = self.factory.get(self.endpoint)
+        response = users_view(r)
+        self.assertEqual(response.status_code, 403)  # expect forbidden response

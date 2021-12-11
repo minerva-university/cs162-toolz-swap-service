@@ -1,51 +1,22 @@
 import jwt
-from django.test import TestCase, RequestFactory
+from django.test import TestCase
 
-from .views import login, logout, users_view, JWT_SECRET_KEY
+from .test_accessories import BASE_URL, signup_data, login_data, decoded_token, \
+    factory, _signup, _login, _logout, header_with_valid_credentials, mock_view_function
+from .views import JWT_SECRET_KEY
 
 
 class TestAuth(TestCase):
     def setUp(self):
-        self.BASE_URL = "http://127.0.0.1:8000/"
-        self.factory = RequestFactory()
-        self.login_data = {
-            "username": "TestUser2",
-            "password": "thisisatestuser"
-        }
-
-        self.signup_data = {
-            "username": "TestUser2",
-            "password1": "thisisatestuser",
-            "email": "test_user1@gmail.com",
-            "password2": "thisisatestuser"}
-
-        self.decoded_token = {
-            "member_id": "TestUser2"
-        }
-
-    def _signup(self):
-        # Signup User
-        path = 'api/users'
-        endpoint = self.BASE_URL + path
-        r = self.factory.post(endpoint, data=self.signup_data)
-        response = users_view(r)
-        self.assertEqual(response.status_code, 201)
-
-    def _login(self):
-        login_endpoint = self.BASE_URL + 'auth/login'
-        r = self.factory.post(login_endpoint, data=self.login_data)
-        response = login(r)
-        return response
-
-    def _logout(self):
-        logout_endpoint = self.BASE_URL + 'auth/logout'
-        r = self.factory.get(logout_endpoint)
-        response = logout(r)
-        return response
+        self.BASE_URL = BASE_URL
+        self.factory = factory
+        self.login_data = login_data
+        self.signup_data = signup_data
+        self.decoded_token = decoded_token
 
     def test_login_successful(self):
-        self._signup()
-        response = self._login()
+        _signup()
+        response = _login()
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.data.get("token") is not None)
         self.assertTrue(response.data.get("member_id") is not None)
@@ -61,12 +32,27 @@ class TestAuth(TestCase):
         )  # check that correctly signed credential belongs to the user
 
     def test_logout(self):
-        self._signup()
-        self._login()
-        response = self._logout()
+        _signup()
+        _login()
+        response = _logout()
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.data.get("token") is None)
         self.assertTrue(response.data.get("member_id") is None)
         self.assertTrue(response.data.get("user_id") is None)
         self.assertTrue(response.data.get("message") is not None)
         self.assertEqual(response.data.get("message"), "Logout Successful")
+
+    def test_login_required_successful(self):
+        mock_request_headers = header_with_valid_credentials()  # signup, login and add credentials
+        mock_http_successful_response = mock_view_function(mock_request_headers)
+        #  if user is logged in, decorator should return the function's return value
+        self.assertEqual(mock_http_successful_response, "this is a mock view function")
+
+    def test_login_required_failed(self):
+        _signup()
+        _login()
+        #  not logged in, return HTTP Forbidden status_code
+        _logout()
+        mock_http_forbidden_response = mock_view_function({})
+        self.assertEqual(mock_http_forbidden_response.status_code, 403)
+        self.assertEqual(mock_http_forbidden_response.data["error"], "Login Required!")
