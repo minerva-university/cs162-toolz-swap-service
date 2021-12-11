@@ -92,9 +92,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get("TOOLZ_APP_DB_DOCKER"),
+        #'NAME': os.environ.get("TOOLZ_APP_DB"),
         'USER': os.environ.get("POSTGRES_USERNAME"),
         'PASSWORD': os.environ.get("TOOLZ_APP_DB_PASSWORD"),
         'HOST': os.environ.get("DB_HOST_DOCKER"),
+        #'HOST': os.environ.get("DB_HOST_DOCKER"),
         'PORT': 5432,
     }
 }
