@@ -9,9 +9,9 @@ from rest_framework.response import Response
 
 from .decorators import custom_login_required
 from .forms import SignUpForm
-from .models import User
-from .serializers import UserSerializer, ListingSerializer
-from .queries import get_all_listings_for_neighborhood
+from .models import User, Listing, City, Neighborhood
+from .serializers import *
+from .queries import *
 
 JWT_SECRET_KEY = settings.JWT_SECRET_KEY
 SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
@@ -93,12 +93,29 @@ def get_all_users(request):
     return Response(serializer.data)
 
 
-# @custom_login_required
+@custom_login_required
 @api_view(['GET'])
 def get_all_listings_view(request):
-    neighborhood_id = request.query_params["neighborhood_id"]
-    listings = get_all_listings_for_neighborhood(neighborhood_id)
+    #neighborhood_id = request.query_params["neighborhood_id"]
+    #listings = get_all_listings_for_neighborhood(neighborhood_id)
+    listings = Listing.objects.all()
     serializer = ListingSerializer(listings, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@custom_login_required
+@api_view(['GET'])
+def get_all_cities_view(request):
+    cities = get_all_cities()
+    serializer = CitySerializer(cities, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@custom_login_required
+@api_view(['GET'])
+def get_all_neighborhoods_view(request):
+    neighborhoods = Neighborhood.objects.all()
+    serializer = NeighborhoodSerializer(neighborhoods, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 

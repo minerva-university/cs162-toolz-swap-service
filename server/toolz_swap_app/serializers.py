@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import ToolType, User, Listing
+from .models import *
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -17,5 +17,17 @@ class ToolTypeSerializer(serializers.ModelSerializer):
 class ListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Listing
+        fields = "__all__"
+
+
+class CitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+        fields = "__all__"
+
+
+class NeighborhoodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Neighborhood
         fields = "__all__"
 
