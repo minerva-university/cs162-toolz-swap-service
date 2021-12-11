@@ -161,7 +161,7 @@ class ListingReview(models.Model):
     body = models.TextField()
     top_review = models.BooleanField()
     # this is the rating that a borrower can give to the Listing
-    rating = models.IntegerField(default = 5, validators=[MaxValueValidator(5), MinValueValidator(1)])
+    rating = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
     
     # these are likes/dislikes for the review, such as if it was helpful
     review_likes = models.IntegerField()
