@@ -43,6 +43,6 @@ def custom_login_required(function):
                 return Response(incorrect_credentials_error, status=status.HTTP_403_FORBIDDEN)
 
         except Exception as e:
-            print(e)  # user is logged in
+            print(e)  # user is not logged in
             return Response(login_required_error, status=status.HTTP_403_FORBIDDEN)
     return wrapper
