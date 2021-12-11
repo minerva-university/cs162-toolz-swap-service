@@ -1,7 +1,7 @@
 from django.test import RequestFactory
 
-from .decorators import custom_login_required
-from .views import users_view, login, logout
+from toolz_swap_app.decorators import custom_login_required
+from toolz_swap_app.views import users_view, login, logout
 
 BASE_URL = "http://127.0.0.1:8000/"
 factory = RequestFactory()
