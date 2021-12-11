@@ -1,10 +1,8 @@
 import uuid
 
 from django.contrib.auth.models import AbstractUser
-from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-
-
+from django.db import models
 
 
 #  TODO: add Admin views in admin.py
@@ -18,12 +16,10 @@ class City(models.Model):
     population = models.IntegerField()
     size_sqkm = models.FloatField()
 
-    
     def __str__(self):
         return f"<city:{self.name}, \
                 population:{self.population},\
                 size_sqkm:{self.size_sqkm};"
-
 
 
 class Neighborhood(models.Model):
@@ -56,7 +52,6 @@ class ToolType(models.Model):
         return f"<tool:{self.name}, \
                 purpose:{self.purpose},\
                 popularity:{self.popularity};"
-    
 
 
 class Brand(models.Model):
@@ -71,7 +66,6 @@ class Brand(models.Model):
         return f"<brand:{self.name};"
 
 
-
 class ToolModel(models.Model):
     """
     Stores information about a tool's model and ist release date.
@@ -79,6 +73,7 @@ class ToolModel(models.Model):
     model_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
     year_released = models.IntegerField()
+
     def __str__(self):
         return f"<tool:{self.name}, \
                 year_released:{self.year_released};"
@@ -88,7 +83,8 @@ class User(AbstractUser):
     """
     Stores our user information. Inherits basic attributes from Django's AbstractUser
     """
-    phone = models.CharField(max_length=200, blank=True)  # leaving this as a charfield, since Django only supports US phones which will become problematic if we wanted to have international phone numbers
+    phone = models.CharField(max_length=200,
+                             blank=True)  # leaving this as a charfield, since Django only supports US phones which will become problematic if we wanted to have international phone numbers
     address = models.CharField(max_length=200, blank=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True, blank=True)
     saved_places = models.ManyToManyField('Listing', related_name='saved_places')
@@ -162,7 +158,7 @@ class ListingReview(models.Model):
     top_review = models.BooleanField()
     # this is the rating that a borrower can give to the Listing
     rating = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(1)])
-    
+
     # these are likes/dislikes for the review, such as if it was helpful
     review_likes = models.IntegerField()
     review_dislikes = models.IntegerField()
