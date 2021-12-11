@@ -84,14 +84,14 @@ class User(AbstractUser):
     Stores our user information. Inherits basic attributes from Django's AbstractUser
     """
     phone = models.CharField(max_length=200,
-                             blank=True)  # leaving this as a charfield, since Django only supports US phones which will become problematic if we wanted to have international phone numbers
+                             blank=True)  # leaving this as a charfield, since Django only supports
+    # US phones which will become problematic if we wanted to have international phone numbers
     address = models.CharField(max_length=200, blank=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True, blank=True)
     saved_places = models.ManyToManyField('Listing', related_name='saved_places')
     rented_tools = models.ManyToManyField('Listing', related_name='rented_tools')
     profile_photo = models.ImageField(null=True, blank=True)
     bio = models.CharField(max_length=200, blank=True)
-    created_on = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
         return f"<username:{self.username}, \
