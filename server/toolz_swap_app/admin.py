@@ -5,7 +5,23 @@ from .models import User, Listing, ToolType
 
 
 class CustomUserAdmin(UserAdmin):
-    pass
+    fieldsets = (
+        *UserAdmin.fieldsets,
+        (
+            'Extra User Information',
+            {
+                'fields': (
+                    'phone',
+                    'address',
+                    'city',
+                    'rented_tools',
+                    'saved_places',
+                    'bio'
+                ),
+            },
+        ),
+
+    )
 
 
 admin.site.register(User, CustomUserAdmin)
