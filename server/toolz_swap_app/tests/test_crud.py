@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from .test_accessories import BASE_URL, signup_data, login_data, decoded_token, \
     factory, _signup, header_with_valid_credentials
-from .views import users_view
+from toolz_swap_app.views import users_view
 
 
 class TestUserCrud(TestCase):

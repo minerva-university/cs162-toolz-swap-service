@@ -3,7 +3,7 @@ from django.test import TestCase
 
 from .test_accessories import BASE_URL, signup_data, login_data, decoded_token, \
     factory, _signup, _login, _logout, header_with_valid_credentials, mock_view_function
-from .views import JWT_SECRET_KEY
+from toolz_swap_app.views import JWT_SECRET_KEY
 
 
 class TestAuth(TestCase):
