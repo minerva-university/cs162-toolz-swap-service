@@ -1,4 +1,4 @@
-from .models import User, City
+from toolz_swap_app.models import User, City
 
 
 # TODO: Pls return the model objects, Vlad and I can process the data how we see fit
