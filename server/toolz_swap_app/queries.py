@@ -1,4 +1,4 @@
-from .models import User, City
+from .models import User, City, Listing
 
 
 # TODO: Pls return the model objects, Vlad and I can process the data how we see fit
@@ -17,7 +17,8 @@ def get_images_for_listing(listing_id):
 
 
 def get_all_listings_for_neighborhood(neighborhood_id):
-    pass
+    listings = Listing.objects.all()
+    return listings
 
 
 def get_all_cities():

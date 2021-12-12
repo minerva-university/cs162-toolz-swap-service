@@ -1,8 +1,10 @@
+import datetime
 from importlib import import_module
 
 import jwt
 from django.conf import settings
 from django.contrib.auth import authenticate
+from django.utils import timezone
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -13,6 +15,7 @@ from .models import User
 from .serializers import UserSerializer
 
 JWT_SECRET_KEY = settings.JWT_SECRET_KEY
+INVALIDATED_TOKENS = settings.INVALIDATED_TOKENS
 SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 
 
@@ -46,7 +49,8 @@ def login(request):
         if user is not None:
             token = jwt.encode(
                 {
-                    "member_id": username
+                    "member_id": username,
+                    "exp": timezone.now() + datetime.timedelta(minutes=90),  # token expires after 90 mins
                 },
                 key=JWT_SECRET_KEY,
                 algorithm="HS256"
@@ -62,10 +66,13 @@ def login(request):
 
 
 @api_view(['GET'])
-def logout(request):
+@custom_login_required  # need to be logged in to logout
+def logout(request, invalidated_token_cache=INVALIDATED_TOKENS):
     """
     Logs a User Out and deletes the user's session data
     """
+    token = request.headers["Token"]  # custom_login_required validates that we have a Token in request header
+    INVALIDATED_TOKENS.add(token)
     session = SessionStore()
     session["message"] = "Logout Successful"
     return Response(session, status=status.HTTP_200_OK)
