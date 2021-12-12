@@ -5,7 +5,7 @@ import datetime
 
 from toolz_swap_app.models import City, Neighborhood, ToolType, Brand, ToolModel, User, Listing, ListingRequest, ListingReview, ListingImage
 from toolz_swap_app.queries import *
-# datetime.date(2021, 12, 30)
+
 # python manage.py test toolz_swap_app.tests.test_queries
 
 # TODO: we changed our models so we need new tests!
