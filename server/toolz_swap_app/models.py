@@ -13,8 +13,8 @@ class City(models.Model):
     """
     city_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
-    population = models.IntegerField()
-    size_sqkm = models.FloatField()
+    population = models.IntegerField(blank=True, null=True)
+    size_sqkm = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         return f"<city:{self.name}, \
@@ -29,8 +29,8 @@ class Neighborhood(models.Model):
     neighborhood_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    population = models.IntegerField()
-    size_sqkm = models.FloatField()
+    population = models.IntegerField(blank=True, null=True)
+    size_sqkm = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         return f"<neighborhood:{self.name}, \
@@ -46,7 +46,7 @@ class ToolType(models.Model):
     tool_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
     purpose = models.TextField()
-    popularity = models.CharField(max_length=200)
+    popularity = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return f"<tool:{self.name}, \
@@ -60,7 +60,7 @@ class Brand(models.Model):
     """
     brand_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
-    logo = models.ImageField()
+    logo = models.ImageField(blank=True, null=True)
 
     def __str__(self):
         return f"<brand:{self.name};"
@@ -117,7 +117,7 @@ class Listing(models.Model):
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
     description = models.TextField(max_length=2000)
     created_on = models.DateTimeField(auto_now_add=True)
-    rating_average = models.FloatField()  # average rating of the listing, can be calculated from ListingReviews
+    rating_average = models.FloatField(blank=True, null=True)  # average rating of the listing, can be calculated from ListingReviews
 
     # likes=models.IntegerField()
     # dislikes=models.IntegerField()
