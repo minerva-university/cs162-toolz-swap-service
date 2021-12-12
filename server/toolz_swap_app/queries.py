@@ -8,6 +8,10 @@ def get_user_by_id(user_id):
     user = User.objects.get(pk=user_id)
     return user
 
+def get_user_by_username(username):
+    user = User.objects.get(username=username)
+    return user
+
 
 def get_listing_by_id(listing_id):
     listing = Listing.objects.get(pk=listing_id)
