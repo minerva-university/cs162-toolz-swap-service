@@ -2,7 +2,8 @@ import jwt
 from django.test import TestCase
 
 from .test_accessories import BASE_URL, signup_data, login_data, decoded_token, \
-    factory, _signup, _login, _logout, header_with_valid_credentials, mock_view_function
+    factory, _signup, _login, _logout, header_with_valid_credentials, mock_view_function, \
+    MockRequestHeader
 from toolz_swap_app.views import JWT_SECRET_KEY
 
 
@@ -32,9 +33,8 @@ class TestAuth(TestCase):
         )  # check that correctly signed credential belongs to the user
 
     def test_logout(self):
-        _signup()
-        _login()
-        response = _logout()
+        mock_request_headers = header_with_valid_credentials()
+        response = _logout(mock_request_headers)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.data.get("token") is None)
         self.assertTrue(response.data.get("member_id") is None)
@@ -50,9 +50,18 @@ class TestAuth(TestCase):
 
     def test_login_required_failed(self):
         _signup()
+        headers_without_credentials = MockRequestHeader()
         _login()
         #  not logged in, return HTTP Forbidden status_code
-        _logout()
-        mock_http_forbidden_response = mock_view_function({})
+        _logout(headers_without_credentials)
+        mock_http_forbidden_response = mock_view_function(headers_without_credentials)
         self.assertEqual(mock_http_forbidden_response.status_code, 403)
         self.assertEqual(mock_http_forbidden_response.data["error"], "Login Required!")
+
+    def test_no_access_to_login_protected_endpoint_after_logout(self):
+        mock_request_headers = header_with_valid_credentials()  # signup, login and add credentials
+        # logout with valid credentials
+        _logout(mock_request_headers)
+        mock_http_unsuccessful_response = mock_view_function(mock_request_headers)  # token has been invalidated
+        self.assertEqual(mock_http_unsuccessful_response.status_code, 403)
+        self.assertEqual(mock_http_unsuccessful_response.data["error"], "Incorrect credentials passed for request!")

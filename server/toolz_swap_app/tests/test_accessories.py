@@ -33,10 +33,16 @@ def _login():
     return response
 
 
-def _logout():
+@custom_login_required
+def _logout(request):
+    auth_header = {
+        "HTTP_Member-Id": request.headers["Member-Id"],
+        "HTTP_Token": request.headers["Token"],
+        "HTTP_User-Id": request.headers["User-Id"]
+    }
     logout_endpoint = BASE_URL + 'auth/logout'
-    r = factory.get(logout_endpoint)
-    response = logout(r)
+    r = factory.get(logout_endpoint, **auth_header)
+    response = logout(r, invalidated_token_cache=set())
     return response
 
 
@@ -63,7 +69,7 @@ class MockRequestHeader:
     Mock Request Header class for testing
     """
 
-    def __init__(self, mock_token, mock_member_id, mock_user_id):
+    def __init__(self, mock_token='', mock_member_id='', mock_user_id=-1):
         self.headers = {
             "Content-Length": '',
             'Content-Type': 'application/json',
@@ -82,4 +88,3 @@ class MockRequestHeader:
 
     def __iter__(self):
         return iter(self.headers.items())
-
