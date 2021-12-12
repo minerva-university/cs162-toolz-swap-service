@@ -55,6 +55,8 @@ def login(request):
                 key=JWT_SECRET_KEY,
                 algorithm="HS256"
             )  # logged in requests must present this token as a credential in the Authentication header
+            if token in INVALIDATED_TOKENS:
+                INVALIDATED_TOKENS.remove(token)  # make this toke valid again
             session = SessionStore()
             session["token"] = token
             session["user_id"] = user.id
