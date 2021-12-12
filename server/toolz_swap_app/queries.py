@@ -9,7 +9,8 @@ def get_user_by_id(user_id):
 
 
 def get_listing_by_id(listing_id):
-    pass
+    listing = User.objects.get(pk=listing_id)
+    return listing
 
 
 def get_images_for_listing(listing_id):
@@ -29,8 +30,8 @@ def get_all_cities():
 
 
 def get_all_listings():
-    pass
-
+    listings = Listing.objects.all()
+    return listings
 
 def get_all_neighborhoods_in_city(city_id):
     pass

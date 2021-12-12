@@ -93,17 +93,17 @@ def get_all_users(request):
     return Response(serializer.data)
 
 
-@custom_login_required
+#@custom_login_required
 @api_view(['GET'])
 def get_all_listings_view(request):
     #neighborhood_id = request.query_params["neighborhood_id"]
     #listings = get_all_listings_for_neighborhood(neighborhood_id)
-    listings = Listing.objects.all()
+    listings = get_all_listings()
     serializer = ListingSerializer(listings, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@custom_login_required
+#@custom_login_required
 @api_view(['GET'])
 def get_all_cities_view(request):
     cities = get_all_cities()
@@ -111,7 +111,7 @@ def get_all_cities_view(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-@custom_login_required
+#@custom_login_required
 @api_view(['GET'])
 def get_all_neighborhoods_view(request):
     neighborhoods = Neighborhood.objects.all()
