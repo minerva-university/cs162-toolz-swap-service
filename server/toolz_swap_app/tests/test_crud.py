@@ -7,7 +7,7 @@ from toolz_swap_app.views import users_view
 
 class TestUserCrud(TestCase):
     def setUp(self):
-        self.endpoint = BASE_URL + 'api/users'
+        self.endpoint = BASE_URL + 'api/user'
         self.factory = factory
         self.login_data = login_data
         self.signup_data = signup_data
