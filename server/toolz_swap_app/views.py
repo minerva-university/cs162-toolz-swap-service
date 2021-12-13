@@ -42,7 +42,6 @@ def login(request):
     :param: request:rest_framework.request.Request
     :return: django-rest-framework Response object
     """
-    print(request.data)
     try:
         username = request.data['username']
         password = request.data['password']
@@ -102,14 +101,39 @@ def get_all_users(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT', 'DELETE'])
 @custom_login_required
-def get_all_listings_view(request):
-    # neighborhood_id = request.query_params["neighborhood_id"]
-    # listings = get_all_listings_for_neighborhood(neighborhood_id)
-    listings = get_all_listings()
-    serializer = ListingSerializer(listings, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+def listing_view(request):
+    url_params = request.query_params
+    pk = int(url_params.get('pk'))
+    if request.method == 'GET':
+        return get_listing(pk)
+    elif request.method == 'PUT':
+        serializer = ListingSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()  # creates a new instance if it doesn't exist else updates instance
+            return Response(serializer.data, status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'DELETE':  # doesn't have a pk query_param
+        if pk is not None:
+            serializer = ListingSerializer(data=request.data)
+            serializer.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+def get_listing(pk):
+    if pk is not None:  # get request asks for a specific listing by pk
+        listing = get_listing_by_id(pk)
+        if listing is not None:  # listing with id = pk exists in db
+            serializer = ListingSerializer(listing)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:  # listing with id = pk doesn't exist in db
+            return Response(status=status.HTTP_404_NOT_FOUND)
+    else:
+        listings = get_all_listings()  # request for all listings in db
+        serializer = ListingSerializer(listings, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
