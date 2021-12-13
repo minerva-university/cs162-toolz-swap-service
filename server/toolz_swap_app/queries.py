@@ -74,7 +74,7 @@ def get_reviews_for_listing(listing_id):
 
 
 def get_average_review_ratings_for_tool(listing_id):
-    avg_rating = Listing.objects.filter(pk=listing_id).rating_average
+    avg_rating = Listing.objects.get(pk=listing_id).rating_average
     return avg_rating
 
 
@@ -85,7 +85,7 @@ def get_average_review_ratings_for_user(user_id):
     """
     user_listings = Listing.objects.filter(owner__pk=user_id)
     if user_listings.exists():
-        ratings = user_listings.aggregate(Avg('rating_average'))
+        ratings = user_listings.aggregate(Avg('rating_average'))['rating_average__avg']
     else:
         ratings = 0
     

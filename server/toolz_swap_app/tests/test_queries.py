@@ -91,7 +91,7 @@ class TestQueries(TestCase):
     def test_get_listing_by_id(self):
         listing1 = Listing.objects.all()[0]
         listing1_id = listing1.pk
-        self.asserTrue(get_listing_by_id(listing1_id), listing1)
+        self.assertTrue(get_listing_by_id(listing1_id), listing1)
 
 
     def test_get_all_listings_for_neighborhood(self):
@@ -101,25 +101,25 @@ class TestQueries(TestCase):
 
     def test_get_all_cities(self):
         cities = City.objects.all()
-        self.assertEqual(get_all_cities(), cities)
+        self.assertQuerysetEqual(get_all_cities(), cities, ordered=False)
 
 
     def test_get_all_listings(self):
         listings = Listing.objects.all()
-        self.assertEqual(get_all_listings(), listings)
+        self.assertQuerysetEqual(get_all_listings(), listings, ordered=False)
 
 
 
     def test_get_all_neighborhoods_in_city(self):
         la_id = City.objects.all()[0].pk
         la_neighborhoods = Neighborhood.objects.all()
-        self.assertEqual(get_all_neighborhoods_in_city(la_id), la_neighborhoods)
+        self.assertQuerysetEqual(get_all_neighborhoods_in_city(la_id), la_neighborhoods)
 
 
     def test_get_all_listings_for_city(self):
         la_id = City.objects.all()[0].pk
         la_listings = Listing.objects.all()
-        self.assertEqual(get_all_listings_for_city(la_id), la_listings)
+        self.assertQuerysetEqual(get_all_listings_for_city(la_id), la_listings, ordered=False)
 
 
     def test_get_tool_by_id(self):
@@ -137,12 +137,12 @@ class TestQueries(TestCase):
 
     def test_get_reviews_for_listing(self):
         review = ListingReview.objects.all()[0]
-        listing_id = Listing.objects.all()[1]
+        listing_id = Listing.objects.all()[1].listing_id
         self.assertEqual(get_reviews_for_listing(listing_id)[0], review)
 
 
     def test_get_average_review_ratings_for_tool(self):
-        listing_id = Listing.objects.all()[0]
+        listing_id = Listing.objects.all()[0].listing_id
         self.assertEqual(get_average_review_ratings_for_tool(listing_id), 3.2)
 
 
