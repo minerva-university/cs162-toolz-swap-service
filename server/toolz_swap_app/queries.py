@@ -1,4 +1,4 @@
-from .models import User, City, Neighborhood, ToolType, Brand, ToolModel, Listing, ListingRequest, ListingReview, ListingImage
+from .models import *
 from django.db.models import Avg
 
 
@@ -19,6 +19,7 @@ def get_user_by_username(username):
 
 
 def get_listing_by_id(listing_id):
+
     """
     Returns the listing given the id
     """
@@ -51,6 +52,7 @@ def get_all_cities():
 
 
 def get_all_listings():
+
     '''
     returns the listing given the id
     '''
