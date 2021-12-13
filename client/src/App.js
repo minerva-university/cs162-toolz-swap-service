@@ -11,6 +11,8 @@ import MyRequests from "./pages/MyRequests";
 import Requests from "./pages/Requests";
 import SavedListings from "./pages/SavedListings";
 import UserProfile from "./pages/UserProfile";
+import SignUp from './auth_pages/Register';
+import Login from './auth_pages/Login'
 import {
   BrowserRouter as Router,
   Routes,
@@ -18,6 +20,7 @@ import {
   Link,
   useRouteMatch,
   useParams,
+  Redirect,  
 } from "react-router-dom";
 
 class App extends Component {
@@ -37,6 +40,8 @@ class App extends Component {
             <Route element={<Requests />} path="/Requests" />
             <Route element={<SavedListings />} path="/SavedListings" />
             <Route element={<UserProfile />} path="/UserProfile" />
+            <Route element={<SignUp />} path="/signup" />
+            <Route element={<Login />} path="/login" />
         </Routes>
       </div>
     )
