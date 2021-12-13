@@ -86,3 +86,70 @@ class TestQueries(TestCase):
         user_1 = User.objects.all()[0]
         user_1_username = user_1.username
         self.assertTrue(get_user_by_username(user_1_username), user_1)
+
+
+    def test_get_listing_by_id(self):
+        listing1 = Listing.objects.all()[0]
+        listing1_id = listing1.pk
+        self.asserTrue(get_listing_by_id(listing1_id), listing1)
+
+
+    def test_get_all_listings_for_neighborhood(self):
+        glendale_id = Neighborhood.objects.all()[0].pk
+        self.assertEqual(get_all_listings_for_neighborhood(glendale_id).count(), 2)
+
+
+    def test_get_all_cities(self):
+        cities = City.objects.all()
+        self.assertEqual(get_all_cities(), cities)
+
+
+    def test_get_all_listings(self):
+        listings = Listing.objects.all()
+        self.assertEqual(get_all_listings(), listings)
+
+
+
+    def test_get_all_neighborhoods_in_city(self):
+        la_id = City.objects.all()[0].pk
+        la_neighborhoods = Neighborhood.objects.all()
+        self.assertEqual(get_all_neighborhoods_in_city(la_id), la_neighborhoods)
+
+
+    def test_get_all_listings_for_city(self):
+        la_id = City.objects.all()[0].pk
+        la_listings = Listing.objects.all()
+        self.assertEqual(get_all_listings_for_city(la_id), la_listings)
+
+
+    def test_get_tool_by_id(self):
+        drill = ToolType.objects.all()[0]
+        drill_id = drill.pk
+        self.assertEqual(get_tool_by_id(drill_id), drill)
+        
+
+
+    def test_get_all_tools_listed_by_owner(self):
+        user1 = User.objects.all()[0]
+        listing_owned = Listing.objects.all()[0]
+        self.assertEqual(get_all_tools_listed_by_owner(user1.pk)[0], listing_owned)
+
+
+    def test_get_reviews_for_listing(self):
+        review = ListingReview.objects.all()[0]
+        listing_id = Listing.objects.all()[1]
+        self.assertEqual(get_reviews_for_listing(listing_id)[0], review)
+
+
+    def test_get_average_review_ratings_for_tool(self):
+        listing_id = Listing.objects.all()[0]
+        self.assertEqual(get_average_review_ratings_for_tool(listing_id), 3.2)
+
+
+    def test_get_average_review_ratings_for_user(self):
+        """
+        Should return the average for a user if the user has ever listed
+        else 0
+        """
+        user_id = User.objects.all()[0].pk
+        self.assertEqual(get_average_review_ratings_for_user(user_id), 3.2)
