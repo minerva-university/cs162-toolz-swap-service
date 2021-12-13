@@ -1,7 +1,7 @@
 import headerProvider from './headerProvider';
 import { serverURL } from '../config'
 
-function getAllUsersRequest(){
+function logoutRequest(){
     const url = serverURL + 'api/users/'
     const method = 'GET'
     const headers = headerProvider(true) // login protected
@@ -12,8 +12,7 @@ function getAllUsersRequest(){
             headers: headers,
         }).then(response => {
             if (response.ok) {
-               window.sessionStorage.clear(); // clear credentials from session storage
-               return response.json() 
+               return response.json() // TODO: clear sessionStorage 
             }
     }).catch((error) => {
         console.log('Error: ', error)
