@@ -19,11 +19,21 @@ import {
   useRouteMatch,
   useParams,
 } from "react-router-dom";
+import NavBar from "./components/Navbar";
+import ToolzLogo from "./images/ToolzLogo.png";
+
+// <img className="navlogo" alt="logo" src="https://github.com/fsiino/thuro/blob/master/app/assets/images/thuro-logo.png?raw=true"/>
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+      <header className="navbar"> 
+          <Link to="/">
+            <img className="navlogo" alt="logo" src={ToolzLogo}/>
+          </Link>
+        <NavBar/>
+      </header>
         <Routes>
             <Route element={<HomePage />}  path="/" />
             <Route element={<SearchPage />} path="/SearchPage" />

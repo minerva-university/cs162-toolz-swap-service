@@ -1,0 +1,110 @@
+body {
+    font-family: BasisGrotesque,Avenir,Helvetica Neue,Helvetica,sans-serif;
+    font-size: 16px;
+    color: black;
+    line-height: 1.5;
+    display: block;
+}
+
+.main-container {
+    /* // background-image: url('https://github.com/fsiino/turo-clone/blob/master/app/assets/images/mustang_joshua_tree_cropped.jpg?raw=true'); */
+    background-image: url('https://github.com/fsiino/turo-clone/blob/master/app/assets/images/mustang_joshua_tree_cropped2.jpg?raw=true');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: block;
+    height: 650px;
+    background-position: bottom;
+    position: relative;
+    /* // z-index: 2; */
+}
+
+a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.banner {
+    font-family: Freight,HoeflerText-Black,Times New Roman,serif;
+    font-size: 72px;
+    font-weight: bold;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0px 10% 0px 10%;
+    cursor: text;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.caption {
+    font-family: BasisGrotesque,Avenir,Helvetica Neue,Helvetica,sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.2;
+    text-align: center;
+    cursor: text;    
+    margin-top: 0;
+}
+
+.spacer {
+    height: 130px;
+}
+
+.main-social {
+    font-family: BasisGrotesque,Avenir,Helvetica Neue,Helvetica,sans-serif;
+    font-size: 20px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-shadow: 2px 2px 4px #000000;
+    padding-right: 5px;
+
+}
+
+.main-social-icon {
+    height:20px;
+    padding-right: 5px;
+}
+
+.mid-insurance-container {
+    position: relative;
+    border-radius: 25px 25px 0 0;
+    background-color: #fff;
+    display: block;
+    width: 287px;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 31px;
+    text-align: center;
+    cursor: not-allowed;
+
+    /* .mid-insurance {
+        align-content: center;
+    } */
+
+    /* .mid-ins-header {
+        font-family: BasisGrotesque,Avenir,Helvetica Neue,Helvetica,sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        color: #949494;
+        text-transform: uppercase;
+        text-align: center;
+        margin: 10px 0;
+        padding-top: 10px;
+    }
+
+    .mid-ins-img {
+        width: 135px;
+        height: 50px;
+    } */
+
+}
+
+.form-book-perfect {
+    width: 235px;
+    margin: auto;
+}
+
+.form-learn-more {
+  width: 175px;
+  margin: auto;
+}

@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import Modal from "../components/Modal";
 import axios from "axios";
 import uuid from 'react-uuid';
+import "../App.css";
+import "../stylesheets/SearchPage.css";
 
 
 
 
 class SearchPage extends Component {
+  /*
     constructor(props) {
       super(props);
       this.state = {
@@ -110,37 +113,38 @@ class SearchPage extends Component {
         </li>
       ));
     };
-  
+  */
     render() {
       return (
-        <main className="container">
-          <h1 className="text-white text-uppercase text-center my-4">Toolz Swap</h1>
-          <div className="row">
-            <div className="col-md-6 col-sm-10 mx-auto p-0">
-              <div className="card p-3">
-                <div className="mb-4">
-                  <button
-                    className="btn btn-primary"
-                    onClick={this.createItem}
-                  >
-                    List Tool
-                  </button>
-                </div>
-                {this.renderTabList()}
-                <ul className="list-group list-group-flush border-top-0">
-                  {this.renderItems()}
-                </ul>
-              </div>
-            </div>
-          </div>
-          {this.state.modal ? (
-            <Modal
-              activeItem={this.state.activeItem}
-              toggle={this.toggle}
-              onSave={this.handleSubmit}
-            />
-          ) : null}
-        </main>
+        <p>ho ho ho</p>
+        // <main className="container">
+        //   <h1 className="text-white text-uppercase text-center my-4">Toolz Swap</h1>
+        //   <div className="row">
+        //     <div className="col-md-6 col-sm-10 mx-auto p-0">
+        //       <div className="card p-3">
+        //         <div className="mb-4">
+        //           <button
+        //             className="btn btn-primary"
+        //             onClick={this.createItem}
+        //           >
+        //             List Tool
+        //           </button>
+        //         </div>
+        //         {this.renderTabList()}
+        //         <ul className="list-group list-group-flush border-top-0">
+        //           {this.renderItems()}
+        //         </ul>
+        //       </div>
+        //     </div>
+        //   </div>
+        //   {this.state.modal ? (
+        //     <Modal
+        //       activeItem={this.state.activeItem}
+        //       toggle={this.toggle}
+        //       onSave={this.handleSubmit}
+        //     />
+        //   ) : null}
+        // </main>
       );
     }
   }
