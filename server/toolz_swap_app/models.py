@@ -3,7 +3,13 @@ import uuid
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+import base64
+import os 
+import requests
+import json
+from dotenv import load_dotenv
 
+load_dotenv()
 
 #  TODO: add Admin views in admin.py
 
@@ -60,10 +66,19 @@ class Brand(models.Model):
     """
     brand_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
-    logo = models.ImageField(blank=True, null=True)
+    item_image = models.ImageField(upload_to='brand_images', default='brand_images/default.jpg', blank=True, null=True)
+    item_image_url = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"<brand:{self.name};"
+
+    def save(self, *args, **kwargs):
+        encodedString = base64.b64encode(self.item_image.file.read())
+        data = {"key": os.environ.get("IMG_BB"), "image": encodedString.decode("utf-8")}
+        uploadedImageInfo = requests.post("https://api.imgbb.com/1/upload", data=data)
+        jsonResponse = json.loads(uploadedImageInfo.text)
+        self.item_image_url = jsonResponse["data"]["display_url"]
+        super().save(*args, **kwargs)
 
 
 class ToolModel(models.Model):

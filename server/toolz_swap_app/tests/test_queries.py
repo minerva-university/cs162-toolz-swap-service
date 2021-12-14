@@ -25,8 +25,8 @@ class TestQueries(TestCase):
         saw_type_1 = ToolType.objects.create(name='Saw', purpose='Sawing', popularity='Medium')
 
         # Brand
-        bosch_brand_1 = Brand.objects.create(name='Bosch')
-        cat_brand_1 = Brand.objects.create(name='CAT')
+        bosch_brand_1 = Brand.objects.create(name='Bosch', image_url="https://ibb.co/TtQWY9v")
+        cat_brand_1 = Brand.objects.create(name='CAT', image_url="https://ibb.co/RYWVLPq")
 
         # ToolModel
         scp51 = ToolModel.objects.create(name='SCP51', year_released=2002)

@@ -10,3 +10,10 @@ class ToolTypeViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = ToolTypeSerializer
+
+class BrandViewSet(viewsets.ModelViewSet):
+    queryset = Brand.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = BrandSerializer

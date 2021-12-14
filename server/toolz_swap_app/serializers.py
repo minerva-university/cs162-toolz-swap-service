@@ -31,3 +31,9 @@ class NeighborhoodSerializer(serializers.ModelSerializer):
         model = Neighborhood
         fields = "__all__"
 
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = ("brand_id", "name", "item_image_url")
+
+
