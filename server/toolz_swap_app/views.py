@@ -1,4 +1,5 @@
 import datetime
+import uuid
 from importlib import import_module
 
 import jwt
@@ -101,7 +102,7 @@ def get_all_users(request):
     return Response(serializer.data)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'PUT', 'POST', 'DELETE'])
 @custom_login_required
 def listing_view(request):
     url_params = request.query_params
@@ -109,17 +110,59 @@ def listing_view(request):
     if request.method == 'GET':
         return get_listing(pk)
     elif request.method == 'PUT':
-        serializer = ListingSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()  # creates a new instance if it doesn't exist else updates instance
-            return Response(serializer.data, status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return update_listing(request.data)
+    elif request.method == "POST":
+        return create_listing(request.data)
     elif request.method == 'DELETE':  # doesn't have a pk query_param
         if pk is not None:
             serializer = ListingSerializer(data=request.data)
             serializer.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+def update_listing(data):
+    listing_id = data.get("listing_id")
+    if listing_id is None:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    listing = get_listing_by_id(listing_id)
+    if listing is None:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    for attribute in data:
+        if attribute == "title":
+            listing.title = data["title"]
+        elif attribute == "owner":
+            listing.owner = data["owner"]
+        elif attribute == "brand":
+            listing.brand == data["brand"]
+        elif attribute == "tool_category":
+            listing.tool_category = data["tool_category"]
+        elif attribute == "description":
+            listing.description = data["description"]
+    listing.save()
+    return Response(status=status.HTTP_201_CREATED)
+
+
+def create_listing(data):
+    listing_id = uuid.uuid4()
+    # get owner's address, city, neighboorhod
+    # store in a dictionary
+    owner = get_user_by_id(data["owner"])
+    city = owner.city
+    created_on = timezone.now()
+    listing_data = {
+        "listing_id": listing_id,
+        "address": "owner's address",
+        "title": data["title"],
+        "city": city
+        "created_on": created_on
+        # etc
+    }
+    serializer = ListingSerializer(data=listing_data)
+    if serializer.is_valid():
+        serializer.save()  # creates a new listing
+        return Response(serializer.data, status.HTTP_201_CREATED)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def get_listing(pk):
