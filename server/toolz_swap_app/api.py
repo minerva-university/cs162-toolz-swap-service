@@ -1,7 +1,7 @@
 from rest_framework import viewsets, permissions
 
 from .models import ToolType
-from .serializers import ToolTypeSerializer
+from .serializers import *
 
 
 class ToolTypeViewSet(viewsets.ModelViewSet):
