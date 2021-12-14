@@ -1,7 +1,7 @@
 import headerProvider from './headerProvider';
 import { serverURL } from '../config'
 
-function loginRequest(loginData){
+function LoginRequest(loginData){
     const url = serverURL + 'auth/login/'
     const method = 'POST'
     const headers = headerProvider(false) // not login protected
@@ -19,4 +19,4 @@ function loginRequest(loginData){
         console.log('Error: ', error)
     });
 }
-export default loginRequest;
+export default LoginRequest;

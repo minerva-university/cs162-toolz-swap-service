@@ -117,7 +117,8 @@ class Listing(models.Model):
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
     description = models.TextField(max_length=2000)
     created_on = models.DateTimeField(auto_now_add=True)
-    rating_average = models.FloatField(blank=True, null=True)  # average rating of the listing, can be calculated from ListingReviews
+    rating_average = models.FloatField(blank=True, null=True)  # average rating of the listing, can be
+    # calculated from ListingReviews
 
     # likes=models.IntegerField()
     # dislikes=models.IntegerField()

@@ -2,13 +2,13 @@ from .models import *
 from django.db.models import Avg
 
 
-
 def get_user_by_id(user_id):
     """
     Returns the user given the id
     """
     user = User.objects.get(pk=user_id)
     return user
+
 
 def get_user_by_username(username):
     """
@@ -19,11 +19,10 @@ def get_user_by_username(username):
 
 
 def get_listing_by_id(listing_id):
-
     """
     Returns the listing given the id
     """
-    listing = Listing.objects.get(pk=listing_id)
+    listing = Listing.objects.filter(pk=listing_id).first()
     return listing
 
 
@@ -39,7 +38,7 @@ def get_all_listings_for_neighborhood(neighborhood_id):
     """
     Returns all listings given the neighborhood id
     """
-    neighborhood_listings = Listing.objects.filter(neighborhood__pk = neighborhood_id)
+    neighborhood_listings = Listing.objects.filter(neighborhood__pk=neighborhood_id)
     return neighborhood_listings
 
 
@@ -52,10 +51,9 @@ def get_all_cities():
 
 
 def get_all_listings():
-
-    '''
+    """
     returns the listing given the id
-    '''
+    """
     listings = Listing.objects.all()
     return listings
 
@@ -92,14 +90,12 @@ def get_all_tools_listed_by_owner(user_id):
     return listed_by_owner
 
 
-
 def get_all_tools_rented_by_user(user_id):
     """
     Returns the listings rented by the user given the user's id
     """
     rented = User.objects.filter(pk=user_id).rented_tools.all()
     return rented
-
 
 
 def get_reviews_for_listing(listing_id):
@@ -128,5 +124,5 @@ def get_average_review_ratings_for_user(user_id):
         ratings = user_listings.aggregate(Avg('rating_average'))['rating_average__avg']
     else:
         ratings = 0
-    
+
     return ratings

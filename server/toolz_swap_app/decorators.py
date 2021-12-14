@@ -1,4 +1,5 @@
 import jwt
+import json
 from django.conf import settings
 from rest_framework import status
 from rest_framework.response import Response
@@ -31,10 +32,14 @@ def custom_login_required(function):
             invalidated_token_cache = args[0]  # for test purposes, an empty set is passed
         else:
             invalidated_token_cache = INVALIDATED_TOKENS  # development/production cache
-        try:
-            token = request.headers["Token"]
-            member_id = request.headers["Member-Id"]
-            user_id = int(request.headers["User-Id"])
+        token = request.headers.get("Token")
+        member_id = request.headers.get("Member-Id")
+        user_id = request.headers.get("User-Id")
+        credentials_in_header = (token is not None) and (member_id is not None) and (
+            user_id is not None
+        )
+        if credentials_in_header:
+            user_id = int(user_id)
             try:
                 decoded_token = jwt.decode(
                     token,
@@ -42,19 +47,27 @@ def custom_login_required(function):
                     algorithms="HS256"
                 ),
                 presented_valid_credentials = (
-                                                      decoded_token[0]["member_id"] == member_id
-                                              ) and (
-                                                      member_id == User.objects.get(pk=user_id).username
-                                              ) and token not in invalidated_token_cache
+                                                    decoded_token[0]["member_id"] == member_id
+                                            ) and (
+                                                member_id == User.objects.get(pk=user_id).username
+                                            ) and token not in invalidated_token_cache
                 if presented_valid_credentials:  # User presented valid credentials
                     return function(request, *args, **kwargs)
                 else:
                     return Response(incorrect_credentials_error, status=status.HTTP_403_FORBIDDEN)
             except jwt.ExpiredSignatureError:
                 return Response(credentials_expired_error, status=status.HTTP_403_FORBIDDEN)
-
-        except Exception as e:
-            print(e, "error!")  # user is not logged in
+            except jwt.DecodeError:
+                return Response(login_required_error, status=status.HTTP_403_FORBIDDEN)
+        else:
             return Response(login_required_error, status=status.HTTP_403_FORBIDDEN)
 
     return wrapper
+"""
+except Exception as e:
+            print(e, "error!")  # user is not logged in
+            return Response(login_required_error, status=status.HTTP_403_FORBIDDEN)
+
+"""
+
+
