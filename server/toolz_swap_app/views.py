@@ -42,6 +42,12 @@ def login(request):
     try:
         username = request.data['username']
         password = request.data['password']
+        user_does_not_exist = User.objects.filter(username=username).first() is None
+        if user_does_not_exist:
+            message = {
+                "message": "User doesn't exist, signup instead"
+            }
+            return Response(message, status=status.HTTP_404_NOT_FOUND)
         user = authenticate(username=username, password=password)
         if user is not None:
             token = jwt.encode(
