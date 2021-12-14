@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ToolTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ToolType
-        fields = ('tool_id', 'toolName', 'toolBrand', 'toolModel', 'toolCondition')
+        fields = ('tool_id', 'name', 'purpose', 'popularity')
 
 
 class ListingSerializer(serializers.ModelSerializer):
@@ -30,6 +30,13 @@ class NeighborhoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Neighborhood
         fields = "__all__"
+
+
+class ToolModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ToolModel
+        fields = "__all__"
+
 
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:

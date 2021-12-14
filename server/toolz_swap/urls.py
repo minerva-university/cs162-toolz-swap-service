@@ -32,5 +32,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 
     path('', include('toolz_swap_app.urls')),
+
+    path('router/', include('toolz_swap_app.routerurls')),
     # enables serving static pages in development
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,6 +1,6 @@
 from rest_framework import viewsets, permissions
 
-from .models import ToolType
+from .models import *
 from .serializers import *
 
 
@@ -10,6 +10,15 @@ class ToolTypeViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = ToolTypeSerializer
+
+
+class ToolModelViewSet(viewsets.ModelViewSet):
+    queryset = ToolModel.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ToolModelSerializer
+
 
 class BrandViewSet(viewsets.ModelViewSet):
     queryset = Brand.objects.all()
