@@ -147,7 +147,7 @@ def update_listing(data):
     listing.save()
     return Response(status=status.HTTP_201_CREATED)
 
-
+'''
 def create_listing(data):
     listing_id = uuid.uuid4()
     # get owner's address, city, neighboorhod
@@ -170,7 +170,7 @@ def create_listing(data):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+'''
 def get_listing(pk):
     if pk is not None:  # get request asks for a specific listing by pk
         listing = get_listing_by_id(pk)
