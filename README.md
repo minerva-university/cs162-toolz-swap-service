@@ -107,22 +107,24 @@ some testing data. To use it, after you have set up your Docker containers and d
 
 This should load some testing data.
 If you wish to modify the seed_data.json file or create a new one, you can follow these steps:
-1. connect to the container
+1. Connect to the container:
 `docker exec -it toolz_swap_back bash`
 
-2. open the shell
+2. Open the shell:
 `python manage.py shell`
 
-3. create your data by pasting/typing in the commands
+3. Create your data by pasting/typing in the commands:
 `>>> user_1 = User.objects.create(...)`
 
-4. dump it in a file
+4. Dump it in a file:
 `python manage.py dumpdata toolz_swap_back > seed_data.json`
 
-5. transfer the file to your host repo
+5. Transfer the file to your host repo:
 `docker cp <container_id>:/app/app_back/seed_data.json C:\Users\Nikita\Documents\GitHub\cs162-toolz-swap-service\server`
 
-6. loaddata on container once you rebuild the container
+6. Rebuild the container and run migrations
+
+7. Connect to the container and load your data:
 `python manage.py loaddata seed_data.json`
 
 
