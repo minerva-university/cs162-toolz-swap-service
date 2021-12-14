@@ -10,27 +10,43 @@ export default function LogIn (){
     const [inputField , setInputField] = useState({
         username: '',
         password: '',
+        password1: '',
+        password2: '',
     })
     console.log(inputField)
     
     const inputsHandler = (e) =>{
-        setInputField({
-            ...inputField,
-            [e.target.name]: e.target.value
-          })
+        console.log(e.target.name)
+        
+        if (e.target.name == "password") {
+            setInputField({
+                ...inputField,
+                [e.target.name]: e.target.value,
+                ["password1"]: e.target.value,
+                ["password2"]: e.target.value,
+              })
+            }
+            else {
+                setInputField({
+                    ...inputField,
+                    [e.target.name]: e.target.value
+                })
+            }
+        }
         console.log(inputField)
-    }
     const navigate = useNavigate()
     function LoginRequest(loginData){
-        const url = serverURL + 'auth/login'
+        const url = serverURL + 'auth/login/'
         const method = 'POST'
         const headers = headerProvider(false) // not login protected
+        let newdata = JSON.stringify(loginData)
+        console.log(loginData["password"])
         return fetch(url,
             {
                 method: method,
-                mode: 'no-cors',
+                mode: 'cors',
                 headers: headers,
-                body: JSON.stringify(loginData)
+                body: loginData
             }).then(response => {
                 if (response.ok) {
                    return response.json() 
@@ -77,6 +93,9 @@ export default function LogIn (){
         </label>
         <br />
         <button>Submit</button>
+        <Routes>
+            <Route path='/' element={<HomePage />} />
+        </Routes>
         </form> 
 );
 }
