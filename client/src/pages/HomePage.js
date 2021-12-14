@@ -39,7 +39,8 @@ class HomePage extends Component {
             <div className="main-container">
                 <div className="spacer"/>
                 <h2 className="banner">Welcome to ToolSwap!</h2>
-                <h2 className="caption">Book unforgettable cars from local hosts around the world</h2>
+                <h2 className="caption">An online platform that connects prospective tool renters to nearby
+                tool owners.</h2>
                 <div className="search-container">
                     <form className="search-form">
 

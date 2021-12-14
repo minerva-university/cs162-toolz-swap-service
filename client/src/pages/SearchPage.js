@@ -1,30 +1,98 @@
 import React, { Component } from "react";
+import {Link} from "react-router-dom";
 import Modal from "../components/Modal";
 import axios from "axios";
 import uuid from 'react-uuid';
 import "../App.css";
 import "../stylesheets/SearchPage.css";
+import  rating_star from "../images/rating_star.png";
 
 
 
 
 class SearchPage extends Component {
-  /*
+  
     constructor(props) {
       super(props);
       this.state = {
         toolList: [],
         modal: false,
-        activeItem: {
-          tool_id: null,
-          toolName: "",
-          toolBrand: "",  
-          toolModel: "", 
-          toolCondition: "",
-          description: "", 
-        },
+        allTools: [{
+          tool_id: [1],
+          Title: "",
+          Owner: "",  
+          Brand: "IRWIN", 
+          Model: "Hammer 1999",
+          Tool_category: "", 
+          Address: "", 
+          City: "", 
+          Neighborhood: "", 
+          Description: "",
+          toolPrice:66
+        }, {
+          tool_id: [2],
+          Title: "",
+          Owner: "",  
+          Brand: "JBtools", 
+          Model: "Wrench 2001",
+          Tool_category: "", 
+          Address: "", 
+          City: "", 
+          Neighborhood: "", 
+          Description: "",
+          toolPrice:55
+        }, {
+          tool_id: [2],
+          Title: "",
+          Owner: "",  
+          Brand: "JBtools", 
+          Model: "Wrench 2001",
+          Tool_category: "", 
+          Address: "", 
+          City: "", 
+          Neighborhood: "", 
+          Description: "",
+          toolPrice:55
+        }, {
+          tool_id: [2],
+          Title: "",
+          Owner: "",  
+          Brand: "JBtools", 
+          Model: "Wrench 2001",
+          Tool_category: "", 
+          Address: "", 
+          City: "", 
+          Neighborhood: "", 
+          Description: "",
+          toolPrice:55
+        }, {
+          tool_id: [2],
+          Title: "",
+          Owner: "",  
+          Brand: "JBtools", 
+          Model: "Wrench 2001",
+          Tool_category: "", 
+          Address: "", 
+          City: "", 
+          Neighborhood: "", 
+          Description: "",
+          toolPrice:55
+        }, {
+          tool_id: [2],
+          Title: "",
+          Owner: "",  
+          Brand: "JBtools", 
+          Model: "Wrench 2001",
+          Tool_category: "", 
+          Address: "", 
+          City: "", 
+          Neighborhood: "", 
+          Description: "",
+          toolPrice:55
+        }]
       };
     }
+    /*
     componentDidMount() {
       this.refreshList();
     }
@@ -114,9 +182,55 @@ class SearchPage extends Component {
       ));
     };
   */
+    
     render() {
+
       return (
-        <p>ho ho ho</p>
+        
+          <div className="search-body-container">
+          <div className="search-filter-container">
+            <div className="sidebar__search">
+            <div className="sidebar__searchContainer">
+                <input placeholder="Search for a tool listing" type="text" />
+            </div>
+          </div>
+              </div>
+                
+                <div className="search-listings-container">
+                  {this.state.allTools.map(tool => (
+                  
+                  <div className="tool-tile-container">
+                    <Link to={`/ListingExpanded`}>
+                      <div className="tool-index-photo-wrapper">
+                        <img className="tool-index-photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} />
+                        <div className="tool-price">
+                          ${tool.toolPrice}<span className="price-per-day"> /day</span>
+                        </div>
+                      </div>
+                    </Link>
+                    <div className="tool-make-model-year-container">
+                    <div className="tool-rating">
+                        3.5 <img src={rating_star}/>
+                        / 5
+                        
+                      </div>
+                      <span className="tool-make-model">
+                        {tool.Brand}&nbsp;{tool.Model}
+                        
+                      </span>
+                    </div>
+                  </div>
+                  ))}
+                </div>
+            </div>
+            
+
+        
+
+        
+
+
+        
         // <main className="container">
         //   <h1 className="text-white text-uppercase text-center my-4">Toolz Swap</h1>
         //   <div className="row">
@@ -150,3 +264,10 @@ class SearchPage extends Component {
   }
   
   export default SearchPage;
+
+  //                 <span className="tool-make-model">
+  //                   {toolName}
+  //                 </span>
+  //                 <span className="tool-year">
+  //                   1999
+  //                 </span>

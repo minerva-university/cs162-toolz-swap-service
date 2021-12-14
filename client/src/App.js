@@ -23,7 +23,7 @@ import {
   Redirect,  
 } from "react-router-dom";
 import NavBar from "./components/Navbar";
-import ToolzLogo from "./images/ToolzLogo.png";
+import toolz_logo from "./images/toolz_logo.png";
 
 // <img className="navlogo" alt="logo" src="https://github.com/fsiino/thuro/blob/master/app/assets/images/thuro-logo.png?raw=true"/>
 
@@ -33,7 +33,7 @@ class App extends Component {
       <div className="App">
       <header className="navbar"> 
           <Link to="/">
-            <img className="navlogo" alt="logo" src={ToolzLogo}/>
+            <img className="navlogo" alt="logo" src={toolz_logo}/>
           </Link>
         <NavBar/>
       </header>
