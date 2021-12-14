@@ -1,7 +1,8 @@
 import headerProvider from './headerProvider';
 import { serverURL } from '../config'
+import React from 'react'
 
-function signUpRequest(signupData){
+function SignUpRequest(signupData){
     const url = serverURL + 'api/user/'
     const method = 'POST'
     const headers = headerProvider(false) // not login protected
@@ -13,10 +14,11 @@ function signUpRequest(signupData){
             body: JSON.stringify(signupData)
         }).then(response => {
             if (response.ok) {
+                console.log('it works')
                 return response.json();
             }
     }).catch((error) => {
         console.log('Error: ', error)
     });
 }
-export default signUpRequest;
+export default SignUpRequest;

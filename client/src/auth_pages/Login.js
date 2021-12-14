@@ -1,55 +1,103 @@
-import React, { Component } from "react";
-import loginRequest from "../apis/apiLogin"
+import React, { Component, useState  } from "react";
+//import LoginRequest from "../apis/apiLogin"
+import { useNavigate, Route, Routes, Link } from "react-router-dom"
+import HomePage from '../pages/HomePage.js'
+import headerProvider from '../apis/headerProvider';
+import { serverURL } from '../config'
 
-export default class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.password = React.createRef();
-        this.username = React.createRef();
-    }
-    handleSubmit(event) {
-        const data = {
-            "username": this.username.current.value,
-            "password": this.password.current.value,
+export default function LogIn (){
+    
+    const [inputField , setInputField] = useState({
+        username: '',
+        password: '',
+        password1: '',
+        password2: '',
+    })
+    console.log(inputField)
+    
+    const inputsHandler = (e) =>{
+        console.log(e.target.name)
+        
+        if (e.target.name == "password") {
+            setInputField({
+                ...inputField,
+                [e.target.name]: e.target.value,
+                ["password1"]: e.target.value,
+                ["password2"]: e.target.value,
+              })
+            }
+            else {
+                setInputField({
+                    ...inputField,
+                    [e.target.name]: e.target.value
+                })
+            }
         }
-        loginRequest(data).then(serverResponse=> {
+        console.log(inputField)
+    const navigate = useNavigate()
+    function LoginRequest(loginData){
+        const url = serverURL + 'auth/login/'
+        const method = 'POST'
+        const headers = headerProvider(false) // not login protected
+        let newdata = JSON.stringify(loginData)
+        console.log(loginData["password"])
+        return fetch(url,
+            {
+                method: method,
+                mode: 'cors',
+                headers: headers,
+                body: loginData
+            }).then(response => {
+                if (response.ok) {
+                   return response.json() 
+                   navigate('/')
+                }
+        }).catch((error) => {
+            console.log('Error: ', error)
+        });
+    }
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        let data = inputField
+        LoginRequest(data)/*.then(serverResponse=> {
             // store credentials in sessionStorage
+            console.log(serverResponse)
                 const jwtToken = serverResponse["token"]
                 const memberId = serverResponse["member_id"]
                 const userId = serverResponse["user_id"]
                 window.sessionStorage.setItem("jwtToken",  jwtToken)
                 window.sessionStorage.setItem("memberId",  memberId)
                 window.sessionStorage.setItem("userId",  userId)
-        })
-        event.preventDefault()
+        })*/
     }
-    render() {
-       return (
-        <form>
-            <h3>Login</h3>
-
-            <div className="form-group">
-                <label>Username</label>
-                <input type="text" className="form-control" placeholder="Username" ref={this.username} />
-            </div>
-            
-            <div className="form-group">
-                <label>Password</label>
-                <input type="password" className="form-control" placeholder="Enter password" ref={this.password} />
-            </div>
-            
-            <button
-                className="btn btn-primary btn-block"
-                onClick={this.handleSubmit}
-            >
-                Login
-            </button>
-            <p className="forgot-password text-right">
-                Already registered <a href="#">sign in?</a>
-            </p>
-        </form>
-    );
-    }
-
+    
+    return (
+        <form onSubmit={handleSubmit}>
+        <label>
+            Username:
+            <input
+            value={inputField.username}
+            name="username"
+            onChange={inputsHandler}
+            />
+        </label>
+        <br />
+        <label>
+            Password:
+            <input
+            value={inputField.password}
+            name="password"
+            type="password"
+            onChange={inputsHandler}
+            />
+        </label>
+        <br />
+        <button>Submit</button>
+        <Routes>
+            <Route path='/' element={<HomePage />} />
+        </Routes>
+        </form> 
+);
 }
+
+

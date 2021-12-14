@@ -128,6 +128,34 @@ npm start
 
 For any of the models, by visiting http://localhost:8000/api/<name_of_model> you can access a form that allows you to post and create objects. You can even select foreign key objects if they are already created. It is using these endpoints that a frontend application will be able to communicate with our application. Feel free to submit information here and see that the entries show up in your postgres database. This is how you know everything is set up correctly. (Note: the uuid field does not need to be filled out, it does so automatically)
 
+### Populating Database with Seed Data
+If you want to quickly test something, there is `seed_data.json` file that has
+some testing data. To use it, after you have set up your Docker containers and did all migrations, follow these steps:
+1. connect to the container `docker exec -it toolz_swap_back bash`
+2. run `python manage.py loaddata seed_data.json`
+
+This should load some testing data.
+If you wish to modify the seed_data.json file or create a new one, you can follow these steps:
+1. Connect to the container:
+`docker exec -it toolz_swap_back bash`
+
+2. Open the shell:
+`python manage.py shell`
+
+3. Create your data by pasting/typing in the commands:
+`>>> user_1 = User.objects.create(...)`
+
+4. Dump it in a file:
+`python manage.py dumpdata toolz_swap_back > seed_data.json`
+
+5. Transfer the file to your host repo:
+`docker cp <container_id>:/app/app_back/seed_data.json C:\Users\Nikita\Documents\GitHub\cs162-toolz-swap-service\server`
+
+6. Rebuild the container and run migrations
+
+7. Connect to the container and load your data:
+`python manage.py loaddata seed_data.json`
+
 ### django-admin
 
 There is a django-admin page but its incredibly rudimentary right now. However, if you'd like to access the admin page:
