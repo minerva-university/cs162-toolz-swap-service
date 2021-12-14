@@ -99,6 +99,32 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
+### Populating Database with Seed Data
+If you want to quickly test something, there is `seed_data.json` file that has
+some testing data. To use it, after you have set up your Docker containers and did all migrations, follow these steps:
+1. connect to the container `docker exec -it toolz_swap_back bash`
+2. run `python manage.py loaddata seed_data.json`
+
+This should load some testing data.
+If you wish to modify the seed_data.json file or create a new one, you can follow these steps:
+1. connect to the container
+`docker exec -it toolz_swap_back bash`
+
+2. open the shell
+`python manage.py shell`
+
+3. create your data by pasting/typing in the commands
+`>>> user_1 = User.objects.create(...)`
+
+4. dump it in a file
+`python manage.py dumpdata toolz_swap_back > seed_data.json`
+
+5. transfer the file to your host repo
+`docker cp <container_id>:/app/app_back/seed_data.json C:\Users\Nikita\Documents\GitHub\cs162-toolz-swap-service\server`
+
+6. loaddata on container once you rebuild the container
+`python manage.py loaddata seed_data.json`
+
 
 ### Starting React frontend
 
