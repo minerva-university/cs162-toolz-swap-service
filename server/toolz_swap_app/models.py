@@ -132,16 +132,17 @@ class Listing(models.Model):
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
     description = models.TextField(max_length=2000)
     created_on = models.DateTimeField(auto_now_add=True)
-    rating_average = models.FloatField(blank=True, null=True)  # average rating of the listing, can be calculated from ListingReviews
-    item_image = models.ImageField(upload_to='listing_images', default='listing_images/default.jpg', blank=True, null=True)
+    rating_average = models.FloatField(blank=True, null=True, default=0)  # average rating of the listing, can be calculated from ListingReviews
+    item_image = models.ImageField(upload_to='listing_images', blank=True, null=True)
     item_image_url = models.TextField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        encodedString = base64.b64encode(self.item_image.file.read())
-        data = {"key": os.environ.get("IMG_BB"), "image": encodedString.decode("utf-8")}
-        uploadedImageInfo = requests.post("https://api.imgbb.com/1/upload", data=data)
-        jsonResponse = json.loads(uploadedImageInfo.text)
-        self.item_image_url = jsonResponse["data"]["display_url"]
+        if self.item_image:
+            encodedString = base64.b64encode(self.item_image.file.read())
+            data = {"key": os.environ.get("IMG_BB"), "image": encodedString.decode("utf-8")}
+            uploadedImageInfo = requests.post("https://api.imgbb.com/1/upload", data=data)
+            jsonResponse = json.loads(uploadedImageInfo.text)
+            self.item_image_url = jsonResponse["data"]["display_url"]
         super().save(*args, **kwargs)
 
     # likes=models.IntegerField()
@@ -192,6 +193,18 @@ class ListingReview(models.Model):
         return f"<listing:{self.listing}, \
                 author:{self.author},\
                 rating:{self.rating};"
+
+    def save(self, *args, **kwargs):
+        a = list(ListingReview.objects.filter(listing__pk= self.listing.listing_id).values('rating', 'listing__title'))
+        b=0
+        length = len(a)
+        for i in a:
+            #print(type(i['rating']))
+            b += i['rating']
+        avg = b/length
+        print(b, length)
+        Listing.objects.filter(listing_id=self.listing.listing_id).update(rating_average=avg)
+        super().save(*args, **kwargs)
 
 
 class ListingImage(models.Model):
