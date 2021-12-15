@@ -106,6 +106,14 @@ def get_reviews_for_listing(listing_id):
     return reviews
 
 
+def get_requests_for_listing(listing_id):
+    """
+    Returns the reviews for a listing given the listing id
+    """
+    requests = ListingRequest.objects.filter(listing__pk=listing_id)
+    return requests
+
+
 def get_average_review_ratings_for_tool(listing_id):
     """
     Returns the average rating given a listing id

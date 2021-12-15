@@ -44,3 +44,14 @@ class BrandSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ListingRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ListingRequest
+        fields = "__all__"
+
+
+class ListingReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ListingReview
+        fields = "__all__"
+
