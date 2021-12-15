@@ -19,10 +19,10 @@ class SearchPage extends Component {
         modal: false,
         allTools: [{
           tool_id: [1],
-          Title: "",
+          Title: "hammer for sale",
           Owner: "",  
           Brand: "IRWIN", 
-          Model: "Hammer 1999",
+          Model: "UniversalHammer 18V-100",
           Tool_category: "", 
           Address: "", 
           City: "", 
@@ -191,7 +191,9 @@ class SearchPage extends Component {
           <div className="search-filter-container">
             <div className="sidebar__search">
             <div className="sidebar__searchContainer">
+                <button class="another-search-button"></button>
                 <input placeholder="Search for a tool listing" type="text" />
+                
             </div>
           </div>
               </div>
@@ -215,7 +217,7 @@ class SearchPage extends Component {
                         
                       </div>
                       <span className="tool-make-model">
-                        {tool.Brand}&nbsp;{tool.Model}
+                        {tool.Title}
                         
                       </span>
                     </div>

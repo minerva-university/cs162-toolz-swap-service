@@ -1,0 +1,222 @@
+/*! CSS Used from: https://eduzuka.com/_next/static/css/191e30288bbeab18df21.css */
+*,:after,:before{
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;}
+h4{
+    margin-top:0;
+    margin-bottom:.5em;
+    color:rgba(0,0,0,.85);
+    font-weight:500;
+}
+p{
+    margin-top:0;
+    margin-bottom:1em;
+}
+::-moz-selection{
+    color:#fff;
+    background:#1890ff;
+}
+::selection{
+    color:#fff;
+    background:#1890ff;
+}
+/*! CSS Used from: https://eduzuka.com/_next/static/css/ae3ff040d9d770ff579e.css */
+*,:after,:before{
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;}
+h4{
+    margin-top:0;
+    margin-bottom:.5rem;
+    font-weight:500;
+    line-height:1.2;}
+h4{
+    font-size:-webkit-calc(1.275rem + .3vw);
+    font-size:calc(1.275rem + .3vw);
+}
+@media (min-width:1200px){
+h4{
+    font-size:1.5rem;
+}
+}
+p{
+    margin-top:0;
+    margin-bottom:1rem;
+}
+::-moz-focus-inner{
+    padding:0;
+    border-style:none;
+}
+/*! CSS Used from: https://eduzuka.com/_next/static/css/4e97bc390fae3b1c24dd.css */
+.profile-nav-info p{
+    margin-right:5px;
+    line-height:2em;
+    font-size:1rem;}
+.bio-heading{
+    font-weight:700;
+    font-family:Old Standard;
+}
+
+.profile-header {
+    width: 100%;
+    height: auto;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    position: relative;
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.profile-header, .updateForm {
+    background: #fff;
+    -webkit-box-shadow: 0 3px 4px rgb(0 0 0 / 20%);
+    box-shadow: 0 3px 4px rgb(0 0 0 / 20%);
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 7rem;
+    padding: 0 2rem;
+}
+
+.profilePageImg {
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    align-items: center;
+    padding: 20px;
+    width: 500px;
+}
+
+.profileShadow {
+    width: inherit;
+    border-radius: 30px
+px
+;
+}
+
+img, svg {
+    vertical-align: middle;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+.profile-nav-info {
+    float: left;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    -webkit-flex-direction: column;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    padding-right: 40px;
+    font-family: Old Standard;
+}
+
+.profile-nav-info h3 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.user-name {
+    font-family: Old Standard;
+}
+
+.profile-nav-info .address {
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    font-weight: 700;
+    color: #777;
+}
+
+.main-bd {
+    width: 100%;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    padding-right: 15px;
+}
+
+.profile-side {
+    width: 300px;
+    background: #fff;
+    -webkit-box-shadow: 0 3px 5px rgb(0 0 0 / 20%);
+    box-shadow: 0 3px 5px rgb(0 0 0 / 20%);
+    padding: 90px 30px 20px;
+    font-family: "Bree Serif",serif;
+    margin-left: 10px;
+    z-index: 99;
+    border-radius: 30px;
+    margin-top: -50px;
+}
+
+.profile-side p {
+    margin-bottom: 7px;
+    color: rgb(51, 51, 51);
+    font-size: 14px;
+}
+
+p {
+    margin-top: 0px;
+    margin-bottom: 1rem;
+}
+p {
+    margin-top: 0px;
+    margin-bottom: 1em;
+}
+
+.profile-nav {
+    width: 99%;
+    z-index: -1;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.profile-body {
+    width: 100%;
+    z-index: -1;
+}
+
+.profile-nav ul li {
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+.profile-nav ul li.active, .profile-nav ul li:hover {
+    -webkit-box-shadow: inset 0 -3px 0 #44941c;
+    box-shadow: inset 0 -3px 0 #44941c;
+}
+
+.profile-nav ul li {
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+.profile-nav ul li {
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
