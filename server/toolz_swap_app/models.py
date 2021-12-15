@@ -10,6 +10,8 @@ import json
 from dotenv import load_dotenv
 
 load_dotenv()
+import datetime
+from django.utils import timezone
 
 #  TODO: add Admin views in admin.py
 
@@ -107,6 +109,7 @@ class User(AbstractUser):
     rented_tools = models.ManyToManyField('Listing', related_name='rented_tools')
     profile_photo = models.ImageField(null=True, blank=True)
     bio = models.CharField(max_length=200, blank=True)
+    rating_average = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         return f"<username:{self.username}, \

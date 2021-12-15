@@ -5,7 +5,16 @@ from .models import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'password', 'email', 'first_name', 'last_name')
+        exclude = [
+            'password',
+            'last_login',
+            'is_staff',
+            'is_superuser',
+            'is_active',
+            'date_joined',
+            'groups',
+            'user_permissions'
+        ]
 
 
 class ToolTypeSerializer(serializers.ModelSerializer):
