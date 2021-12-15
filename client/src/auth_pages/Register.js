@@ -59,6 +59,7 @@ export default function SignUp (){
                     return response.json();
                 }
         }).catch((error) => {
+            console.log(response.json())
             console.log('Error: ', error)
         });
     }

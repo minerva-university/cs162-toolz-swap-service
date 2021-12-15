@@ -29,6 +29,8 @@ TOOLZ_APP_DB=toolz_app_db_local
 DB_HOST=localhost
 TOOLZ_APP_DB_DOCKER=toolz_app_db_docker
 DB_HOST_DOCKER=postgres_db_toolz
+IS_LOCAL_SETUP=false
+JWT_SECRET_KEY="secret"
 ```
 
 Please reach out for the DJANGO_SECRET_KEY variable

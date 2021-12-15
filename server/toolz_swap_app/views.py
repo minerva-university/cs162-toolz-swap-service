@@ -19,6 +19,7 @@ JWT_SECRET_KEY = settings.JWT_SECRET_KEY
 INVALIDATED_TOKENS = settings.INVALIDATED_TOKENS
 SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
 
+#print(JWT_SECRET_KEY)
 
 def signup(request):
     """
@@ -43,6 +44,7 @@ def login(request):
     :param: request:rest_framework.request.Request
     :return: django-rest-framework Response object
     """
+    #print("Look here", request.data, request.data['username'], type(request.data['username']))
     try:
         username = request.data['username']
         password = request.data['password']

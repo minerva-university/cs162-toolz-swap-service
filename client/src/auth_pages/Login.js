@@ -10,8 +10,6 @@ export default function LogIn (){
     const [inputField , setInputField] = useState({
         username: '',
         password: '',
-        password1: '',
-        password2: '',
     })
     console.log(inputField)
     
@@ -35,22 +33,23 @@ export default function LogIn (){
         }
         console.log(inputField)
     const navigate = useNavigate()
+    
     function LoginRequest(loginData){
         const url = serverURL + 'auth/login/'
         const method = 'POST'
         const headers = headerProvider(false) // not login protected
-        let newdata = JSON.stringify(loginData)
         console.log(loginData["password"])
         return fetch(url,
             {
                 method: method,
                 mode: 'cors',
                 headers: headers,
-                body: loginData
+                body: JSON.stringify(loginData)
             }).then(response => {
                 if (response.ok) {
-                   return response.json() 
-                   navigate('/')
+                    navigate('/')
+                    return response.json() 
+                   
                 }
         }).catch((error) => {
             console.log('Error: ', error)
@@ -59,7 +58,7 @@ export default function LogIn (){
     const handleSubmit = (event) => {
         event.preventDefault()
         let data = inputField
-        LoginRequest(data)/*.then(serverResponse=> {
+        LoginRequest(data).then(serverResponse=> {
             // store credentials in sessionStorage
             console.log(serverResponse)
                 const jwtToken = serverResponse["token"]
@@ -68,7 +67,7 @@ export default function LogIn (){
                 window.sessionStorage.setItem("jwtToken",  jwtToken)
                 window.sessionStorage.setItem("memberId",  memberId)
                 window.sessionStorage.setItem("userId",  userId)
-        })*/
+        })
     }
     
     return (
