@@ -12,4 +12,7 @@ urlpatterns = [
     name='reviews for listing'),
     path('listing/requests/', filterviews.ListingRequestViewSet.as_view(), 
     name='requests for listing'),
+    path('requests/', filterviews.RequestMadeByUserViewSet.as_view(), name='request made by user'),
+    path('myrequests/', filterviews.RequestMadeToUserViewSet.as_view(), name='request made to user'),
+
 ]

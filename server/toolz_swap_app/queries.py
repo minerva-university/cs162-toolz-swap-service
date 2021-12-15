@@ -114,6 +114,22 @@ def get_requests_for_listing(listing_id):
     return requests
 
 
+def get_requests_by_user(user_id): #requests made by a user
+    """
+    Returns the reviews for a listing given the listing id
+    """
+    requests = ListingRequest.objects.filter(author__pk=user_id)
+    return requests
+
+
+def get_requests_to_user(user_id): #myrequests. Requests made to the user
+    """
+    Returns the reviews for a listing given the listing id
+    """
+    requests = ListingRequest.objects.filter(recipient__pk=user_id)
+    return requests
+
+
 def get_average_review_ratings_for_tool(listing_id):
     """
     Returns the average rating given a listing id

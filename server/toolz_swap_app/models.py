@@ -6,6 +6,7 @@ from django.db import models
 
 
 #  TODO: add Admin views in admin.py
+#  TODO: create model for TOOLS (combination of type, brand, model and name)
 
 class City(models.Model):
     """

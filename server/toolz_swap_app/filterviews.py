@@ -50,7 +50,7 @@ class ListingReviewViewSet(generics.ListAPIView):
         return get_reviews_for_listing(listing_id)
 
 
-class ListingRequestViewSet(generics.RetrieveUpdateDestroyAPIView):
+class ListingRequestViewSet(generics.ListAPIView):
     """
     Allows not to have separate views for getting 
     a list of objects and detail of one object (incl. CRUD)
@@ -63,3 +63,48 @@ class ListingRequestViewSet(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         listing_id = self.request.query_params.get('listing_id', None)
         return get_requests_for_listing(listing_id)
+
+
+class ListingByUserViewSet(generics.ListAPIView):
+    """
+    Allows not to have separate views for getting 
+    a list of objects and detail of one object (incl. CRUD)
+    """
+    
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ListingSerializer
+    def get_queryset(self):
+        user_id = self.request.query_params.get('user_id', None)
+        return get_all_tools_listed_by_owner(user_id)
+
+
+class RequestMadeByUserViewSet(generics.ListAPIView):
+    """
+    Allows not to have separate views for getting 
+    a list of objects and detail of one object (incl. CRUD)
+    """
+    
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ListingRequestSerializer
+    def get_queryset(self):
+        user_id = self.request.query_params.get('user_id', None)
+        return get_requests_by_user(user_id)
+
+
+class RequestMadeToUserViewSet(generics.ListAPIView):
+    """
+    Allows not to have separate views for getting 
+    a list of objects and detail of one object (incl. CRUD)
+    """
+    
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ListingRequestSerializer
+    def get_queryset(self):
+        user_id = self.request.query_params.get('user_id', None)
+        return get_requests_to_user(user_id)
