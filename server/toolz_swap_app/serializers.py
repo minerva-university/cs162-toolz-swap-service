@@ -55,6 +55,6 @@ class BrandSerializer(serializers.ModelSerializer):
 class ListingImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ListingImage
-        fields = ("listing", "author", "item_image_url")
+        fields = ("listing", "created_on", "author", "item_image_url", "top_image")
 
 
