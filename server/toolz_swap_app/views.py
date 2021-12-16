@@ -213,3 +213,9 @@ def get_all_neighborhoods_view(request):
     neighborhoods = Neighborhood.objects.all()
     serializer = NeighborhoodSerializer(neighborhoods, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def get_all_listing_images(request):
+    images = ListingImage.objects.all()
+    serializer = ListingImageSerializer(images, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

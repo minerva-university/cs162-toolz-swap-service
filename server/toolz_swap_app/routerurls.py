@@ -9,4 +9,5 @@ router = routers.DefaultRouter()
 router.register('tool/type', ToolTypeViewSet, 'tooltype')
 router.register('tool/model', ToolModelViewSet, 'toolmodel')
 router.register('tool/brand', BrandViewSet, 'toolbrand')
+#router.register('/listing_images', ListingImageSerializer, 'listing_image')
 urlpatterns = router.urls

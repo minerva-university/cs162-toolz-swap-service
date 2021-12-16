@@ -52,4 +52,9 @@ class BrandSerializer(serializers.ModelSerializer):
         model = Brand
         fields = ("brand_id", "name", "item_image_url")
 
+class ListingImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ListingImage
+        fields = ("listing", "author", "item_image_url")
+
 

@@ -201,12 +201,13 @@ class ListingReview(models.Model):
         a = list(ListingReview.objects.filter(listing__pk= self.listing.listing_id).values('rating', 'listing__title'))
         b=0
         length = len(a)
-        for i in a:
-            #print(type(i['rating']))
-            b += i['rating']
-        avg = b/length
-        print(b, length)
-        Listing.objects.filter(listing_id=self.listing.listing_id).update(rating_average=avg)
+        if length != 0:
+            for i in a:
+                #print(type(i['rating']))
+                b += i['rating']
+            avg = b/length
+            print(b, length)
+            Listing.objects.filter(listing_id=self.listing.listing_id).update(rating_average=avg)
         super().save(*args, **kwargs)
 
 
@@ -218,9 +219,9 @@ class ListingImage(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    item_image = models.ImageField(upload_to='listing_images', default='listing_images/default.jpg', blank=True, null=True)
+    item_image = models.ImageField(upload_to='listing_images', blank=True, null=True)
     item_image_url = models.TextField(blank=True, null=True)
-    top_image = models.BooleanField()
+    top_image = models.BooleanField(default=False)
 
     def __str__(self):
         return f"<image_id:{self.image_id}, \
