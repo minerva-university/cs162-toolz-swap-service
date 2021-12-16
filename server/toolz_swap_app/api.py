@@ -26,3 +26,10 @@ class BrandViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = BrandSerializer
+
+class ListingImageViewSet(viewsets.ModelViewSet):
+    queryset = ListingImage.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ListingImageSerializer

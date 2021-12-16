@@ -25,8 +25,8 @@ class TestQueries(TestCase):
         saw_type_1 = ToolType.objects.create(name='Saw', purpose='Sawing', popularity='Medium')
 
         # Brand
-        bosch_brand_1 = Brand.objects.create(name='Bosch', image_url="https://ibb.co/TtQWY9v")
-        cat_brand_1 = Brand.objects.create(name='CAT', image_url="https://ibb.co/RYWVLPq")
+        bosch_brand_1 = Brand.objects.create(name='Bosch', item_image_url="https://ibb.co/TtQWY9v")
+        cat_brand_1 = Brand.objects.create(name='CAT', item_image_url="https://ibb.co/RYWVLPq")
 
         # ToolModel
         scp51 = ToolModel.objects.create(name='SCP51', year_released=2002)
@@ -78,6 +78,11 @@ class TestQueries(TestCase):
                                                 rating=4,
                                                 review_likes=2,
                                                 review_dislikes=0)
+
+        # images
+        image1 = ListingImage.objects.create(listing=listing1, author=user_1, item_image_url="https://i.ibb.co/jhB2d8D/drill2.jpg")
+        image2 = ListingImage.objects.create(listing=listing1, author=user_1, item_image_url="https://i.ibb.co/chkPV3p/drill.jpg")
+        image3 = ListingImage.objects.create(listing=listing2, author=user_2, item_image_url="https://i.ibb.co/kQQy2s6/saw.jpg")
 
     def test_get_user_by_username(self):
         '''

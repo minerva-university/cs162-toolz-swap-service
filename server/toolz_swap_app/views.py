@@ -106,7 +106,10 @@ def users_view(request):
                 serializer = UserSerializer(user)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             else:  # user with id = pk doesn't exist in db
-                return Response(status=status.HTTP_404_NOT_FOUND)
+                message = {
+                    "message": "User with that Id doesn't exist"
+                }
+                return Response(message, status=status.HTTP_404_NOT_FOUND)
         return get_all_users(request) # didn't specify particular user, get all users
     elif request.method == 'POST':
         return signup(request)
@@ -209,4 +212,11 @@ def get_all_cities_view(request):
 def get_all_neighborhoods_view(request):
     neighborhoods = Neighborhood.objects.all()
     serializer = NeighborhoodSerializer(neighborhoods, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@custom_login_required
+def get_all_listing_images(request):
+    images = ListingImage.objects.all()
+    serializer = ListingImageSerializer(images, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
