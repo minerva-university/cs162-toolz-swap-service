@@ -1,12 +1,13 @@
 /* // whole page container */
 
-.car-show-container {
+.tool-show-container {
   color: black;
   width: 100%;
   min-height: 170vh;
+  background-color: azure;
 }
 
-.car-show-container > button {
+.tool-show-container > button {
     width: 100%;
     height: 100%;
     border: 1px solid black;
@@ -24,17 +25,17 @@
     transition: 0.5s;
 }
 
-.car-show-container > button:hover {
+.tool-show-container > button:hover {
     background-color: #e2e2e2;
 }
 
-.car-show-add-fav-btn{
+.tool-show-add-fav-btn{
     cursor:not-allowed;
   }
 
 /* // image banner */
 
-.car-show-img-banner {
+.tool-show-img-banner {
   object-fit: cover;
   display: block;
   height: 95vh;
@@ -44,24 +45,28 @@
 
 /* // main section wrapping left and right panels */
 
-.car-show-main-section {
+.tool-show-main-section {
   display: flex;
   justify-content: space-between;
 }
 
 /* // left section */
 
-.car-show-left-container {
+.tool-show-left-container {
   margin-left: 10%;
   /* // begin grid */
 }
-  .car-show-left-container > item-1 {
+  .tool-show-left-container > item-1 {
     grid-area: g-car-l;
     padding: 6px;    
   }
   .item-2 {
     grid-area: g-car-c;
     padding: 6px;
+    text-align: left;
+  }
+  .item-2 img {
+      height: 36px
   }
   .item-3 {
     grid-area: g-host-l;
@@ -70,6 +75,7 @@
   .item-4 {
     grid-area: g-host-c;
     padding: 6px;
+    text-align: left;
   }
   .item-5 {
     grid-area: g-desc-l;
@@ -94,13 +100,15 @@
   .item-10 {
     grid-area: g-rev-c;
     padding: 6px;
+
   }
 
-  .car-show-grid-container {
+
+  .tool-show-grid-container {
     justify-content: left;
     width: 75%;
     display: grid;
-    grid-template-columns: 118px 100%;
+    grid-template-columns: 170px 100%;
     grid-template-areas: 
     "g-car-l g-car-c"
     "g-host-l g-host-c"
@@ -111,7 +119,7 @@
 
   /* // end grid */
 
-  .car-show-left-sec {
+  .tool-show-left-sec {
     font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
     font-weight: bold;
     color: #5d5d5d;
@@ -121,7 +129,7 @@
     text-transform: uppercase;
   }
 
-  .car-show-title {
+  .tool-show-title {
     flex: 0 1 auto;
     font-family: Freight, HoeflerText-Black, Times New Roman, serif;  
     font-weight: bold;
@@ -131,60 +139,22 @@
     text-transform: uppercase;
   }
 
-  .car-show-year {
+  .tool-show-year {
     font-family: Plantin,AmericanTypewriter-Condensed,Times New Roman,serif;
     font-size: 24px;
     font-weight: 600;
   }
 
-  .car-show-left-full-star {
-    background-image: url('https://github.com/fsiino/thuro/blob/master/app/assets/images/review-full-star.png?raw=true');
-    background-size: 20px 20px;
-    height: 20px;
-    width: 20px;
-    margin-right: 4px;
-    float: left;
-  }
-
-  .car-show-left-half-star {
-    background-image: url('https://github.com/fsiino/thuro/blob/master/app/assets/images/review-half-star.png?raw=true');
-    background-size: 20px 20px;
-    height: 20px;
-    width: 20px;
-    margin-right: 4px;
-    float: left;
-  }
-
-  .car-show-left-empty-star {
-    background-image: url('https://github.com/fsiino/thuro/blob/master/app/assets/images/review-empty-star.png?raw=true');
-    background-size: 20px 20px;
-    height: 20px;
-    width: 20px;
-    margin-right: 4px;
-    float: left;
-  }
-
-  .car-show-star-inner {
-    overflow: hidden;
-    width: 100%;
-  }
-  
-  .car-show-star-wrapper {
-    overflow: hidden;
-    /* // width: 200px; */
-    width: 100%;
-    padding-bottom: 20px;
-  }
-
-  .car-show-left-content {
+  .tool-show-left-content {
     color: #231f20;
     font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
     font-weight: 500;
     font-size: 16px;
     line-height: 1.5;
+    text-align: left;
   }
 
-  .car-show-left-content-trips {
+  .tool-show-left-content-trips {
     font-size: 13px;
     color: #231f20;
     font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
@@ -192,7 +162,7 @@
     line-height: 1.5;
   }
 
-  .car-show-left-content-response {
+  .tool-show-left-content-response {
     color: #949494;
     margin-top: 2px;
     font-size: 13px;
@@ -201,17 +171,17 @@
     line-height: 1.5;
   }
 
-  .car-show-host-wrapper {
+  .tool-show-host-wrapper {
     display: flex;
     justify-content: left;
     padding-right: 10px;
   }
 
-  .car-show-host-right-of-avatar {
+  .tool-show-host-right-of-avatar {
     line-height: 0px;
   }
 
-  .car-show-host-avatar {
+  .tool-show-host-avatar {
     background-image: url('https://github.com/fsiino/thuro/blob/master/app/assets/images/host-avatar-happy.jpg?raw=true');
     background-size: 60px 60px;
     height: 60px;
@@ -220,7 +190,7 @@
     float: left;
   }
 
-  .car-features-wrapper {
+  .tool-features-wrapper {
     display: flex;
     justify-content: space-around;
   }
@@ -228,9 +198,9 @@
 
 /* // right panel */
 
-.car-show-right-container {
+.tool-show-right-container {
   /* // width: 18%; */
-  width: 286px;
+  width: 430px;
 
   position: absolute;
   top: 98vh;
@@ -239,13 +209,14 @@
   background: white;
   padding: 40px;
   border-radius: 30px 30px 0 0;
+  background-color: aliceblue;
 }
-  .car-show-rental {
+  .tool-show-rental {
     padding: 15px 0 25px 0;
     color: black;
   }  
 
-  .car-show-price {
+  .tool-show-price {
     /* // font-family: Freight,HoeflerText-Black,Times New Roman,serif; */
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 45px;
@@ -255,7 +226,7 @@
     font-size: 62px;
   }
 
-  .car-show-usd {
+  .tool-show-usd {
     /* // font-family: Plantin,AmericanTypewriter-Condensed,Times New Roman,serif; */
     font-family: Times New Roman,serif;
     font-size: 24px;
@@ -265,7 +236,7 @@
     vertical-align: top;
   }
 
-  .car-show-per-day {
+  .tool-show-per-day {
     font-family: BasisGrotesque,Avenir,Helvetica Neue,Helvetica,sans-serif;
     font-size: 16px;
     font-weight: 500;
@@ -273,10 +244,10 @@
     text-align: right;
   }
 
-    .car-show-distance-container {
+    .tool-show-distance-container {
         color: null
     }
-      .car-show-distance-header {
+      .tool-show-distance-header {
         text-transform: uppercase;
         color: #5d5d5d;
         font-size: 13px;
@@ -286,34 +257,36 @@
         padding-top: 10px;
       }
 
-      .car-show-distance {
+      .tool-show-distance {
         display: flex;
         justify-content: space-between;
       }
 
-      .car-show-distance-time {
+      .tool-show-distance-time {
         color: #231f20;
         font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
         font-weight: 500;
         font-size: 16px;
         line-height: 1.5;
+        text-align: left;
       }
 
-      .car-show-distance-mi {
+      .tool-show-distance-mi {
         color: #231f20;
-        font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
+        font-family: ui-monospace;
         font-weight: 500;
         font-size: 16px;
         line-height: 1.5;
-        text-align: right;
+        text-align: left;
+        padding-left: 13%;
       }
 
     
 
-    .car-show-insurance-container {
+    .tool-show-insurance-container {
         color: null
     }
-      .car-show-insurance-header {
+      .tool-show-insurance-header {
         border-top: 1px solid #e6e6e6;
         font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
         font-weight: bold;
@@ -323,7 +296,7 @@
         padding-top: 20px;
       }
 
-      .car-show-insurance-co {
+      .tool-show-insurance-co {
         background: transparent;
         border: none;
         color: #59d389;
@@ -341,19 +314,19 @@
       }
     
 
-    .car-show-add-fav-icon {
+    .tool-show-add-fav-icon {
       width: 16px;
       height: 16px;
     }  
 
 
-.car-show-edit-del {
+.tool-show-edit-del {
   padding-top: 10px;  
   padding-bottom: 10px;
   border-top: 1px solid #e6e6e6;
 }
 
-.car-show-top-trips {
+.tool-show-top-trips {
       color: #231f20;
     font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
     font-weight: 500;

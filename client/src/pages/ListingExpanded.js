@@ -1,50 +1,60 @@
-import React, { Component } from "react";
+import React, { useState, Component } from "react";
 import { Link } from "react-router-dom";
 import "../stylesheets/listingExpanded.css";
+import  star from "../images/star.png";
 
 
-class ListingExpanded extends Component {
-    render(){
+const ListingExpanded =()=> {
 
-        const randomNumber = (min, max) => {
-            return Math.floor(Math.random() * (max - min) + min);
-          }  
+    const [tool, setValuess]=useState({
+        "listing_id": "4e8d7df8-e086-4eee-a861-d15505062137",
+        "title": "Some cool Drill right here",
+        "address": "Random Address",
+        "description": "This drill has been used by Mike tyson, you probably want it wink wink",
+        "created_on": "2021-12-14T00:39:28.371000-08:00",
+        "rating_average": 3.2,
+        "owner": "Mike Tyson",
+        "brand": "IRWIN",
+        "model": "X AE-A-12",
+        "tool_category": "DRILL",
+        "city": "San Francisco, CA",
+        "neighborhood": "Tenderloin"
+    })
+
+    const randomNumber = (min, max) => {
+        return Math.floor(Math.random() * (max - min) + min);
+      }  
 
         return(
-            <div className="car-show-container">
+            <div className="tool-show-container">
 
       {/* IMAGE BANNER */}
 
-        <div className="car-show-banner">
-          <img className="car-show-img-banner" alt="car photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} /> 
+        <div className="tool-show-banner">
+          <img className="tool-show-img-banner" alt="tool photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} /> 
         </div>
 
         <br/><br/><br/>
 
-        <div className="car-show-main-section">
+        <div className="tool-show-main-section">
       
         {/* LEFT PANEL */}
         
-          <div className="car-show-left-container">
-            <div className="car-show-grid-container">
+          <div className="tool-show-left-container">
+            <h2 className="tool-show-title">{tool.title}</h2>
+            <div className="tool-show-grid-container">
               <div className="item-1">
-                <div className="car-show-left-sec">
-                  The car
+                <div className="tool-show-left-sec">
+                  Rating
                 </div>
               </div>
               <div className="item-2">
-
-                <span className="car-show-title">
-                  IRWIN HAMMER 
-                </span>&nbsp;
-                <span className="car-show-year">
-                  2001
+                <span >
+                  {tool.rating_average} <img src={star} /> / 5
                 </span>
-                <div className="car-show-star-wrapper">
-                  <div className="car-show-star-inner">
-
-
-                    <span className="car-show-top-trips">
+                <div className="tool-show-star-wrapper">
+                  <div className="tool-show-star-inner">
+                    <span className="tool-show-top-trips">
                     </span>
                   </div>
                 </div>
@@ -52,63 +62,69 @@ class ListingExpanded extends Component {
               </div>
 
               <div className="item-3">
-                <div className="car-show-left-sec">
-                  Hosted by
+                <div className="tool-show-left-sec">
+                  Date-created
                 </div>
               </div>
-              <div className="item-4">
-                <div className="car-show-host-wrapper">
-                  <div className="car-show-host-avatar">
-                  </div> 
-                  <div className="car-show-right-of-avatar">
-                    <div className="car-show-left-content">
-                      Nahom
-                    </div>
-                    <br/>
-                    <div className="car-show-left-content-trips">
-                      {randomNumber(100,200)} trips - Joined May 2019
-                    </div>
-                    <br />
-                    <div className="car-show-left-content-response">
-                        Typically responds in {randomNumber(2,35)} minutes
-                    </div>
-                  </div>
-                </div>
 
+              <div className="item-4">
+                <div className="tool-show-left-content">
+                  {tool.created_on}
+                </div>
               </div>
 
               <div className="item-5">
-                <div className="car-show-left-sec">
-                  Description
+                <div className="tool-show-left-sec">
+                  Tool Category
                 </div>
               </div>
-
               <div className="item-6">
-                <div className="car-show-left-content">
-                  this is a very cool hammer
+                <div className="tool-show-host-wrapper">
+                    <div className="tool-show-left-content-trips">
+                    {tool.tool_category}
+                    </div>
+                    
                 </div>
               </div>
 
               <div className="item-7">
-                <div className="car-show-left-sec">
-                 
+                <div className="tool-show-left-sec">
+                  Tool Brand
+                </div>
+              </div>
+              <div className="item-8">
+                <div className="tool-show-host-wrapper">
+                    <div className="tool-show-left-content-trips">
+                    {tool.brand}
+                    </div>
+                    
                 </div>
               </div>
 
-              <div className="item-8">
-                <div className="car-show-left-content">
-                </div>
-              </div>
 
               <div className="item-9">
-                <div className="car-show-left-sec">
-                  Reviews
+                <div className="tool-show-left-sec">
+                 Tool Model
                 </div>
               </div>
 
               <div className="item-10">
-                <div className="car-show-left-content">
-                  
+                <div className="tool-show-host-wrapper">
+                    <div className="tool-show-left-content-trips">
+                    {tool.model}
+                    </div>
+                </div>
+              </div>
+            
+              <div className="item-11">
+                <div className="tool-show-left-sec">
+                  Tool Description
+                </div>
+              </div>
+
+              <div className="item-12">
+                <div className="tool-show-left-content">
+                  {tool.description}
                 </div>
               </div>
 
@@ -117,21 +133,21 @@ class ListingExpanded extends Component {
           
           {/* RIGHT PANEL */}
 
-            <div className="car-show-right-container">
-              <span className="car-show-usd">
+            <div className="tool-show-right-container">
+              <span className="tool-show-usd">
                 $
               </span>
-              <span className="car-show-price">
+              <span className="tool-show-price">
                 66
               </span>
               &nbsp;
-              <span className="car-show-per-day">
+              <span className="tool-show-per-day">
                 per day
               </span>
 
-              <div className="car-show-distance-container">
+              <div className="tool-show-distance-container">
 
-                <div className="car-show-rental">
+                <div className="tool-show-rental">
                   
                 
 
@@ -139,45 +155,40 @@ class ListingExpanded extends Component {
 
                 
 
-                <div className="car-show-distance-header">
-                  Distance included
+                <div className="tool-show-distance-header">
+                  CONTACT
                 </div>
+                <div className="tool-show-distance">
 
-                <div className="car-show-distance">
-
-                  <div className="car-show-distance-time">
+                  <div className="tool-show-distance-time">
                 
-                    Day<br/>
-                    Week<br/>
-                    Month
+                    Owner<br/>
+                    Address<br/>
+                    Neighborhood<br/>
+                    City
                     
                   </div>
 
-                  <div className="car-show-distance-mi">
-                    200 mi<br/>
-                    1000 mi<br/>
-                    2250 mi
+                  <div className="tool-show-distance-mi">
+                    {tool.owner}<br/>
+                    {tool.address}<br/>
+                    {tool.neighborhood}<br/>
+                    {tool.city}
                   </div>
                 </div>
               </div>
-
-              <div className="car-show-insurance-container">
-                <div className="car-show-insurance-header">
-                  Insurance provided via
+                <br />
+              <div className="tool-show-insurance-container">
+                <div className="tool-show-insurance-header">
                 </div>
-                <div className="car-show-insurance-co">
-                  Freedom Reciprocal
+                <div className="tool-show-insurance-co">
                 </div>
               </div>
-
-              <button className="car-show-add-fav-btn">
-                <img className="car-show-add-fav-icon" src="https://github.com/fsiino/thuro/blob/master/app/assets/images/add-fav-transp.png?raw=true"/>&nbsp;Add to favorites
+                
+              <button className="tool-show-add-fav-btn">
+                <img className="tool-show-add-fav-icon" src="https://github.com/fsiino/thuro/blob/master/app/assets/images/add-fav-transp.png?raw=true"/>&nbsp;Add to Saved
               </button>
               <br/>
-
-            {/* <div className="car-show-zoomed-map">
-                <CarMap cars={this.props.cars} />
-            </div> */}
 
             </div> 
           
@@ -186,7 +197,7 @@ class ListingExpanded extends Component {
         </div>
       )
         
-    }
+    
 }
 
 export default ListingExpanded;

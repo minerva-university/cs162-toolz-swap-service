@@ -4,25 +4,30 @@ import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CS
 import { faBell, faComment, faEdit, faEnvelope, faPhone, faPlus, faStar } from "@fortawesome/free-solid-svg-icons"; // import the icons you need
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import the FontAwesomeIcon component
 import axios from "axios";
-import {
-    Button,
-    Modal,
-    ModalFooter,
-    Form,
-    FormGroup,
-    Input,
-    Label,
-  } from "reactstrap";
-  import Resizer from 'react-image-file-resizer';
-  import {toast} from 'react-toastify';
-  import "../stylesheets/erics.css";
-  import  userAvatar from "../images/userAvatar.jpg";
+import {Modal} from "reactstrap";
+import Resizer from 'react-image-file-resizer';
+import {toast} from 'react-toastify';
+import "../stylesheets/userProfile.css";
+import  userAvatar from "../images/userAvatar.jpg";
 
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
 
 const UserProfile =()=> {
  const [valuess, setValues]=useState({name:'',username:"", country: '',email:"", phone:0, bio:"", valueStory:"", loading:false})
- const [values, setValuess]=useState({name:'Nahom',username:"Nahom@58", country: 'Ethiopia',email:"nahom@gmail.com", phone:5556667744, bio:"I am in cs162", valueStory:"I don't have a story", loading:false})
+ const [values, setValuess]=useState({
+    "id": 1,
+    "username": "test_user_1",
+    "first_name": "Mike",
+    "last_name": "Tyson",
+    "email": "mike@toolz.com",
+    "phone": "555-666-7722",
+    "address": "16 Turk St.",
+    "profile_photo": null,
+    "bio": "I am Mike Tyson, The greatest Boxer of all time!!",
+    "city": "San Fracisco, CA",
+    "saved_places": [],
+    "rented_tools": []
+})
  const [active, setActive] = useState(1)
  const [showForm, setShowForm] = useState(false)
  const [name, setname] = useState("")
@@ -37,24 +42,13 @@ const UserProfile =()=> {
  const [showSide, setShowside] = useState(false)
  const submit =async () => {
     try{
-      const {data} = await axios.put(`/api/update-profile/${values.email}`, {...valuess, image})
+      const {data} = await axios.put(`/api/update-profile/${values.email}`, {...values, image})
       toast.success("Profile updated!")
       setShowForm(false)
     }catch(err){
       toast.error(err)
     }
   }
- 
-  // const getUser = async() =>{
-  //     try{
-  //       const {data} = await axios.get(`/api/get-profile${asPath}`)
-  //       if(data)setValues(data)
-  //       if(data && data.image) setImage(data.image)
-  //     }catch(err){
-  //         console.log(err)
-  //     }
-  // }
-  // console.log(values)
 
   const handleImage =async(e)=>{
 
@@ -125,14 +119,33 @@ const UserProfile =()=> {
          <img src={image} alt="Profile picture" className="profileShadow"/>
        </div>
        <div className="profile-nav-info">
-         <h3 className="user-name">{values.name}</h3>
+         
          <div className="user-bio">
-         <h4 className="bio-heading">Bio</h4>
-           <p className="bio">{values.bio}</p>
+            <h4 className="bio-heading">Name</h4>
+            <h4 className="user-name">{values.first_name}&nbsp;{values.last_name}</h4>
+         </div>
+         <br />
+         <div className="user-bio">
+            <h4 className="bio-heading">Userame</h4>
+            <h4 className="user-name" >{values.username}</h4>
+         </div>
+         <br />
+         <div className="user-bio">
+           <h4 className="bio-heading">Location</h4>
          </div>
          <div className="address">
-           <p id="state" className="state">{values.country}</p>
+           <p id="state" className="state">Address: {values.address}</p>
          </div>
+         <div className="address">
+           <p id="state" className="state">City: {values.city}</p>
+         </div>
+        <br />
+        <div className="user-bio">
+            <h4 className="bio-heading">Bio</h4>
+                <p className="bio">{values.bio}</p>
+         </div>
+
+
        </div>
 
 
@@ -161,40 +174,9 @@ const UserProfile =()=> {
              {/* <button className="chatbtn" id="chatBtn"> <FontAwesomeIcon icon={faComment}></FontAwesomeIcon>&nbsp; Chat</button>
              <button className="createbtn" id="Create-post"> <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>&nbsp; Create</button> */}
            </div>
-           {/* <div className="user-rating">
-             <h3 className="rating">4.5</h3>
-             <div className="rate">
-               <div className="star-outer">
-                 <div className="star-inner">
-                   <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                   <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                   <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                   <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                   <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                 </div>
-               </div>
-               <span className="no-of-user-rate"><span>123</span>&nbsp;&nbsp;reviews</span>
-             </div>
-           </div>           */}
            <div style={{width:"100%", justifyContent:"center", display:'flex'}}>
            <button className="updateProfileBtn" id="Create-post" onClick={() => setShowForm(true)}> <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>&nbsp; Update Profile</button>
        </div>
-         </div>
-       </div>
-       
-
-       <div className="right-side">
-       
-         <div className="profile-body">
-
-             <div className="profile-settings tab">
-               <div className="account-setting">
-                 <h3>User Detail</h3>
-                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit omnis eaque, expedita nostrum, facere libero provident laudantium. Quis, hic doloribus! Laboriosam nemo tempora praesentium. Culpa quo velit omnis, debitis
-                   maxime, sequi animi dolores commodi odio placeat, magnam, cupiditate facilis impedit veniam? Soluta aliquam excepturi illum natus adipisci ipsum quo, voluptatem, nemo, commodi, molestiae doloribus magni et. Cum, saepe enim
-                   quam voluptatum vel debitis nihil, recusandae, omnis officiis tenetur, ullam rerum.</p>
-               </div>
-             </div> 
          </div>
        </div>
      </div>

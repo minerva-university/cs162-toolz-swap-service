@@ -10,6 +10,7 @@ import  rating_star from "../images/rating_star.png";
 
 
 
+
 class SearchPage extends Component {
   
     constructor(props) {
@@ -188,15 +189,16 @@ class SearchPage extends Component {
       return (
         
           <div className="search-body-container">
-          <div className="search-filter-container">
-            <div className="sidebar__search">
-            <div className="sidebar__searchContainer">
-                <button class="another-search-button"></button>
-                <input placeholder="Search for a tool listing" type="text" />
-                
-            </div>
-          </div>
-              </div>
+                <div className="search-filter-container">
+                  <div className="sidebar__search">
+                    <div className="sidebar__searchContainer">
+                        <button class="another-search-button"></button>
+                        <input placeholder="Search for a tool listing" type="text" />
+                        
+                    </div>
+                  </div>
+                  
+                </div>
                 
                 <div className="search-listings-container">
                   {this.state.allTools.map(tool => (
