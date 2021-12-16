@@ -68,7 +68,7 @@ class Brand(models.Model):
     """
     brand_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     name = models.CharField(max_length=200)
-    item_image = models.ImageField(upload_to='brand_images', default='brand_images/default.jpg', blank=True, null=True)
+    item_image = models.ImageField(upload_to='brand_images', blank=True, null=True)
     item_image_url = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -108,7 +108,7 @@ class User(AbstractUser):
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True, blank=True)
     saved_places = models.ManyToManyField('Listing', related_name='saved_places')
     rented_tools = models.ManyToManyField('Listing', related_name='rented_tools')
-    item_image = models.ImageField(upload_to='brand_images', default='brand_images/default.jpg', null=True, blank=True)
+    item_image = models.ImageField(upload_to='brand_images', null=True, blank=True)
     item_image_url = models.TextField(blank=True, null=True)
     bio = models.CharField(max_length=200, blank=True)
     rating_average = models.FloatField(blank=True, null=True)
