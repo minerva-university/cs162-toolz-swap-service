@@ -130,6 +130,7 @@ class Listing(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     model = models.ForeignKey(ToolModel, on_delete=models.CASCADE)
     tool_category = models.ForeignKey(ToolType, on_delete=models.CASCADE)
+    price = models.FloatField()
     address = models.CharField(max_length=200)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
@@ -198,7 +199,6 @@ class ListingReview(models.Model):
                 rating:{self.rating};"
 
     def save(self, *args, **kwargs):
-        a = list(ListingReview.objects.filter(listing__pk= self.listing.listing_id).values('rating', 'listing__title'))
         b=0
         length = len(a)
         for i in a:
@@ -206,7 +206,6 @@ class ListingReview(models.Model):
             b += i['rating']
         avg = b/length
         print(b, length)
-        Listing.objects.filter(listing_id=self.listing.listing_id).update(rating_average=avg)
         super().save(*args, **kwargs)
 
 
