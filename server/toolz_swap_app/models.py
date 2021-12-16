@@ -75,11 +75,12 @@ class Brand(models.Model):
         return f"<brand:{self.name};"
 
     def save(self, *args, **kwargs):
-        encodedString = base64.b64encode(self.item_image.file.read())
-        data = {"key": os.environ.get("IMG_BB"), "image": encodedString.decode("utf-8")}
-        uploadedImageInfo = requests.post("https://api.imgbb.com/1/upload", data=data)
-        jsonResponse = json.loads(uploadedImageInfo.text)
-        self.item_image_url = jsonResponse["data"]["display_url"]
+        if self.item_image:
+            encodedString = base64.b64encode(self.item_image.file.read())
+            data = {"key": os.environ.get("IMG_BB"), "image": encodedString.decode("utf-8")}
+            uploadedImageInfo = requests.post("https://api.imgbb.com/1/upload", data=data)
+            jsonResponse = json.loads(uploadedImageInfo.text)
+            self.item_image_url = jsonResponse["data"]["display_url"]
         super().save(*args, **kwargs)
 
 
@@ -107,7 +108,8 @@ class User(AbstractUser):
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True, blank=True)
     saved_places = models.ManyToManyField('Listing', related_name='saved_places')
     rented_tools = models.ManyToManyField('Listing', related_name='rented_tools')
-    profile_photo = models.ImageField(null=True, blank=True)
+    item_image = models.ImageField(upload_to='brand_images', default='brand_images/default.jpg', null=True, blank=True)
+    item_image_url = models.TextField(blank=True, null=True)
     bio = models.CharField(max_length=200, blank=True)
     rating_average = models.FloatField(blank=True, null=True)
 
@@ -116,6 +118,15 @@ class User(AbstractUser):
                 first_name:{self.first_name},\
                 last_name:{self.last_name}, \
                 email:{self.email};"
+
+    def save(self, *args, **kwargs):
+        if self.item_image:
+            encodedString = base64.b64encode(self.item_image.file.read())
+            data = {"key": os.environ.get("IMG_BB"), "image": encodedString.decode("utf-8")}
+            uploadedImageInfo = requests.post("https://api.imgbb.com/1/upload", data=data)
+            jsonResponse = json.loads(uploadedImageInfo.text)
+            self.item_image_url = jsonResponse["data"]["display_url"]
+        super().save(*args, **kwargs)
 
 
 class Listing(models.Model):
@@ -136,17 +147,6 @@ class Listing(models.Model):
     description = models.TextField(max_length=2000)
     created_on = models.DateTimeField(auto_now_add=True)
     rating_average = models.FloatField(blank=True, null=True, default=0)  # average rating of the listing, can be calculated from ListingReviews
-    item_image = models.ImageField(upload_to='listing_images', blank=True, null=True)
-    item_image_url = models.TextField(blank=True, null=True)
-
-    def save(self, *args, **kwargs):
-        if self.item_image:
-            encodedString = base64.b64encode(self.item_image.file.read())
-            data = {"key": os.environ.get("IMG_BB"), "image": encodedString.decode("utf-8")}
-            uploadedImageInfo = requests.post("https://api.imgbb.com/1/upload", data=data)
-            jsonResponse = json.loads(uploadedImageInfo.text)
-            self.item_image_url = jsonResponse["data"]["display_url"]
-        super().save(*args, **kwargs)
 
     # likes=models.IntegerField()
     # dislikes=models.IntegerField()
@@ -218,9 +218,20 @@ class ListingImage(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField()
+    item_image = models.ImageField(upload_to='listing_images', default='listing_images/default.jpg', blank=True, null=True)
+    item_image_url = models.TextField(blank=True, null=True)
     top_image = models.BooleanField()
 
     def __str__(self):
         return f"<image_id:{self.image_id}, \
-                listing:{self.listing};"
+                listing:{self.listing}, \
+                item_image_url:{self.item_image_url};"
+
+    def save(self, *args, **kwargs):
+        if self.item_image:
+            encodedString = base64.b64encode(self.item_image.file.read())
+            data = {"key": os.environ.get("IMG_BB"), "image": encodedString.decode("utf-8")}
+            uploadedImageInfo = requests.post("https://api.imgbb.com/1/upload", data=data)
+            jsonResponse = json.loads(uploadedImageInfo.text)
+            self.item_image_url = jsonResponse["data"]["display_url"]
+        super().save(*args, **kwargs)
