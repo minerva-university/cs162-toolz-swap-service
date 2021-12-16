@@ -79,4 +79,4 @@ class ListingReviewAdmin(admin.ModelAdmin):
 
 @admin.register(ListingImage)
 class ListingImageAdmin(admin.ModelAdmin):
-    list_display = ('image_id', 'listing', 'created_on', 'author', 'top_image')
+    list_display = ('image_id', 'listing', 'created_on', 'author', 'item_image_url', 'top_image')

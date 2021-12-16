@@ -215,7 +215,7 @@ def get_all_neighborhoods_view(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['GET'])
-@custom_login_required
+#@custom_login_required
 def get_all_listing_images(request):
     images = ListingImage.objects.all()
     serializer = ListingImageSerializer(images, many=True)

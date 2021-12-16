@@ -26,7 +26,7 @@ class ToolTypeSerializer(serializers.ModelSerializer):
 class ListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Listing
-        fields = ('title', 'owner', 'brand', 'item_image_url')
+        fields = ('title', 'owner', 'brand')
 
 
 class CitySerializer(serializers.ModelSerializer):
