@@ -5,7 +5,8 @@ import { useNavigate, Route, Routes, Link } from "react-router-dom"
 import HomePage from '../pages/HomePage.js'
 import SearchPage from '../pages/SearchPage.js'
 import headerProvider from '../apis/headerProvider';
-import { serverURL } from '../config'
+
+import "../stylesheets/MyRequests.css";
 import axios from 'axios'
 export default function MyRequests (){
     const username = window.sessionStorage.getItem("username")
@@ -22,12 +23,17 @@ export default function MyRequests (){
     }
     getLists()
     const listItems = myrequests.map((d) => 
-    <Link to = '/'> 
+    <Link
+    to={`/ListingExpanded/${d.listing}`}
+    params={{
+    "tool_id": d.listing,
+    "title": d.listing_title
+        }}>
     <button>
-    <article class="post">
+    <article class="list">
     <header>
       <div>
-        <h3>{d.listing_name}</h3>
+        <h3>{d.listing_title}</h3>
         <div>Request By {d.author_name} on {d.created_on}</div>
       </div>
     </header>
@@ -42,12 +48,7 @@ export default function MyRequests (){
     return (
         <div>
             <div>
-                <p>This is MyRequests page</p>
-                <Link
-                to={{ pathname: "/SearchPage" }}
-                >
-                <button>Click here to go to SearchPage</button>
-                </Link>
+                <h2>Requests Made to You</h2>
             </div>
             <div>
                 {listItems}
