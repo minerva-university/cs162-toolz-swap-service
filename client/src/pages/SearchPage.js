@@ -30,7 +30,9 @@ const SearchPage =(props)=> {
   // axios.get("http://localhost:8000/router/listing/").then(response => {console.log(response)})
 
   const url = "http://localhost:8000/router/listing/"
+  const another_url = "http://localhost:8000/router/listing_image/"
   const [allTools, setAllTools] = useState([])
+  const [toolImages, setToolImages] = useState([])
 
   useEffect(() => {
     axios.get(url)
@@ -40,6 +42,13 @@ const SearchPage =(props)=> {
     })
   })
 
+  useEffect(() => {
+    axios.get(another_url)
+    .then((response)=>{
+      setToolImages(response.data)
+      // axios returns API response body in .data
+    })
+  })
   // const [allTools, setValues]=useState([{
   //         tool_id: 1,
   //         Title: "hammer for sale",
@@ -302,7 +311,7 @@ const SearchPage =(props)=> {
                         "title": tool.title
                     }}>
                       <div className="tool-index-photo-wrapper">
-                        <img className="tool-index-photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} />
+                        <img className="tool-index-photo" src={toolImages[2].item_image_url} />
                         <div className="tool-price">
                           ${tool.toolPrice}<span className="price-per-day"> /day</span>
                         </div>
