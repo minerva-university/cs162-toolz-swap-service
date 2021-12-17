@@ -145,7 +145,7 @@ def get_average_review_ratings_for_user(user_id):
     """
     user_listings = Listing.objects.filter(owner__pk=user_id)
     if user_listings.exists():
-        ratings = user_listings.aggregate(Avg('rating_average'))['rating_average__avg']
+        ratings = round(user_listings.aggregate(Avg('rating_average'))['rating_average__avg'], 1)
     else:
         ratings = 0
 

@@ -1,4 +1,4 @@
-import React, {useState, Component } from "react";
+import React, {useState, useEffect, Component } from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {Form, Row, Col} from "react-bootstrap";
 import Modal from "../components/Modal";
@@ -15,83 +15,46 @@ import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CS
 
 
 const SearchPage =(props)=> {
-  console.log(window.sessionStorage.getItem("jwtToken"))
-  axios.get("http://localhost:8000/router/listing/").then(response => {console.log(response)})
+  const axios = require('axios');
   const history = useNavigate();
-  const [allTools, setValuess]=useState([{
-          tool_id: 1,
-          Title: "hammer for sale",
-          Owner: "Mike",  
-          Brand: "IRWIN", 
-          Model: "UniversalHammer 18V-100",
-          Tool_category: "", 
-          Address: "", 
-          City: "", 
-          Neighborhood: "", 
-          Description: "",
-          toolPrice:66
-        }, {
-          tool_id: [2],
-          Title: "",
-          Owner: "",  
-          Brand: "JBtools", 
-          Model: "Wrench 2001",
-          Tool_category: "", 
-          Address: "", 
-          City: "", 
-          Neighborhood: "", 
-          Description: "",
-          toolPrice:55
-        }, {
-          tool_id: [2],
-          Title: "",
-          Owner: "",  
-          Brand: "JBtools", 
-          Model: "Wrench 2001",
-          Tool_category: "", 
-          Address: "", 
-          City: "", 
-          Neighborhood: "", 
-          Description: "",
-          toolPrice:55
-        }, {
-          tool_id: [2],
-          Title: "",
-          Owner: "",  
-          Brand: "JBtools", 
-          Model: "Wrench 2001",
-          Tool_category: "", 
-          Address: "", 
-          City: "", 
-          Neighborhood: "", 
-          Description: "",
-          toolPrice:55
-        }, {
-          tool_id: [2],
-          Title: "",
-          Owner: "",  
-          Brand: "JBtools", 
-          Model: "Wrench 2001",
-          Tool_category: "", 
-          Address: "", 
-          City: "", 
-          Neighborhood: "", 
-          Description: "",
-          toolPrice:55
-        }, {
-          tool_id: [2],
-          Title: "",
-          Owner: "",  
-          Brand: "JBtools", 
-          Model: "Wrench 2001",
-          Tool_category: "", 
-          Address: "", 
-          City: "", 
-          Neighborhood: "", 
-          Description: "",
-          toolPrice:55
-        }]
-  )
+  console.log("hello")
+  
+  // const fetchListing = async () => {
+  //           const res = await fetch(`http://localhost:8000/router/listing/`)
+  //           console.log("res",res)
+  //           const data = await res.json()
+  //           console.log("data", data)
+  //         }
+  // console.log(axios
+  //   .get("http://localhost:8000/router/listing/").json())
+  // async function getListing() {
+  // axios.get("http://localhost:8000/router/listing/").then(response => {console.log(response)})
+
+  const url = "http://localhost:8000/router/listing/"
+  const [allTools, setAllTools] = useState([])
+
+  useEffect(() => {
+    axios.get(url)
+    .then((response)=>{
+      setAllTools(response.data)
+      // axios returns API response body in .data
+    })
+  })
+
+  // const [allTools, setValues]=useState([{
+  //         tool_id: 1,
+  //         Title: "hammer for sale",
+  //         Owner: "Mike",  
+  //         Brand: "IRWIN", 
+  //         Model: "UniversalHammer 18V-100",
+  //         Tool_category: "", 
+  //         Address: "", 
+  //         City: "", 
+  //         Neighborhood: "", 
+  //         Description: "",
+  //         toolPrice:66
+  //       }]
+  // )
 
     /*
     componentDidMount() {
@@ -333,7 +296,11 @@ const SearchPage =(props)=> {
                   {allTools.map(tool => (
                   <div className="tool-tile-container">
                     <Link
-                     to={`/ListingExpanded/${tool.tool_id}`}>
+                     to={`/ListingExpanded/${tool.listing_id}`}
+                     params={{
+                        "tool_id": tool.listing_id,
+                        "title": tool.title
+                    }}>
                       <div className="tool-index-photo-wrapper">
                         <img className="tool-index-photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} />
                         <div className="tool-price">
@@ -348,7 +315,7 @@ const SearchPage =(props)=> {
                         
                       </div>
                       <span className="tool-make-model">
-                        {tool.Title}
+                        {tool.title}
                         
                       </span>
                     </div>

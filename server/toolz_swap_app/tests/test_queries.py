@@ -8,10 +8,6 @@ from toolz_swap_app.queries import *
 
 # python manage.py test toolz_swap_app.tests.test_queries
 
-# TODO: we changed our models so we need new tests!
-# IDEA: add reviews for lenders too? not just the listings
-
-
 class TestQueries(TestCase):
     def setUp(self):
         # City
@@ -234,7 +230,7 @@ class TestQueries(TestCase):
         '''
         
         glendale_id = Neighborhood.objects.all()[0].pk
-        self.assertEqual(get_all_listings_for_neighborhood(glendale_id).count(), 2)
+        self.assertEqual(get_all_listings_for_neighborhood(glendale_id).count(), 3)
 
 
     def test_get_all_cities(self):
@@ -259,8 +255,8 @@ class TestQueries(TestCase):
         gets all neighborhoods given a city id
         """
         la_id = City.objects.all()[0].pk
-        la_neighborhoods = Neighborhood.objects.all()
-        self.assertQuerysetEqual(get_all_neighborhoods_in_city(la_id), la_neighborhoods)
+        la_neighborhoods = Neighborhood.objects.filter(city=la_id)
+        self.assertQuerysetEqual(get_all_neighborhoods_in_city(la_id), la_neighborhoods, ordered=False)
 
 
     def test_get_all_listings_for_city(self):
@@ -268,7 +264,7 @@ class TestQueries(TestCase):
         gets all listings given a city id
         """
         la_id = City.objects.all()[0].pk
-        la_listings = Listing.objects.all()
+        la_listings = Listing.objects.filter(city=la_id)
         self.assertQuerysetEqual(get_all_listings_for_city(la_id), la_listings, ordered=False)
 
 
@@ -295,9 +291,9 @@ class TestQueries(TestCase):
         """
         gets the listing reviews (the actual method gets all reviews, here we use a single one for the test)
         """
-        review = ListingReview.objects.all()[0]
         listing_id = Listing.objects.all()[1].listing_id
-        self.assertEqual(get_reviews_for_listing(listing_id)[0], review)
+        reviews = ListingReview.objects.filter(listing_id=listing_id)
+        self.assertQuerysetEqual(get_reviews_for_listing(listing_id), reviews, ordered=False)
 
 
     def test_get_average_review_ratings_for_tool(self):
@@ -314,4 +310,4 @@ class TestQueries(TestCase):
         else 0
         """
         user_id = User.objects.all()[0].pk
-        self.assertEqual(get_average_review_ratings_for_user(user_id), 3.2)
+        self.assertEqual(get_average_review_ratings_for_user(user_id), 3.3)
