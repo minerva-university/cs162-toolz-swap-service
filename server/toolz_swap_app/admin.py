@@ -57,7 +57,7 @@ class NeighborhoodAdmin(admin.ModelAdmin):
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
-    list_display = ('brand_id', 'name', 'logo')
+    list_display = ('brand_id', 'name', 'item_image_url')
 
 
 @admin.register(ToolModel)
@@ -79,4 +79,4 @@ class ListingReviewAdmin(admin.ModelAdmin):
 
 @admin.register(ListingImage)
 class ListingImageAdmin(admin.ModelAdmin):
-    list_display = ('image_id', 'listing', 'created_on', 'author', 'image', 'top_image')
+    list_display = ('image_id', 'listing', 'created_on', 'author', 'item_image_url', 'top_image')
