@@ -29,9 +29,10 @@ TOOLZ_APP_DB=toolz_app_db_local
 DB_HOST=localhost
 TOOLZ_APP_DB_DOCKER=toolz_app_db_docker
 DB_HOST_DOCKER=postgres_db_toolz
+IMG_BB=""
 ```
 
-Please reach out for the DJANGO_SECRET_KEY variable
+Please reach out for the DJANGO_SECRET_KEY and IMG_BB variable
 
 ### Docker-Compose Setup (recommended)
 
@@ -146,7 +147,7 @@ If you wish to modify the seed_data.json file or create a new one, you can follo
 `>>> user_1 = User.objects.create(...)`
 
 4. Dump it in a file:
-`python manage.py dumpdata toolz_swap_back > seed_data.json`
+`python manage.py dumpdata toolz_swap_app > seed_data.json`
 
 5. Transfer the file to your host repo:
 `docker cp <container_id>:/app/app_back/seed_data.json C:\Users\Nikita\Documents\GitHub\cs162-toolz-swap-service\server`

@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import User, Listing, ToolType, City, Neighborhood, \
-    Brand, ToolModel, ListingRequest, ListingReview, ListingImage
+from .models import *
 
 
 class CustomUserAdmin(UserAdmin):
@@ -57,7 +56,7 @@ class NeighborhoodAdmin(admin.ModelAdmin):
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
-    list_display = ('brand_id', 'name', 'logo')
+    list_display = ('brand_id', 'name', 'item_image_url')
 
 
 @admin.register(ToolModel)
@@ -79,4 +78,4 @@ class ListingReviewAdmin(admin.ModelAdmin):
 
 @admin.register(ListingImage)
 class ListingImageAdmin(admin.ModelAdmin):
-    list_display = ('image_id', 'listing', 'created_on', 'author', 'image', 'top_image')
+    list_display = ('image_id', 'listing', 'created_on', 'author', 'item_image_url', 'top_image')
