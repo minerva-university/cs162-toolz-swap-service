@@ -32,7 +32,7 @@ DB_HOST_DOCKER=postgres_db_toolz
 IMG_BB=""
 ```
 
-Please reach out for the DJANGO_SECRET_KEY variable
+Please reach out for the DJANGO_SECRET_KEY and IMG_BB variable
 
 ### Docker-Compose Setup (recommended)
 
