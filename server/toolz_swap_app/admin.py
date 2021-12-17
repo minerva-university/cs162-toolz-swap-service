@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import User, Listing, ToolType, City, Neighborhood, \
-    Brand, ToolModel, ListingRequest, ListingReview, ListingImage
+from .models import *
 
 
 class CustomUserAdmin(UserAdmin):

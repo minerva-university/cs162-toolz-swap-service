@@ -14,6 +14,8 @@ import datetime
 from django.utils import timezone
 
 
+#  TODO: add Admin views in admin.py
+#  TODO: create model for TOOLS (combination of type, brand, model and name)
 
 class City(models.Model):
     """

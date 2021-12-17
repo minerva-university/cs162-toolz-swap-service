@@ -20,7 +20,7 @@ from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
-from toolz_swap_app import views
+from toolz_swap_app import views, filterviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,5 +34,7 @@ urlpatterns = [
     path('', include('toolz_swap_app.urls')),
 
     path('router/', include('toolz_swap_app.routerurls')),
+
+    path('filter/', include('toolz_swap_app.filterurls')),
     # enables serving static pages in development
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
