@@ -196,7 +196,8 @@ class ListingReview(models.Model):
 
     class Meta:
         indexes = [
-            models.Index(fields=['rating',]),]
+            models.Index(fields=['rating',]),
+            models.Index(fields=['listing',]),]
 
 
 class ListingImage(models.Model):
