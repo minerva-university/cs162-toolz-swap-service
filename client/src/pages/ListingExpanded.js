@@ -1,10 +1,15 @@
-import React, { useState, Component } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, Component } from "react";
+import { Link, useParams } from "react-router-dom";
 import "../stylesheets/listingExpanded.css";
 import  star from "../images/star.png";
 
 
 const ListingExpanded =()=> {
+
+    
+    // const [tool, setTool] = useState({})
+
+    // const params = useParams()
 
     const [tool, setValuess]=useState({
         "listing_id": "4e8d7df8-e086-4eee-a861-d15505062137",
@@ -21,12 +26,26 @@ const ListingExpanded =()=> {
         "neighborhood": "Tenderloin"
     })
 
+
+    // useEffect(() => {
+    //     const fetchTool = async () => {
+    //         const res = await fetch(`http://localhost:3000/ListingExpanded/${params.tool_id}`)
+    //         console.log("res",res)
+    //         const data = await res.json()
+
+    //         setTool(data)
+    //     }
+
+    //     fetchTool()
+    // })
+
+
     const randomNumber = (min, max) => {
         return Math.floor(Math.random() * (max - min) + min);
       }  
 
-        return(
-            <div className="tool-show-container">
+    return (
+        <div className="tool-show-container">
 
       {/* IMAGE BANNER */}
 

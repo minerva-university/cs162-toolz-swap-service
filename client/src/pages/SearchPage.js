@@ -1,27 +1,26 @@
-import React, { Component } from "react";
-import {Link} from "react-router-dom";
+import React, {useState, Component } from "react";
+import {Link, useNavigate} from "react-router-dom";
+import {Form, Row, Col} from "react-bootstrap";
 import Modal from "../components/Modal";
 import axios from "axios";
 import uuid from 'react-uuid';
 import "../App.css";
 import "../stylesheets/SearchPage.css";
 import  rating_star from "../images/rating_star.png";
+import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CSS
 
 
 
 
 
-class SearchPage extends Component {
+
+const SearchPage =(props)=> {
   
-    constructor(props) {
-      super(props);
-      this.state = {
-        toolList: [],
-        modal: false,
-        allTools: [{
-          tool_id: [1],
+  const history = useNavigate();
+  const [allTools, setValuess]=useState([{
+          tool_id: 1,
           Title: "hammer for sale",
-          Owner: "",  
+          Owner: "Mike",  
           Brand: "IRWIN", 
           Model: "UniversalHammer 18V-100",
           Tool_category: "", 
@@ -91,8 +90,8 @@ class SearchPage extends Component {
           Description: "",
           toolPrice:55
         }]
-      };
-    }
+  )
+
     /*
     componentDidMount() {
       this.refreshList();
@@ -183,8 +182,22 @@ class SearchPage extends Component {
       ));
     };
   */
+
+
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
     
-    render() {
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
 
       return (
         
@@ -197,14 +210,129 @@ class SearchPage extends Component {
                         
                     </div>
                   </div>
+                  <div class="sidenav">
+                    <div>
+                      <button class="dropdown-btn">City
+                        <i class="fas fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-container">
                   
+                      <fieldset>
+                        <Form.Group as={Row} className="mb-3">
+                          <Col sm={10}>
+                            <Form.Check
+                              type="radio"
+                              label="San Francisco"
+                              name="formHorizontalRadios"
+                              id="formHorizontalRadios1"
+                            />
+                            <Form.Check
+                              type="radio"
+                              label="San Diago"
+                              name="formHorizontalRadios"
+                              id="formHorizontalRadios2"
+                            />
+                            <Form.Check
+                              type="radio"
+                              label="Palo Alt"
+                              name="formHorizontalRadios"
+                              id="formHorizontalRadios3"
+                            />
+                            <Form.Check
+                              type="radio"
+                              label="Seattle"
+                              name="formHorizontalRadios"
+                              id="formHorizontalRadios4"
+                            />
+                          </Col>
+                        </Form.Group>
+                      </fieldset>
+                    
+                      </div>
+                    </div>
+                    <div>
+                      <button class="dropdown-btn">Neighborhood
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-container">
+                          <fieldset>
+                          <Form.Group as={Row} className="mb-3">
+                            <Col sm={10}>
+                              <Form.Check
+                                type="radio"
+                                label="Bellevue"
+                                name="formHorizontalRadios"
+                                id="formHorizontalRadios1"
+                              />
+                              <Form.Check
+                                type="radio"
+                                label="Sunset District"
+                                name="formHorizontalRadios"
+                                id="formHorizontalRadios2"
+                              />
+                              <Form.Check
+                                type="radio"
+                                label="Tenderloin"
+                                name="formHorizontalRadios"
+                                id="formHorizontalRadios3"
+                              />
+                              <Form.Check
+                                type="radio"
+                                label="Hayes valley"
+                                name="formHorizontalRadios"
+                                id="formHorizontalRadios4"
+                              />
+                            </Col>
+                          </Form.Group>
+                        </fieldset>
+                      </div>
+                    </div>
+                    <div>
+                      <button class="dropdown-btn">Brand
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      <div class="dropdown-container">
+                        <fieldset>
+                        <Form.Group as={Row} className="mb-3">
+                          <Col sm={10}>
+                            <Form.Check
+                              type="radio"
+                              label="IRWIN"
+                              name="formHorizontalRadios"
+                              id="formHorizontalRadios1"
+                            />
+                            <Form.Check
+                              type="radio"
+                              label="Another brand"
+                              name="formHorizontalRadios"
+                              id="formHorizontalRadios2"
+                            />
+                            <Form.Check
+                              type="radio"
+                              label="yet another brand"
+                              name="formHorizontalRadios"
+                              id="formHorizontalRadios3"
+                            />
+                            <Form.Check
+                              type="radio"
+                              label="some other brand"
+                              name="formHorizontalRadios"
+                              id="formHorizontalRadios4"
+                            />
+                          </Col>
+                        </Form.Group>
+                      </fieldset>
+                      </div>
+                    </div>
+                    
+                  </div>
                 </div>
                 
                 <div className="search-listings-container">
-                  {this.state.allTools.map(tool => (
-                  
+                  {allTools.map(tool => (
                   <div className="tool-tile-container">
-                    <Link to={`/ListingExpanded`}>
+                    <Link
+                     to={`/ListingExpanded/${tool.tool_id}`}>
                       <div className="tool-index-photo-wrapper">
                         <img className="tool-index-photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} />
                         <div className="tool-price">
@@ -265,7 +393,7 @@ class SearchPage extends Component {
         // </main>
       );
     }
-  }
+  
   
   export default SearchPage;
 

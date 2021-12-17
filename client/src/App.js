@@ -44,7 +44,7 @@ class App extends Component {
             <Route element={<CreateListing />} path="/CreateListing" />
             <Route element={<CreateRequest />} path="/CreateRequest" />
             <Route element={<EditListing />} path="/EditListing" />
-            <Route element={<ListingExpanded />} path="/ListingExpanded" />
+            <Route element={<ListingExpanded />} path="/ListingExpanded/:tool_id" />
             <Route element={<MyListings />} path="/MyListings" />
             <Route element={<MyRequests />} path="/MyRequests" />
             <Route element={<Requests />} path="/Requests" />
