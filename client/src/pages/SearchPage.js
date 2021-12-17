@@ -15,7 +15,8 @@ import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CS
 
 
 const SearchPage =(props)=> {
-  
+  console.log(window.sessionStorage.getItem("jwtToken"))
+  axios.get("http://localhost:8000/router/listing/").then(response => {console.log(response)})
   const history = useNavigate();
   const [allTools, setValuess]=useState([{
           tool_id: 1,
