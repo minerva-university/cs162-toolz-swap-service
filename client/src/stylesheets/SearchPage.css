@@ -234,3 +234,8 @@
   float: right;
   padding-right: 8px;
 }
+
+.sidenav > p {
+  text-align: left;
+  padding-bottom: 5px;
+}

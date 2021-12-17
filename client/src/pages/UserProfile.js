@@ -9,6 +9,7 @@ import Resizer from 'react-image-file-resizer';
 import {toast} from 'react-toastify';
 import "../stylesheets/userProfile.css";
 import  userAvatar from "../images/userAvatar.jpg";
+import {Link} from "react-router-dom";
 
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
 
@@ -175,7 +176,12 @@ const UserProfile =()=> {
              <button className="createbtn" id="Create-post"> <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>&nbsp; Create</button> */}
            </div>
            <div style={{width:"100%", justifyContent:"center", display:'flex'}}>
-           <button className="updateProfileBtn" id="Create-post" onClick={() => setShowForm(true)}> <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>&nbsp; Update Profile</button>
+           <Link to= {`/UpdateProfile`} >
+           
+           <button className="updateProfileBtn" id="Create-post" onClick={() => setShowForm(true)}> <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>&nbsp; 
+           Update Profile
+           </button>
+           </Link>
        </div>
          </div>
        </div>

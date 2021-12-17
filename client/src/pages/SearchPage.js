@@ -174,6 +174,7 @@ const SearchPage =(props)=> {
                     </div>
                   </div>
                   <div class="sidenav">
+                  <p>Filter by:</p>
                     <div>
                       <button class="dropdown-btn">City
                         <i class="fas fa-caret-down"></i>

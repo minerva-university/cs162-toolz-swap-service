@@ -9,26 +9,18 @@ import { serverURL } from '../config'
 const ListingExpanded =()=> {
 
     const params = useParams()
-    const toolId = params.tool_id.toString()
-    console.log(toolId)
-    const url = "http://localhost:8000/router/listing/"+toolId+"/"
-    console.log(url)
-    console.log(params)
-    const [tool, setTool] = useState({})
+    const url = "http://localhost:8000/router/listing/"+params.tool_id.toString()+"/"
+    // console.log(url)
+    //console.log(params)
 
-    function getList() {
-      const header = headerProvider(false)
-      return axios.get(url)
-        .then(response => console.log(response))
-    }
-    console.log(getList())
-    // useEffect(() => {
-    //     fetch(url)
-    //     .then((response)=>{
-    //         setTool(response.data)
-    //     // axios returns API response body in .data
-    //     })
-    // })
+    const [tool, setTool] = useState({})
+    useEffect(() => {
+        axios.get(url)
+        .then((response)=>{
+            setTool(response.data)
+        // axios returns API response body in .data
+        })
+    })
     // console.log(tool)
     // const [tool, setValuess]=useState({
     //     "listing_id": "4e8d7df8-e086-4eee-a861-d15505062137",
@@ -43,19 +35,6 @@ const ListingExpanded =()=> {
     //     "tool_category": "DRILL",
     //     "city": "San Francisco, CA",
     //     "neighborhood": "Tenderloin"
-    // })
-    
-
-    // useEffect(() => {
-    //     const fetchTool = async () => {
-    //         const res = await fetch(`http://localhost:8000/router/listing/listing_id=${params.listing_id}`)
-    //         console.log("res",res)
-    //         const data = await res.json()
-
-    //         setTool(data)
-    //     }
-
-    //     fetchTool()
     // })
 
 
@@ -119,7 +98,7 @@ const ListingExpanded =()=> {
               <div className="item-6">
                 <div className="tool-show-host-wrapper">
                     <div className="tool-show-left-content-trips">
-                    {tool.tool_category}
+                    {tool.category_name}
                     </div>
                     
                 </div>
@@ -133,7 +112,7 @@ const ListingExpanded =()=> {
               <div className="item-8">
                 <div className="tool-show-host-wrapper">
                     <div className="tool-show-left-content-trips">
-                    {tool.brand}
+                    {tool.brand_name}
                     </div>
                     
                 </div>
@@ -149,7 +128,7 @@ const ListingExpanded =()=> {
               <div className="item-10">
                 <div className="tool-show-host-wrapper">
                     <div className="tool-show-left-content-trips">
-                    {tool.model}
+                    {tool.model_name}
                     </div>
                 </div>
               </div>
@@ -176,7 +155,7 @@ const ListingExpanded =()=> {
                 $
               </span>
               <span className="tool-show-price">
-                66
+                {tool.price}
               </span>
               &nbsp;
               <span className="tool-show-per-day">
@@ -208,10 +187,10 @@ const ListingExpanded =()=> {
                   </div>
 
                   <div className="tool-show-distance-mi">
-                    {tool.owner}<br/>
+                    {tool.owner_name}<br/>
                     {tool.address}<br/>
-                    {tool.neighborhood}<br/>
-                    {tool.city}
+                    {tool.neighborhood_name}<br/>
+                    {tool.city_name}
                   </div>
                 </div>
               </div>
@@ -225,6 +204,10 @@ const ListingExpanded =()=> {
                 
               <button className="tool-show-add-fav-btn">
                 <img className="tool-show-add-fav-icon" src="https://github.com/fsiino/thuro/blob/master/app/assets/images/add-fav-transp.png?raw=true"/>&nbsp;Add to Saved
+              </button>
+              &nbsp;&nbsp;&nbsp;&#160;
+              <button className="tool-show-add-fav-btn">
+                Request
               </button>
               <br/>
 
