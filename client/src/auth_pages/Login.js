@@ -2,6 +2,7 @@ import React, { Component, useState  } from "react";
 //import LoginRequest from "../apis/apiLogin"
 import { useNavigate, Route, Routes, Link } from "react-router-dom"
 import HomePage from '../pages/HomePage.js'
+import SearchPage from '../pages/SearchPage.js'
 import headerProvider from '../apis/headerProvider';
 import { serverURL } from '../config'
 
@@ -46,11 +47,11 @@ export default function LogIn (){
                 method: method,
                 mode: 'cors',
                 headers: headers,
-                body: loginData
+                body: JSON.stringify(loginData)
             }).then(response => {
                 if (response.ok) {
-                   return response.json() 
-                   navigate('/')
+                    console.log("okok")
+                    return response.json()
                 }
         }).catch((error) => {
             console.log('Error: ', error)
@@ -59,16 +60,22 @@ export default function LogIn (){
     const handleSubmit = (event) => {
         event.preventDefault()
         let data = inputField
-        LoginRequest(data)/*.then(serverResponse=> {
+        LoginRequest(data).then(serverResponse=> {
             // store credentials in sessionStorage
             console.log(serverResponse)
+            if (serverResponse !== undefined) {
                 const jwtToken = serverResponse["token"]
                 const memberId = serverResponse["member_id"]
                 const userId = serverResponse["user_id"]
                 window.sessionStorage.setItem("jwtToken",  jwtToken)
                 window.sessionStorage.setItem("memberId",  memberId)
                 window.sessionStorage.setItem("userId",  userId)
-        })*/
+                navigate('/')
+            } else {
+                navigate('/loginfail')
+            }
+            
+        })
     }
     
     return (
@@ -95,6 +102,7 @@ export default function LogIn (){
         <button>Submit</button>
         <Routes>
             <Route path='/' element={<HomePage />} />
+            <Route path='/SearchPage' element={<SearchPage />} />
         </Routes>
         </form> 
 );

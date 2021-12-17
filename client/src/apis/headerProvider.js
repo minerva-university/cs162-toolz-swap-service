@@ -1,5 +1,7 @@
 function headerProvider(isLoginProtected) {
     const defaultHeaders = {
+        //'Access-Control-Allow-Origin': '*',
+        //'Content-Type': 'application/json',
         'Content-Length': '',
         'Content-Type': 'application/json',
         'Host': '127.0.0.1:8000',
@@ -8,7 +10,8 @@ function headerProvider(isLoginProtected) {
         'Accept-Encoding': 'gzip, deflate',
         'Accept-Language': 'en-US,en;q=0.8',
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \A' +
-            'ppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36'
+            'ppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36',
+        
     }
     const headers = new Headers(defaultHeaders)
     if (isLoginProtected) {

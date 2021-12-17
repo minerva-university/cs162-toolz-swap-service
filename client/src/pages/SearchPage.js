@@ -15,8 +15,6 @@ import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CS
 
 
 const SearchPage =(props)=> {
-  
-
   const axios = require('axios');
   const history = useNavigate();
   console.log("hello")

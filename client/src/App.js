@@ -13,6 +13,7 @@ import SavedListings from "./pages/SavedListings";
 import UserProfile from "./pages/UserProfile";
 import SignUp from './auth_pages/Register';
 import Login from './auth_pages/Login'
+import LoginFail from './auth_pages/LoginFail'
 import {
   BrowserRouter as Router,
   Routes,
@@ -52,6 +53,7 @@ class App extends Component {
             <Route element={<UserProfile />} path="/UserProfile" />
             <Route element={<SignUp />} path="/signup" />
             <Route element={<Login />} path="/login" />
+            <Route element={<LoginFail />} path="/loginfail" />
         </Routes>
       </div>
     )
