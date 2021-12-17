@@ -4,11 +4,10 @@ import "../stylesheets/listingExpanded.css";
 import  star from "../images/star.png";
 import axios from 'axios'
 
-
+import headerProvider from '../apis/headerProvider';
+import { serverURL } from '../config'
 const ListingExpanded =()=> {
 
-    
-    const axios = require('axios');
     const params = useParams()
     const url = "http://localhost:8000/router/listing/"+params.tool_id.toString()+"/"
     // console.log(url)

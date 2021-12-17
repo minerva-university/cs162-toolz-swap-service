@@ -64,12 +64,16 @@ export default function LogIn (){
             // store credentials in sessionStorage
             console.log(serverResponse)
             if (serverResponse !== undefined) {
+                const username = data["username"]
+                console.log(username)
                 const jwtToken = serverResponse["token"]
                 const memberId = serverResponse["member_id"]
                 const userId = serverResponse["user_id"]
+                console.log(jwtToken, memberId, userId)
                 window.sessionStorage.setItem("jwtToken",  jwtToken)
                 window.sessionStorage.setItem("memberId",  memberId)
                 window.sessionStorage.setItem("userId",  userId)
+                window.sessionStorage.setItem("username",  username)
                 navigate('/')
             } else {
                 navigate('/loginfail')
