@@ -24,6 +24,13 @@ class ToolTypeSerializer(serializers.ModelSerializer):
 
 
 class ListingSerializer(serializers.ModelSerializer):
+    brand_name = serializers.ReadOnlyField(source='brand.name')
+    model_name = serializers.ReadOnlyField(source='model.name')
+    owner_name = serializers.ReadOnlyField(source='owner.username')
+    city_name = serializers.ReadOnlyField(source='city.name')
+    neighborhood_name = serializers.ReadOnlyField(source='neighborhood.name')
+    category_name = serializers.ReadOnlyField(source='tool_category.name')
+    
     class Meta:
         model = Listing
         fields = ('__all__')
