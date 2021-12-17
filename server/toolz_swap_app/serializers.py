@@ -69,12 +69,17 @@ class ListingImageSerializer(serializers.ModelSerializer):
 
 
 class ListingRequestSerializer(serializers.ModelSerializer):
+    author_username = serializers.ReadOnlyField(source='author.username')
+    recipient_username = serializers.ReadOnlyField(source='recipient.username')
+    listing_title = serializers.ReadOnlyField(source='listing.title')
     class Meta:
         model = ListingRequest
         fields = "__all__"
 
 
 class ListingReviewSerializer(serializers.ModelSerializer):
+    author_username = serializers.ReadOnlyField(source='author.username')
+    listing_title = serializers.ReadOnlyField(source='listing.title')
     class Meta:
         model = ListingReview
         fields = "__all__"
