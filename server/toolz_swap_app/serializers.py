@@ -84,3 +84,8 @@ class ListingReviewSerializer(serializers.ModelSerializer):
         model = ListingReview
         fields = "__all__"
 
+class UserDetailSerializer(serializers.ModelSerializer):
+    saved_listing_title = ListingSerializer(many=True, read_only=True)
+    class Meta:
+        model = User
+        fields = ("__all__")

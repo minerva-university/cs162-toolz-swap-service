@@ -27,21 +27,6 @@ const NavBar = () => {
         'User-Id' : userId
       }})
         .then(response => console.log(response))
-      // return fetch(url,
-      //     {
-      //         method: method,
-      //         mode: 'no-cors',
-      //         headers: headers,
-      //         body: JSON.stringify()
-      //     }).then(response => {
-      //         if (response.ok) {
-      //             console.log("okok")
-      //             return response.json()
-      //         }
-      // }).catch((error) => {
-      //     console.log('Error: ', error)
-      // });
-
   }
     if (isLoggedin) {
       return (

@@ -12,5 +12,5 @@ urlpatterns = [
     name='requests for listing'),
     path('requests/', filterviews.RequestMadeByUserViewSet.as_view(), name='request made by user'),
     path('myrequests/', filterviews.RequestMadeToUserViewSet.as_view(), name='request made to user'),
-
+    path('listing/user/', filterviews.ListingByUserViewSet.as_view(), name='request made to user'),
 ]

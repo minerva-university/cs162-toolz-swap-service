@@ -21,7 +21,6 @@ export default function MyRequests (){
         // axios returns API response body in .data
         })
     }
-    getLists()
     const listItems = myrequests.map((d) => 
     <Link
     to={`/ListingExpanded/${d.listing}`}
@@ -33,7 +32,7 @@ export default function MyRequests (){
     <article class="list">
     <header>
       <div>
-        <h3>{d.listing_title}</h3>
+        <h2>{d.listing_title}</h2>
         <div>Request By {d.author_name} on {d.created_on}</div>
       </div>
     </header>
@@ -55,17 +54,3 @@ export default function MyRequests (){
             </div>
         </div>
     )}
-// class MyRequests extends Component {
-//     render(){
-//         return(
-//             <div>
-//                 <p>This is MyRequests page</p>
-//                 <Link
-//                 to={{ pathname: "/SearchPage" }}
-//                 >
-//                 <button>Click here to go to SearchPage</button>
-//                 </Link>
-//             </div>
-//         )
-//     }
-// }

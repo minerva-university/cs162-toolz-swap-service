@@ -169,7 +169,8 @@ class Listing(models.Model):
     description = models.TextField(max_length=2000)
     created_on = models.DateTimeField(auto_now_add=True)
     rating_average = models.FloatField(blank=True, null=True, default=0)  # average rating of the listing, can be calculated from ListingReviews
-
+    item_image = models.ImageField(upload_to='listing_images', blank=True, null=True)
+    item_image_url = models.TextField(blank=True, null=True)
     # likes=models.IntegerField()
     # dislikes=models.IntegerField()
 
@@ -179,6 +180,15 @@ class Listing(models.Model):
     class Meta:
         indexes = [
             models.Index(fields=['title',]),]
+            
+    def save(self, *args, **kwargs):
+        if self.item_image:
+            encodedString = base64.b64encode(self.item_image.file.read())
+            data = {"key": os.environ.get("IMG_BB"), "image": encodedString.decode("utf-8")}
+            uploadedImageInfo = requests.post("https://api.imgbb.com/1/upload", data=data)
+            jsonResponse = json.loads(uploadedImageInfo.text)
+            self.item_image_url = jsonResponse["data"]["display_url"]
+        super().save(*args, **kwargs)
 
 
 class ListingRequest(models.Model):
