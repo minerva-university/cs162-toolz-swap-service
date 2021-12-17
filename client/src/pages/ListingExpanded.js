@@ -10,11 +10,11 @@ const ListingExpanded =()=> {
     
     const axios = require('axios');
     const params = useParams()
-    const url = "http://localhost:8000/router/listing/"+params.tool_id
-    console.log(url)
-    console.log(params)
-    const [tool, setTool] = useState({})
+    const url = "http://localhost:8000/router/listing/"+params.tool_id.toString()+"/"
+    // console.log(url)
+    //console.log(params)
 
+    const [tool, setTool] = useState({})
     useEffect(() => {
         axios.get(url)
         .then((response)=>{
@@ -22,7 +22,7 @@ const ListingExpanded =()=> {
         // axios returns API response body in .data
         })
     })
-    console.log(tool)
+    // console.log(tool)
     // const [tool, setValuess]=useState({
     //     "listing_id": "4e8d7df8-e086-4eee-a861-d15505062137",
     //     "title": "Some cool Drill right here",
@@ -36,19 +36,6 @@ const ListingExpanded =()=> {
     //     "tool_category": "DRILL",
     //     "city": "San Francisco, CA",
     //     "neighborhood": "Tenderloin"
-    // })
-    
-
-    // useEffect(() => {
-    //     const fetchTool = async () => {
-    //         const res = await fetch(`http://localhost:8000/router/listing/listing_id=${params.listing_id}`)
-    //         console.log("res",res)
-    //         const data = await res.json()
-
-    //         setTool(data)
-    //     }
-
-    //     fetchTool()
     // })
 
 
