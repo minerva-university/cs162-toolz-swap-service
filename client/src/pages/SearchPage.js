@@ -17,7 +17,6 @@ import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CS
 const SearchPage =(props)=> {
   const axios = require('axios');
   const history = useNavigate();
-  console.log("hello")
   
   // const fetchListing = async () => {
   //           const res = await fetch(`http://localhost:8000/router/listing/`)

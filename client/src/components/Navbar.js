@@ -15,10 +15,18 @@ const NavBar = () => {
     const isLoggedin = is_user()
 
     function handleLogout() {
-      const url = serverURL + 'auth/logout/'
+      const url = 'http://localhost:8000/auth/logout/'
       const method = 'GET'
-      const headers = headerProvider(true) // not login protected
-      axios.get(url, {headers}).then(response => console.log(response))
+      //const headers = headerProvider(true)
+      const token = window.sessionStorage.getItem('jwtToken')
+      const memberId = window.sessionStorage.getItem('memberId')
+      const userId = window.sessionStorage.getItem('userId')
+      return axios.get(url, {headers: {
+        "Token": token,
+        'Member-Id': memberId,
+        'User-Id' : userId
+      }})
+        .then(response => console.log(response))
       // return fetch(url,
       //     {
       //         method: method,
@@ -63,9 +71,10 @@ const NavBar = () => {
               <Link to="/MyRequests">
                 My Requests
               </Link>
-              <Link to="/" onClick={handleLogout}>
+              <button className="navbutton" onClick={handleLogout}>Logout</button>
+              {/* <Link to="/" onClick={handleLogout}>
                 Log out
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

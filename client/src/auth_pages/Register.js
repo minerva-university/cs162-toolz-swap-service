@@ -46,6 +46,7 @@ export default function SignUp (){
         const url = serverURL + 'api/user/'
         const method = 'POST'
         const headers = headerProvider(false) // not login protected
+        console.log(JSON.stringify(signupData))
         return fetch(url,
             {
                 method: method,

@@ -4,25 +4,32 @@ import "../stylesheets/listingExpanded.css";
 import  star from "../images/star.png";
 import axios from 'axios'
 
-
+import headerProvider from '../apis/headerProvider';
+import { serverURL } from '../config'
 const ListingExpanded =()=> {
 
-    
-    const axios = require('axios');
     const params = useParams()
-    const url = "http://localhost:8000/router/listing/"+params.tool_id
+    const toolId = params.tool_id.toString()
+    console.log(toolId)
+    const url = "http://localhost:8000/router/listing/"+toolId+"/"
     console.log(url)
     console.log(params)
     const [tool, setTool] = useState({})
 
-    useEffect(() => {
-        axios.get(url)
-        .then((response)=>{
-            setTool(response.data)
-        // axios returns API response body in .data
-        })
-    })
-    console.log(tool)
+    function getList() {
+      const header = headerProvider(false)
+      return axios.get(url)
+        .then(response => console.log(response))
+    }
+    console.log(getList())
+    // useEffect(() => {
+    //     fetch(url)
+    //     .then((response)=>{
+    //         setTool(response.data)
+    //     // axios returns API response body in .data
+    //     })
+    // })
+    // console.log(tool)
     // const [tool, setValuess]=useState({
     //     "listing_id": "4e8d7df8-e086-4eee-a861-d15505062137",
     //     "title": "Some cool Drill right here",
