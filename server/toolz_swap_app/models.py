@@ -198,17 +198,25 @@ class ListingReview(models.Model):
                 author:{self.author},\
                 rating:{self.rating};"
 
+    def get_reviews_for_listing(self, listing_id):
+        """
+        Returns the reviews for a listing given the listing id
+        """
+        reviews = ListingReview.objects.filter(listing__pk=listing_id)
+        return reviews
+
+    # custom save function to automatically update ratings for a listing upon review submission
     def save(self, *args, **kwargs):
-        a = list(ListingReview.objects.filter(listing__pk= self.listing.listing_id).values('rating', 'listing__title'))
-        b=0
-        length = len(a)
+        listing_id = str(self.listing.listing_id)
+        a = list(self.get_reviews_for_listing(listing_id))
+        b= self.rating
+        length = len(a)+1
         if length != 0:
             for i in a:
                 #print(type(i['rating']))
-                b += i['rating']
+                b += i.rating
             avg = b/length
-            print(b, length)
-            Listing.objects.filter(listing_id=self.listing.listing_id).update(rating_average=avg)
+            update = Listing.objects.filter(listing_id=self.listing.listing_id).update(rating_average=round(avg,2))
         super().save(*args, **kwargs)
 
 
