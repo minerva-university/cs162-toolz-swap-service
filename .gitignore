@@ -115,3 +115,6 @@ dmypy.json
 # node_modules
 node_modules/
 postgres_data/
+
+# server
+server/media/
