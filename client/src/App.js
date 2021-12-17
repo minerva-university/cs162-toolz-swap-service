@@ -11,9 +11,11 @@ import MyRequests from "./pages/MyRequests";
 import Requests from "./pages/Requests";
 import SavedListings from "./pages/SavedListings";
 import UserProfile from "./pages/UserProfile";
+import UpdateProfile from "./pages/UpdateProfile";
 import SignUp from './auth_pages/Register';
 import Login from './auth_pages/Login'
 import LoginFail from './auth_pages/LoginFail'
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -51,6 +53,7 @@ class App extends Component {
             <Route element={<Requests />} path="/Requests" />
             <Route element={<SavedListings />} path="/SavedListings" />
             <Route element={<UserProfile />} path="/UserProfile" />
+            <Route element={<UpdateProfile />} path="/UpdateProfile" />
             <Route element={<SignUp />} path="/signup" />
             <Route element={<Login />} path="/login" />
             <Route element={<LoginFail />} path="/loginfail" />

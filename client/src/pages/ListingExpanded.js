@@ -99,7 +99,7 @@ const ListingExpanded =()=> {
               <div className="item-6">
                 <div className="tool-show-host-wrapper">
                     <div className="tool-show-left-content-trips">
-                    {tool.tool_category}
+                    {tool.category_name}
                     </div>
                     
                 </div>
@@ -113,7 +113,7 @@ const ListingExpanded =()=> {
               <div className="item-8">
                 <div className="tool-show-host-wrapper">
                     <div className="tool-show-left-content-trips">
-                    {tool.brand}
+                    {tool.brand_name}
                     </div>
                     
                 </div>
@@ -129,7 +129,7 @@ const ListingExpanded =()=> {
               <div className="item-10">
                 <div className="tool-show-host-wrapper">
                     <div className="tool-show-left-content-trips">
-                    {tool.model}
+                    {tool.model_name}
                     </div>
                 </div>
               </div>
@@ -156,7 +156,7 @@ const ListingExpanded =()=> {
                 $
               </span>
               <span className="tool-show-price">
-                66
+                {tool.price}
               </span>
               &nbsp;
               <span className="tool-show-per-day">
@@ -188,10 +188,10 @@ const ListingExpanded =()=> {
                   </div>
 
                   <div className="tool-show-distance-mi">
-                    {tool.owner}<br/>
+                    {tool.owner_name}<br/>
                     {tool.address}<br/>
-                    {tool.neighborhood}<br/>
-                    {tool.city}
+                    {tool.neighborhood_name}<br/>
+                    {tool.city_name}
                   </div>
                 </div>
               </div>
@@ -205,6 +205,10 @@ const ListingExpanded =()=> {
                 
               <button className="tool-show-add-fav-btn">
                 <img className="tool-show-add-fav-icon" src="https://github.com/fsiino/thuro/blob/master/app/assets/images/add-fav-transp.png?raw=true"/>&nbsp;Add to Saved
+              </button>
+              &nbsp;&nbsp;&nbsp;&#160;
+              <button className="tool-show-add-fav-btn">
+                Request
               </button>
               <br/>
 

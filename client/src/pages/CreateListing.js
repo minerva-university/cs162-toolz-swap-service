@@ -4,8 +4,6 @@ import "../stylesheets/createListing.css";
 
 
 const CreateListing =()=> {
-
-
     
 
     return(
