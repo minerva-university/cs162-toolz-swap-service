@@ -2,34 +2,46 @@ import React, { useState, useEffect, Component } from "react";
 import { Link, useParams } from "react-router-dom";
 import "../stylesheets/listingExpanded.css";
 import  star from "../images/star.png";
+import axios from 'axios'
 
 
 const ListingExpanded =()=> {
 
     
-    // const [tool, setTool] = useState({})
+    const axios = require('axios');
+    const params = useParams()
+    const url = "http://localhost:8000/router/listing/"+params.tool_id
+    console.log(url)
+    console.log(params)
+    const [tool, setTool] = useState({})
 
-    // const params = useParams()
-
-    const [tool, setValuess]=useState({
-        "listing_id": "4e8d7df8-e086-4eee-a861-d15505062137",
-        "title": "Some cool Drill right here",
-        "address": "Random Address",
-        "description": "This drill has been used by Mike tyson, you probably want it wink wink",
-        "created_on": "2021-12-14T00:39:28.371000-08:00",
-        "rating_average": 3.2,
-        "owner": "Mike Tyson",
-        "brand": "IRWIN",
-        "model": "X AE-A-12",
-        "tool_category": "DRILL",
-        "city": "San Francisco, CA",
-        "neighborhood": "Tenderloin"
+    useEffect(() => {
+        axios.get(url)
+        .then((response)=>{
+            setTool(response.data)
+        // axios returns API response body in .data
+        })
     })
-
+    console.log(tool)
+    // const [tool, setValuess]=useState({
+    //     "listing_id": "4e8d7df8-e086-4eee-a861-d15505062137",
+    //     "title": "Some cool Drill right here",
+    //     "address": "Random Address",
+    //     "description": "This drill has been used by Mike tyson, you probably want it wink wink",
+    //     "created_on": "2021-12-14T00:39:28.371000-08:00",
+    //     "rating_average": 3.2,
+    //     "owner": "Mike Tyson",
+    //     "brand": "IRWIN",
+    //     "model": "X AE-A-12",
+    //     "tool_category": "DRILL",
+    //     "city": "San Francisco, CA",
+    //     "neighborhood": "Tenderloin"
+    // })
+    
 
     // useEffect(() => {
     //     const fetchTool = async () => {
-    //         const res = await fetch(`http://localhost:3000/ListingExpanded/${params.tool_id}`)
+    //         const res = await fetch(`http://localhost:8000/router/listing/listing_id=${params.listing_id}`)
     //         console.log("res",res)
     //         const data = await res.json()
 
