@@ -6,6 +6,9 @@ from .models import *
 from .serializers import *
 from .queries import *
 
+# Viewsets for specific queries
+# all viewsets here are routed in filterviews.py
+
 class ListingForNeighborhoodViewSet(generics.ListAPIView):
     """
     Allows not to have separate views for getting 

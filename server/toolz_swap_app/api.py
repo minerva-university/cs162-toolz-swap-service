@@ -6,7 +6,8 @@ from .models import *
 from .serializers import *
 from .queries import *
 
-
+# Viewsets here are general basic model viewsets. Include GET, POST, PUT, DELETE, OPTIONS
+# all viewsets here are routed in routerurls.py
 
 class ToolTypeViewSet(viewsets.ModelViewSet):
     """

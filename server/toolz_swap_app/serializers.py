@@ -52,10 +52,13 @@ class BrandSerializer(serializers.ModelSerializer):
         model = Brand
         fields = ("brand_id", "name", "item_image_url")
 
+
 class ListingImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ListingImage
-        fields = ("listing", "created_on", "author", "item_image_url", "top_image")
+
+        # even though the json response won't return the actual file, we want option to upload images
+        fields = ("__all__")
 
 
 class ListingRequestSerializer(serializers.ModelSerializer):

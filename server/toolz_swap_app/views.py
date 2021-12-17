@@ -15,10 +15,12 @@ from .forms import SignUpForm
 from .queries import *
 from .serializers import *
 
+# custom views with custom api methods
+# all views here are routed in urls.py
+
 JWT_SECRET_KEY = settings.JWT_SECRET_KEY
 INVALIDATED_TOKENS = settings.INVALIDATED_TOKENS
 SessionStore = import_module(settings.SESSION_ENGINE).SessionStore
-
 
 def signup(request):
     """

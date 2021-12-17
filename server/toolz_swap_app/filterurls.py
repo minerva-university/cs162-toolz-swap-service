@@ -1,8 +1,6 @@
 from django.urls import path
-
-from . import views
-from . import api
 from . import filterviews
+
 urlpatterns = [
     path('listing/neighborhoods/', filterviews.ListingForNeighborhoodViewSet.as_view(), 
     name='listing for neighborhood'),

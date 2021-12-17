@@ -17,5 +17,5 @@ router.register('cities', CityViewSet, 'city')
 router.register('neighborhoods', NeighborhoodViewSet, 'neighborhood')
 router.register('listing_request', RequestViewSet, 'listing request')
 router.register('listing_review', ReviewViewSet, 'listing review')
-
+router.register('listing_image', ListingImageViewSet, 'listing review')
 urlpatterns = router.urls
