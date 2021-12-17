@@ -6,7 +6,7 @@ from django.db import models
 import datetime
 from django.utils import timezone
 
-#  TODO: add Admin views in admin.py
+
 
 class City(models.Model):
     """
@@ -16,6 +16,10 @@ class City(models.Model):
     name = models.CharField(max_length=200)
     population = models.IntegerField(blank=True, null=True)
     size_sqkm = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        indexes = [models.Index(fields=['name',]),]
+
 
     def __str__(self):
         return f"<city:{self.name}, \
@@ -38,6 +42,9 @@ class Neighborhood(models.Model):
                 city:{self.city}, \
                 population:{self.population},\
                 size_sqkm:{self.size_sqkm};"
+    class Meta:
+        indexes = [
+            models.Index(fields=['name',]),]
 
 
 class ToolType(models.Model):
@@ -54,6 +61,10 @@ class ToolType(models.Model):
                 purpose:{self.purpose},\
                 popularity:{self.popularity};"
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['name',]),]
+
 
 class Brand(models.Model):
     """
@@ -65,6 +76,10 @@ class Brand(models.Model):
 
     def __str__(self):
         return f"<brand:{self.name};"
+    
+    class Meta:
+        indexes = [
+            models.Index(fields=['name',]),]
 
 
 class ToolModel(models.Model):
@@ -100,6 +115,10 @@ class User(AbstractUser):
                 first_name:{self.first_name},\
                 last_name:{self.last_name}, \
                 email:{self.email};"
+    
+    class Meta:
+        indexes = [
+            models.Index(fields=['first_name', 'last_name',]),]
 
 
 class Listing(models.Model):
@@ -127,6 +146,10 @@ class Listing(models.Model):
 
     def __str__(self):
         return f"<listing_id:{self.listing_id}, title:{self.title};"
+    
+    class Meta:
+        indexes = [
+            models.Index(fields=['title',]),]
 
 
 class ListingRequest(models.Model):
@@ -170,6 +193,10 @@ class ListingReview(models.Model):
         return f"<listing:{self.listing}, \
                 author:{self.author},\
                 rating:{self.rating};"
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['rating',]),]
 
 
 class ListingImage(models.Model):
