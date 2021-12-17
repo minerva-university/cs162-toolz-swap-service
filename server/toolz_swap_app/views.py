@@ -123,6 +123,12 @@ def get_all_users(request):
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def logout_no_cors(request):
+    session = SessionStore()
+    session["message"] = "Logout Successful"
+    return Response(session, status=status.HTTP_200_OK)
+
 '''
 @api_view(['GET', 'PUT', 'POST', 'DELETE'])
 @custom_login_required
