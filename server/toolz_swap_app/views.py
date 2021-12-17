@@ -95,8 +95,22 @@ def users_view(request):
     :param: request:rest_framework.request.Request'
     :returns django-rest-framework Response object
     """
+    url_params = request.query_params
+    pk = (url_params.get('pk'))
+    if pk is not None:
+        pk = int(pk)
     if request.method == 'GET':
-        return get_all_users(request)
+        if pk is not None:  # get request asks for a specific User  by pk
+            user = get_user_by_id(pk)
+            if user is not None:  # user with id = pk exists in db
+                serializer = UserSerializer(user)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:  # user with id = pk doesn't exist in db
+                message = {
+                    "message": "User with that Id doesn't exist"
+                }
+                return Response(message, status=status.HTTP_404_NOT_FOUND)
+        return get_all_users(request) # didn't specify particular user, get all users
     elif request.method == 'POST':
         return signup(request)
 
@@ -112,7 +126,7 @@ def get_all_users(request):
 @custom_login_required
 def listing_view(request):
     url_params = request.query_params
-    pk = int(url_params.get('pk'))
+    pk = int(url_params.get('pk')) # vlad this could return None and raise an error!
     if request.method == 'GET':
         return get_listing(pk)
     elif request.method == 'PUT':

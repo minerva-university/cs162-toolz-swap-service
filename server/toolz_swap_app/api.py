@@ -100,6 +100,9 @@ class RequestViewSet(viewsets.ModelViewSet):
     serializer_class = ListingRequestSerializer
 
 
-
-
-
+class ListingImageViewSet(viewsets.ModelViewSet):
+    queryset = ListingImage.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = ListingImageSerializer

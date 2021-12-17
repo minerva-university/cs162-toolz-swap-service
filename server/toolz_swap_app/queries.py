@@ -6,7 +6,7 @@ def get_user_by_id(user_id):
     """
     Returns the user given the id
     """
-    user = User.objects.get(pk=user_id)
+    user = User.objects.filter(pk=user_id).first()
     return user
 
 

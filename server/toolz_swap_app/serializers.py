@@ -5,7 +5,16 @@ from .models import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'password', 'email', 'first_name', 'last_name')
+        exclude = [
+            'password',
+            'last_login',
+            'is_staff',
+            'is_superuser',
+            'is_active',
+            'date_joined',
+            'groups',
+            'user_permissions'
+        ]
 
 
 class ToolTypeSerializer(serializers.ModelSerializer):
@@ -17,7 +26,7 @@ class ToolTypeSerializer(serializers.ModelSerializer):
 class ListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Listing
-        fields = "__all__"
+        fields = ('title', 'owner', 'brand')
 
 
 class CitySerializer(serializers.ModelSerializer):
@@ -41,7 +50,12 @@ class ToolModelSerializer(serializers.ModelSerializer):
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
-        fields = "__all__"
+        fields = ("brand_id", "name", "item_image_url")
+
+class ListingImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ListingImage
+        fields = ("listing", "created_on", "author", "item_image_url", "top_image")
 
 
 class ListingRequestSerializer(serializers.ModelSerializer):
