@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-
-class CreateRequest extends Component {
-    render(){
+const CreateRequest =()=> {
+    
         return(
             <div>
                 <p>This is the CreateRequest page</p>
@@ -14,7 +13,7 @@ class CreateRequest extends Component {
                 </Link>
             </div>
         )
-    }
+    
 }
 
 export default CreateRequest;

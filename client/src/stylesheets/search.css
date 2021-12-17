@@ -1,0 +1,160 @@
+.search-container {
+    color: #231f20;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+     /* padding: 3px 0 3px 0; */
+    background: #ffffff;
+    font-family: BasisGrotesque,Avenir,Helvetica Neue,Helvetica,sans-serif;
+    border-radius: 100px;
+    margin: 40px 50vw 0 50vw;
+    /* // z-index: 5; */
+  }
+  
+  .search-form {
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 100px;
+    padding: 7px 0 7px 0;
+  }
+  
+  
+  .label {
+    font-size: 12px;
+    font-weight: 600px;
+  }
+
+  .search-where {
+    display: flex;
+    flex-direction: column;
+    font-family: BasisGrotesque, Avenir, 
+    Helvetica Neue, Helvetica, sans-serif;
+    padding-left: 20px;
+    /* input[type="text"] {
+      font-size: 18px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      border: 1px solid #ffffff;
+      width: 300px;
+    }
+  
+    input[type="datetime-local"] {
+      // padding-right: 10px;
+      font-size: 18px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
+      border: 1px solid #ffffff;
+      width: 300px;    
+    }
+  
+    input:focus {
+      border: 1px solid #ffffff;
+      outline: none;
+    }  */
+    
+  }
+
+  .search-where > input[type="text"] {
+    font-size: 18px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+    width: 300px;
+  }
+  
+  .search-where > input[type="datetime-local"] {
+    /* // padding-right: 10px; */
+    font-size: 18px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
+    border: 1px solid #ffffff;
+    width: 300px;    
+  }
+
+  .search-where > input:focus {
+    border: 1px solid #ffffff;
+    outline: none;
+  }
+
+  .search-from, .search-until {
+    display: flex;
+    flex-direction: column;
+    font-family: BasisGrotesque, Avenir, 
+    Helvetica Neue, Helvetica, sans-serif;
+    padding-left: 20px;
+    border-left: 1px solid #c7c7c7;
+  
+    /* input[type="text"] {
+      font-size: 18px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      border: 1px solid #ffffff;
+      width: 300px;
+    }
+  
+    input[type="datetime-local"] {
+      // padding-right: 10px;
+      font-size: 18px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
+      border: 1px solid #ffffff;
+      width: 300px;    
+    }
+  
+    input:focus {
+      border: 1px solid #ffffff;
+      outline: none;
+    } */
+  
+  }
+
+  .search-from, .search-until > input[type="text"] {
+    font-size: 18px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+    width: 300px;
+  }
+
+  .search-from, .search-until > input[type="datetime-local"] {
+    /* // padding-right: 10px; */
+    font-size: 18px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
+    border: 1px solid #ffffff;
+    width: 300px;    
+  }
+
+  .search-from, .search-until > input:focus {
+    border: 1px solid #ffffff;
+    outline: none;
+  }
+  
+  .search-dates {
+    padding-right: 10px;
+    padding-left: 15px;
+    border-left: 1px solid #c7c7c7;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  
+  .search-button {
+    background-image: url('https://github.com/fsiino/thuro/blob/master/app/assets/images/search-glass.png?raw=true');
+    background-position: center;
+    background-size: 40px 40px;
+    outline: none !important;
+    border-radius: 999em;
+    align-self: center;
+    width: 40px;
+    height: 40px;
+    background-color: #59d389;
+    margin-right: 7px;
+    cursor: pointer;
+    border: none;
+  }

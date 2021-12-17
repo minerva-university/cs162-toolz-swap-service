@@ -1,0 +1,110 @@
+.tool-create-container {
+    color: black;
+  }
+  
+  .tool-create-banner {
+    background-image: url('https://images.squarespace-cdn.com/content/v1/5a5e62f732601ec5cbd448c7/1566041780734-PIVMMTARU2CBAHTH73A9/Letterbox%2Btool%2Bboard.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: block;
+    height: 125px;
+    background-position: center;
+    position: relative;
+  }
+  
+  .tool-create-banner-text {
+    color: #061986;
+    font-weight: bolder;
+    font-size: 46px;
+    font-family: Plantin,AmericanTypewriter-Condensed,Times New Roman,serif;
+    line-height: 1.2;
+    text-transform: uppercase;
+    font-weight: 1800;
+    padding-top: 80px;
+  }
+  
+  .tool-create-form-container {
+    padding-top: 10px;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-bottom: 15px;
+  }
+    input[type="text"] {
+      height: 35px;
+      padding: 3px 10px;
+      font-size: 13px;
+      border: 1px solid #c7c7c7;
+      color: #231f20;
+      width: 100%;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+  
+    input:focus, textarea:focus, select:focus {
+      border: 1px solid #8F63F3;
+      outline: none !important; 
+    }
+  
+    label {
+        color: #231f20;
+        font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 1.5;
+        padding-top: 5px;
+      } 
+    
+    h3 {
+      color: #231f20;
+      font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 1.5;
+      padding-top: 5px;
+    }
+  
+    h2 {
+    font-family: BasisGrotesque,Avenir,Helvetica Neue,Helvetica,sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    }
+  
+    textarea {
+      height: 115px;
+      padding: 3px 10px;
+      font-size: 13px;
+      border: 1px solid #c7c7c7;
+      color: #231f20;
+      width: 100%;
+      -webkit-appearance: none;
+      border-radius: 0;
+      resize: none;
+    }
+  
+  
+  .features-wrapper {
+    display: flex; 
+    justify-content: space-between;
+  }
+  
+  .tool-create-submit-btn {
+    background-color: #8f63f4;
+    border: 1px solid #8f63f4;
+    color: #fff;
+    font-family: BasisGrotesque,Avenir,Helvetica Neue,Helvetica,sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    height: 34px;
+    padding: 0 14px;
+    margin: 20px 0;
+    cursor: pointer;
+  }
+  
+  .tool-create-errors {
+    color: red;
+    font-family: BasisGrotesque, Avenir, Helvetica Neue, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 1.5;
+    padding-top: 15px;
+  }

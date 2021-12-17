@@ -10,6 +10,7 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import "../stylesheets/SearchPage.css";
 
 export default class CustomModal extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ export default class CustomModal extends Component {
     const { toggle, onSave } = this.props;
 
     return (
-      <Modal isOpen={true} toggle={toggle}>
+      <Modal isOpen={true} toggle={toggle} className="container">
         <ModalHeader toggle={toggle}>Tool Name</ModalHeader>
         <ModalBody>
           <Form>
