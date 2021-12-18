@@ -5,6 +5,9 @@ import headerProvider from '../apis/headerProvider';
 import { useNavigate, Route, Routes, Link } from "react-router-dom"
 import axios from 'axios' 
 
+/* TODO: make certain fields dependent upon others. For example, only neighborhoods within a city should be allowed to be selected
+    not just all neighborhoods. Same for model->brand relations etc. 
+*/
 export default function CreateListing () {
   const owner = window.sessionStorage.getItem('userId')
   const [inputField , setInputField] = useState({
