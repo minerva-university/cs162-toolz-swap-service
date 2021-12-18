@@ -74,6 +74,7 @@ export default function LogIn (){
                 window.sessionStorage.setItem("memberId",  memberId)
                 window.sessionStorage.setItem("userId",  userId)
                 window.sessionStorage.setItem("username",  username)
+                window.location.reload(false);
                 navigate('/')
             } else {
                 navigate('/loginfail')
