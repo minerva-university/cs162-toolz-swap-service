@@ -1,56 +1,95 @@
 import "../stylesheets/createListing.css";
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 //import SignUpRequest from '../apis/apiSignup';
 import headerProvider from '../apis/headerProvider';
 import { useNavigate, Route, Routes, Link } from "react-router-dom"
 import axios from 'axios' 
 
 export default function CreateListing () {
+  const owner = window.sessionStorage.getItem('userId')
   const [inputField , setInputField] = useState({
-      "listing_id": "",
-      "brand_name": "",
-      "model_name": "",
-      "owner_name": "",
-      "city_name": "",
-      "neighborhood_name": "",
-      "category_name": "",
-      "title": "",
-      "price": 0,
-      "address": "",
-      "description": "",
-      "created_on": "",
-      "rating_average": 0.0,
-      "item_image": null,
-      "item_image_url": null,
-      "owner": 0,
-      "brand": "",
-      "model": "",
-      "tool_category": "",
-      "city": "",
-      "neighborhood": ""
+      title: "",
+      price: 0,
+      address: "",
+      description: "",
+      rating_average: 0.0,
+      item_image: null,
+      item_image_url: null,
+      owner: owner,
+      brand: "",
+      model: "",
+      tool_category: "",
+      city: "",
+      neighborhood: "",
+      allNeighborhoods: [],
+      allCities: [],
+      allToolTypes: [],
+      allModels: [],
+      allBrands: [],
   })
-  console.log(inputField)
+
+  useEffect(()=>{
+    let urls = [
+      "http://localhost:8000/router/neighborhoods/",
+      "http://localhost:8000/router/cities/",
+      "http://localhost:8000/router/tool_type/",
+      "http://localhost:8000/router/tool_model/",
+      "http://localhost:8000/router/tool_brand/"
+
+  ]
+    const One = axios.get(urls[0]);
+    const Two = axios.get(urls[1]);
+    const Three = axios.get(urls[2]);
+    const Four = axios.get(urls[3]);
+    const Five = axios.get(urls[4]);
+    axios.all([One, Two, Three, Four, Five]).then(axios.spread((responseOne, responseTwo, responseThree, responseFour, responseFive) => {
+      var data1 = responseOne.data
+      var data2 = responseTwo.data
+      var data3 = responseThree.data
+      var data4 = responseFour.data
+      var data5 = responseFive.data
+      setInputField({
+        ...inputField,
+        allNeighborhoods: data1,
+        allCities: data2,
+        allToolTypes: data3,
+        allModels: data4,
+        allBrands: data5,
+      })
+    }))
+    //console.log(inputField)
+  },[])
+
   const inputsHandler = (e) =>{
-    e.preventDefault();
+    console.log(e.target.name, e.target.value)
     setInputField({
         ...inputField,
         [e.target.name]: e.target.value
       })
     console.log(inputField)
-    }   
+    }  
+  
   const handleImageChange = (e) => {
-    e.preventDefault();
+    const img = e.target.files[0]
     setInputField({
       ...inputField,
-      [inputField.item_image]: e.target.files[0]
+      [e.target.name]: URL.createObjectURL(img)
       })
     }
   const handleSubmit = (e) => {
     e.preventDefault();
-    let url = 'http://localhost:8000/router/listings/';
-    axios.post(url, inputField, {
+    console.log(inputField)
+    const data = JSON.parse(JSON.stringify(inputField))
+    delete data['allNeighborhoods'];
+    delete data['allCities'];
+    delete data['allBrands'];
+    delete data['allModels'];
+    delete data['allToolTypes'];
+    console.log(JSON.stringify(data))
+    let url = 'http://localhost:8000/router/listing/';
+    axios.post(url, JSON.stringify(data), {
       headers: {
-        'content-type': 'multipart/form-data'
+        'content-type': 'application/json'
       }
     })
         .then(res => {
@@ -61,89 +100,110 @@ export default function CreateListing () {
   };
 
   const navigate = useNavigate()
-
   return(
       <div className="tool-create-container">
       <div className="tool-create-banner">
         
       </div>
-
-      <form className="tool-create-form-container" onSubmit={handleSubmit}>
-
-          <h3 className="tool-create-banner-text">
-              List your tool
-          </h3>
+        <h3 className="tool-create-banner-text">
+            List your tool
+        </h3>
 
         <br/><br/>
                     
-        <h2>Who owns the tool and Where is it located?</h2>
+        <h2>Where is it located?</h2>
 
         <br/>
-
-        <label>Owner
-          <input type="text" placeholder="Address" value={inputField.owner} onChange={""}></input>
-        </label>
         <label>Address
-          <input type="text" placeholder="City" value={inputField.address} onChange={""}></input>
+          <input 
+          type="text" 
+          name="address"
+          placeholder="Address" 
+          onChange={inputsHandler} 
+          value={inputField.address}>
+          </input>
         </label>
-        <label>Neighborhood
-          <input type="text" placeholder="State" value={inputField.neighborhood} onChange={""}></input>
-        </label>
-        <label>City
-          <input type="text" placeholder="Zip" value={inputField.City} onChange={""}></input>
-        </label>
+
+        <label>Choose a City:</label>
+        <select name="city" onChange={inputsHandler} value={inputField.city}>
+          <option value="" disabled selected>Select your option</option>
+          {inputField.allCities.map(city => (<option value={city.city_id}>{city.name}</option>))}
+        </select>
+        
+        <br/>
+        <br/>
+        <label>Choose a Neighborhood:</label>
+        <select name="neighborhood" onChange={inputsHandler} value={inputField.neighborhood}>
+          <option value="" disabled selected>Select your option</option>
+          {inputField.allNeighborhoods.map(neighborhood => (<option value={neighborhood.neighborhood_id}>{neighborhood.name}</option>))}
+        </select>
 
         <br/><br/>
 
         <h2>Which tool do you have?</h2>
 
-        <br/>
-
-        <label htmlFor="">Tool Category
-          <input type="text" placeholder="Year" value={inputField.tool_category} onChange={""}/>
-        </label>
-        <label htmlFor="">Tool Brand
-          <input type="text" placeholder="Make" value={inputField.brand} onChange={""}/>
-        </label>
-        <label htmlFor="">Tool Model
-          <input type="text" placeholder="Model" value={inputField.model} onChange={""}/>
-        </label>
-        
-
-
-        <br/><br/><br/>
+        <label> Tool Category: </label>
+        <select name="tool_category" onChange={inputsHandler} value={inputField.tool_category}>
+          <option value="" disabled selected>Select your option</option>
+          {inputField.allToolTypes.map(tool_category => (<option value={tool_category.tool_id}>{tool_category.name}</option>))}
+        </select>
+        <br/><br/>
+        <label> Tool Brand: </label>
+        <select name="brand" onChange={inputsHandler} value={inputField.brand}>
+          <option value="" disabled selected>Select your option</option>
+          {inputField.allBrands.map(brand => (<option value={brand.brand_id}>{brand.name}</option>))}
+        </select>
+        <br/><br/>
+        <label> Tool Model: </label>
+        <select name="model" onChange={inputsHandler} value={inputField.model}>
+          <option value="" disabled selected>Select your option</option>
+          {inputField.allModels.map(model => (<option value={model.model_id}>{model.name}</option>))}
+        </select>
+        <br/><br/>
 
         <h2>Tool Details</h2>
 
         <br/>
-        <label htmlFor="">Title
-        <input type="text" placeholder="Daily Rate" value={inputField.title} onChange={""}/>
-          </label>
-
-        <label htmlFor="">Daily Rate (USD)
-          <input type="text" placeholder="Daily Rate" value={inputField.price} onChange={""}/>
+        <label>Title
+          <input 
+          type="text" 
+          name="title"
+          placeholder="Title" 
+          onChange={inputsHandler} 
+          value={inputField.title}>
+          </input>
         </label>
 
+        <label>Price (per hour)
+          <input 
+          type="number" 
+          name="price"
+          placeholder="Price" 
+          onChange={inputsHandler} 
+          value={inputField.price}>
+          </input>
+        </label>
+        <br/><br/>
         <label>Description
-          <textarea placeholder="Description" value={inputField.description} onChange={""}>
-            
+          <textarea 
+          type="text" 
+          name="description"
+          placeholder="Add a description" 
+          onChange={inputsHandler} 
+          value={inputField.description}>
           </textarea>
         </label>
-
-        
         <br/><br/>
-    
         <h2>Add a Photo</h2>
         <br/>
         <input 
         type="file"
-                   id="image"
-                   accept="image/png, image/jpeg"  onChange={handleImageChange} multiple/>
+        id="item_image_url"
+        name="item_image_url"
+        accept="image/png, image/jpeg" onChange={handleImageChange}/>
         <br/>
 
-        <input className="tool-create-submit-btn" type="submit" value="Finish"/>
-
-      </form>
+        <input className="tool-create-submit-btn" type="submit" onClick={handleSubmit} value="Finish"/>
 
     </div>
   )

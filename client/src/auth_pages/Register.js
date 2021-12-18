@@ -6,10 +6,6 @@ import TestNav from '../apis/apiTest';
 import { useNavigate, Route, Routes, Link } from "react-router-dom"
 import Login from './Login.js'
 
-/*export default function RootNavigation (){
-    const navigation = useNavigate() // extract navigation prop here
-     return <SignUp navigation={navigation} /> //pass to your component.
-    }*/
 export default function SignUp (){
     /*
     constructor(props) {
