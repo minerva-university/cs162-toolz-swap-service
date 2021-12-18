@@ -7,18 +7,7 @@ import { useNavigate, Route, Routes, Link } from "react-router-dom"
 import Login from './Login.js'
 
 export default function SignUp (){
-    /*
-    constructor(props) {
-        super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.firstName = React.createRef();
-        this.lastName = React.createRef();
-        this.password1 = React.createRef();
-        this.password2 = React.createRef();
-        this.username = React.createRef();
-        this.email = React.createRef();
-    }
-    */
+    
     const [inputField , setInputField] = useState({
         first_name: '',
         last_name: '',

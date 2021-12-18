@@ -100,7 +100,8 @@ export default function CreateListing () {
   };
 
   const navigate = useNavigate()
-  return(
+  if (window.sessionStorage.getItem("jwtToken") !== null) {
+    return(
       <div className="tool-create-container">
       <div className="tool-create-banner">
         
@@ -207,4 +208,22 @@ export default function CreateListing () {
 
     </div>
   )
+  } else {
+    return (
+      <div>
+        <h2>Please Sign In to Create Listing</h2>
+        <Link to='/signup'>
+          <button>Register</button>
+        </Link>
+        <Link to='/login'>
+          <button>Login</button>
+        </Link>
+        <Routes>
+            <Route path='login' element={<LogIn />} />
+            <Route path='signup' element={<SignUp />} />
+        </Routes>
+      </div>
+    )
+  }
+  
 }
