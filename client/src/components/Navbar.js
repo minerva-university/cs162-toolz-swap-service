@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Navigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; 
 import axios from "axios";
 import headerProvider from '../apis/headerProvider';
 import { serverURL } from '../config'
@@ -13,8 +13,15 @@ const is_user = () => {
 }
 const NavBar = () => {
     const isLoggedin = is_user()
-
+    const navigate = useNavigate()
     function handleLogout() {
+      window.sessionStorage.removeItem("jwtToken")
+      window.sessionStorage.removeItem("memberId")
+      window.sessionStorage.removeItem("userId")
+      window.sessionStorage.removeItem("username")
+      window.location.reload(false);
+      navigate('/')
+      /*
       const url = 'http://localhost:8000/auth/logout/'
       const method = 'GET'
       //const headers = headerProvider(true)
@@ -26,7 +33,7 @@ const NavBar = () => {
         'Member-Id': memberId,
         'User-Id' : userId
       }})
-        .then(response => console.log(response))
+        .then(response => console.log(response))*/
   }
     if (isLoggedin) {
       return (

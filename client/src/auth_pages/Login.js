@@ -74,8 +74,8 @@ export default function LogIn (){
                 window.sessionStorage.setItem("memberId",  memberId)
                 window.sessionStorage.setItem("userId",  userId)
                 window.sessionStorage.setItem("username",  username)
-                window.location.reload(false);
                 navigate('/')
+                window.location.reload(false);
             } else {
                 navigate('/loginfail')
             }
@@ -105,10 +105,6 @@ export default function LogIn (){
         </label>
         <br />
         <button>Submit</button>
-        <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/SearchPage' element={<SearchPage />} />
-        </Routes>
         </form> 
 );
 }

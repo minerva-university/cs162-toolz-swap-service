@@ -1,3 +1,8 @@
+.regular {
+  color: black;
+  background-color: whitesmoke;
+}
+
 .tool-create-container {
     color: black;
   }
@@ -90,7 +95,7 @@
   .tool-create-submit-btn {
     background-color: #8f63f4;
     border: 1px solid #8f63f4;
-    color: #fff;
+    color: black;
     font-family: BasisGrotesque,Avenir,Helvetica Neue,Helvetica,sans-serif;
     font-size: 16px;
     font-weight: 700;
