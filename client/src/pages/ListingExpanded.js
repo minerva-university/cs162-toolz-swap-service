@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import "../stylesheets/listingExpanded.css";
 import  star from "../images/star.png";
 import axios from 'axios'
-
 import headerProvider from '../apis/headerProvider';
 import { serverURL } from '../config'
 const ListingExpanded =()=> {
@@ -20,27 +19,10 @@ const ListingExpanded =()=> {
             setTool(response.data)
         // axios returns API response body in .data
         })
-    })
-    // console.log(tool)
-    // const [tool, setValuess]=useState({
-    //     "listing_id": "4e8d7df8-e086-4eee-a861-d15505062137",
-    //     "title": "Some cool Drill right here",
-    //     "address": "Random Address",
-    //     "description": "This drill has been used by Mike tyson, you probably want it wink wink",
-    //     "created_on": "2021-12-14T00:39:28.371000-08:00",
-    //     "rating_average": 3.2,
-    //     "owner": "Mike Tyson",
-    //     "brand": "IRWIN",
-    //     "model": "X AE-A-12",
-    //     "tool_category": "DRILL",
-    //     "city": "San Francisco, CA",
-    //     "neighborhood": "Tenderloin"
-    // })
+    }, []) 
+    const requestHandler = (e) =>{
 
-
-    const randomNumber = (min, max) => {
-        return Math.floor(Math.random() * (max - min) + min);
-      }  
+    }
 
     return (
         <div className="tool-show-container">
@@ -48,7 +30,11 @@ const ListingExpanded =()=> {
       {/* IMAGE BANNER */}
 
         <div className="tool-show-banner">
-          <img className="tool-show-img-banner" alt="tool photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} /> 
+        {tool.item_image_url === null ? (
+        <img className="tool-show-img-banner" alt="tool photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} /> 
+          ) : (
+            <img className="tool-show-img-banner" alt="tool photo" src={tool.item_image_url} /> 
+          )}
         </div>
 
         <br/><br/><br/>
@@ -206,9 +192,18 @@ const ListingExpanded =()=> {
                 <img className="tool-show-add-fav-icon" src="https://github.com/fsiino/thuro/blob/master/app/assets/images/add-fav-transp.png?raw=true"/>&nbsp;Add to Saved
               </button>
               &nbsp;&nbsp;&nbsp;&#160;
-              <button className="tool-show-add-fav-btn">
+              <Link
+                     to={`/CreateRequest/${tool.listing_id}/${tool.title}/${tool.owner}/${tool.owner_name}`}
+                     params={{
+                        "tool_id": tool.listing_id,
+                        "title": tool.title,
+                        "owner": tool.owner,
+                        "owner_name": tool.owner_name,
+                    }}>
+              <button className="regular" >
                 Request
               </button>
+              </Link>
               <br/>
 
             </div> 

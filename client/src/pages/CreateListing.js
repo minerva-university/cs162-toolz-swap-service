@@ -65,12 +65,12 @@ export default function CreateListing () {
   },[])
 
   const inputsHandler = (e) =>{
-    console.log(e.target.name, e.target.value)
+    // console.log(e.target.name, e.target.value)
     setInputField({
         ...inputField,
         [e.target.name]: e.target.value
       })
-    console.log(inputField)
+    // console.log(inputField)
     }  
   
   const handleImageChange = (e) => {

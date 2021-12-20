@@ -82,7 +82,7 @@ v=uoJjDbL-Y_E
 2. Enter virtual environment (see above)
 3. Enter toolz_swap_back directory:
 ```bash
-cd toolz_swap_back
+cd server
 ```
 4. Install requirements.txt after entering virtual environment (see above)
 ```bash
@@ -105,7 +105,7 @@ python manage.py runserver
 
 1. From the root of the directory, enter 'toolz_swap_front' folder:
 ```bash
-cd toolz_swap_front
+cd client
 ```
 2. Install the app. Yarn is recommended
 ```bash

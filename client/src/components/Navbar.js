@@ -63,7 +63,7 @@ const NavBar = () => {
               <Link to="/MyRequests">
                 My Requests
               </Link>
-              <button className="navbutton" onClick={handleLogout}>Logout</button>
+              <button className="regular" onClick={handleLogout}>Logout</button>
               {/* <Link to="/" onClick={handleLogout}>
                 Log out
               </Link> */}

@@ -311,7 +311,11 @@ const SearchPage =(props)=> {
                         "title": tool.title
                     }}>
                       <div className="tool-index-photo-wrapper">
-                        <img className="tool-index-photo" src={toolImages[2].item_image_url} />
+                        {tool.item_image_url === null ? (
+                        <img className="tool-index-photo" alt="tool photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} /> 
+                          ) : (
+                            <img className="tool-index-photo" alt="tool photo" src={tool.item_image_url} /> 
+                          )}
                         <div className="tool-price">
                           ${tool.toolPrice}<span className="price-per-day"> /day</span>
                         </div>
