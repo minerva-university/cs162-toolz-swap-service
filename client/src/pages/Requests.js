@@ -14,35 +14,44 @@ export default function Requests (){
     const url = "http://localhost:8000/filter/requests/?user_id=" + user_id
     const [requests, setRequests] = useState([])
 
-    function getLists() {
-        axios.get(url)
+    useEffect(()=>{
+        const res = axios.get(url)
         .then((response)=>{
         setRequests(response.data)
-        // axios returns API response body in .data
+        console.log(requests)
         })
-    }
+    }, [])
     const listItems = requests.map((d) => 
-    <Link
-    to={`/ListingExpanded/${d.listing}`}
-    params={{
-    "tool_id": d.listing,
-    "title": d.listing_title
-        }}>
-    <button>
-    <article class="list">
-    <header>
-      <div>
-        <h2>{d.listing_title}</h2>
-        <div>Request To {d.recipient_name} on {d.created_on}</div>
-      </div>
-    </header>
-    <p>From: {d.renting_start}</p>
-    <p>To: {d.renting_end}</p>
-    <br></br>
-    <p>{d.body}</p>
-  </article>
-  </button>
-  </Link>);
+    <div><div className="list">
+        <article >
+        <header>
+        <div>
+            <Link 
+            to={`/ListingExpanded/${d.listing}`}
+            params={{
+            "tool_id": d.listing,
+            "title": d.listing_title
+                }}>
+            <h1>{d.listing_title}</h1>
+            </Link>
+            <div>
+                <p>Request To {d.recipient_username}</p> 
+                <p>on {d.created_on}</p>
+            </div><br/>
+        </div>
+        </header>
+        <p>From: {d.renting_start}</p>
+        <p>To: {d.renting_end}</p>
+        <br></br>
+        <p>{d.body}</p>
+        {d.approved? (
+            <button backgroundColor="green"> Approved</button>
+        ) : (
+            <button backgroundColor="red"> Not Approved</button>
+        )}
+    </article>
+    </div><br/>
+    </div>);
    // console.log(myrequests)
     return (
         <div>

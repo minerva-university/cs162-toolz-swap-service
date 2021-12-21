@@ -19,21 +19,9 @@ const NavBar = () => {
       window.sessionStorage.removeItem("memberId")
       window.sessionStorage.removeItem("userId")
       window.sessionStorage.removeItem("username")
-      window.location.reload(false);
       navigate('/')
-      /*
-      const url = 'http://localhost:8000/auth/logout/'
-      const method = 'GET'
-      //const headers = headerProvider(true)
-      const token = window.sessionStorage.getItem('jwtToken')
-      const memberId = window.sessionStorage.getItem('memberId')
-      const userId = window.sessionStorage.getItem('userId')
-      return axios.get(url, {headers: {
-        "Token": token,
-        'Member-Id': memberId,
-        'User-Id' : userId
-      }})
-        .then(response => console.log(response))*/
+      // reload page
+      window.location.reload(false);
   }
     if (isLoggedin) {
       return (
