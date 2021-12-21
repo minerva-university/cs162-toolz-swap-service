@@ -12,6 +12,7 @@ const is_user = () => {
   }
 }
 const NavBar = () => {
+    const username = window.sessionStorage.getItem("username")
     const isLoggedin = is_user()
     const navigate = useNavigate()
     function handleLogout() {
@@ -45,16 +46,14 @@ const NavBar = () => {
           <div className="dropdown">
             <div className="nav-profile"/>
             <div className="dropdown-content"> 
+              <h2>{username}</h2>
               <Link to="/UserProfile">
-                Update Profile
+                <p>Update Profile</p>
               </Link>
               <Link to="/MyRequests">
-                My Requests
+                <p>My Requests</p>
               </Link>
-              <button className="regular" onClick={handleLogout}>Logout</button>
-              {/* <Link to="/" onClick={handleLogout}>
-                Log out
-              </Link> */}
+              <button onClick={handleLogout}><p>Logout</p></button>
             </div>
           </div>
         </div>

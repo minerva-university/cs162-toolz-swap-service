@@ -1,5 +1,8 @@
 /* // whole page container */
-
+.regular {
+  color:black;
+  width: 20px;
+}
 .tool-show-container {
   color: black;
   width: 100%;

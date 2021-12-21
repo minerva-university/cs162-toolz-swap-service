@@ -1,5 +1,5 @@
 import React, {useState, useEffect, Component } from "react";
-import {Link, useNavigate, useParams, useLocation } from "react-router-dom";
+import {Link, useNavigate, useParams } from "react-router-dom";
 import {Form, Row, Col} from "react-bootstrap";
 import Modal from "../components/Modal";
 import axios from "axios";
@@ -9,17 +9,14 @@ import "../stylesheets/SearchPage.css";
 import  rating_star from "../images/rating_star.png";
 import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CSS
 
-// TODO: Search page is very rudimentary. Should be able to switch filters back and forth, but can't so far
-// ideally we should be storing filters set, looping over those each time. But this will do for now
 const SearchPage =()=> {
+
   const axios = require('axios');
   const navigate = useNavigate();
-  const location = useLocation();
   const username = window.sessionStorage.getItem('userId')
   const params = useParams()
-  const {city, renting_start, renting_end} = location.state
   const [allTools, setAllTools] = useState({
-    city: city,
+    city: params.city,
     renting_start: params.renting_start,
     renting_end: params.renting_end,
     filtered: [],
@@ -54,14 +51,8 @@ const SearchPage =()=> {
       var data4 = responseFour.data
       var data5 = responseFive.data
       var filtered_data = responseSix.data.filter(function (tool) {
-        if (city) {
-          return tool.city === city;
-        } else {
-          return tool
-        }
-        
+        return tool.city === params.city;
     })
-    console.log(filtered_data)
       setAllTools({
         ...allTools,
         allNeighborhoods: data1,
@@ -77,84 +68,54 @@ const SearchPage =()=> {
     console.log("hello")
   }
   const handleChange = (e) => {
-    e.preventDefault()
-    console.log(e.target.name, e.target.value)
+    e.preventdefault()
     const new_filtered_data = allTools.filtered.filter(function (tool) {
-      console.log(tool)
-      return tool[e.target.name] === e.target.value;
-    })
+      return tool.city === params.city;
     setAllTools({
       ...allTools,
       filtered: new_filtered_data,
     })
-    console.log("change", allTools)
-  }
+  })}
       return (
-        <div className="search-body-container">
-        <div className="search-filter-container">
-          <div className="sidebar__search">
-            <div className="sidebar__searchContainer">
-                <button class="another-search-button"></button>
-                <input placeholder="Search for a tool listing" type="text" />
-                
-            </div>
-          </div>
-          <div class="sidenav">
-          <p>Filter by:</p>
-            <div>
-              <button class="dropdown-btn">City
-                <i class="fas fa-caret-down"></i>
-              </button>
-              <select name="city" onChange={handleChange}>
-                <option value="" disabled selected>Select your option</option>
-                {allTools.allCities.map(city => (<option value={city.city_id}>{city.name}</option>))}
-              </select>
-            </div>
-            <div>
-              <button class="dropdown-btn">Neighborhood
-                <i class="fa fa-caret-down"></i>
-              </button>
-              <select name="neighborhood" onChange={handleChange} value={allTools.neighborhood}>
-                <option value="" disabled selected>Select your option</option>
-                {allTools.allNeighborhoods.map(neighborhood => (<option value={neighborhood.neighborhood_id}>{neighborhood.name}</option>))}
-              </select>
-            </div>
-            <div>
-            <button class="dropdown-btn">Tool Category
-                <i class="fa fa-caret-down"></i>
-              </button>
-              <select name="tool_category" onChange={handleChange} value={allTools.tool_category}>
-                <option value="" disabled selected>Select your option</option>
-                {allTools.allToolTypes.map(tool_category => (<option value={tool_category.tool_id}>{tool_category.name}</option>))}
-              </select>
-            </div>
-            <div>
-            <button class="dropdown-btn">Brand
-                <i class="fa fa-caret-down"></i>
-              </button>
-              <select name="brand" onChange={handleChange} value={allTools.brand}>
-                <option value="" disabled selected>Select your option</option>
-                {allTools.allBrands.map(brand => (<option value={brand.brand_id}>{brand.name}</option>))}
-              </select>
-            </div>
-            <div>
-            <button class="dropdown-btn">Model
-                <i class="fa fa-caret-down"></i>
-              </button>
-              <select name="model" onChange={handleChange} value={allTools.model}>
-                <option value="" disabled selected>Select your option</option>
-                {allTools.allModels.map(model => (<option value={model.model_id}>{model.name}</option>))}
-              </select>
-            </div>
-            
-          </div>
-        </div>
+          <div className="search-body-container">
+                <div className="search-filter-container">
+                  <div className="sidebar__search">
+                    <div className="sidebar__searchContainer">
+                        <button class="another-search-button"></button>
+                        <input placeholder="Search for a tool listing" type="text" />
+                        
+                    </div>
+                  </div>
+                  <div class="sidenav">
+                  <p>Filter by:</p>
+                    <div>
+                      <button class="dropdown-btn">City
+                        <i class="fas fa-caret-down"></i>
+                      </button>
+                      <select name="city" onChange={inputsHandler} value={allTools.city}>
+                        <option value="" disabled selected>Select your option</option>
+                        {allTools.allCities.map(city => (<option value={city.city_id}>{city.name}</option>))}
+                      </select>
+                      
+                    </div>
+                    <div>
+                      <button class="dropdown-btn">Neighborhood
+                        <i class="fa fa-caret-down"></i>
+                      </button>
+                      
+                    </div>
+                    <div>
+                      
+                    </div>
+                    
+                  </div>
+                </div>
                 <div className="search-listings-container">
                   {allTools.filtered.map(tool => (
                   <div className="tool-tile-container">
                     <Link
                      to={`/ListingExpanded/${tool.listing_id}`}
-                     state= {{ renting_start: renting_start, renting_end: renting_end}}
+                     state= {{ renting_start: params.renting_start, renting_end: params.renting_end}}
                      params={{
                         "tool_id": tool.listing_id,
                         "title": tool.title,
@@ -185,8 +146,51 @@ const SearchPage =()=> {
                   ))}
                 </div>
             </div>
+            
+
+        
+
+        
+
+
+        
+        // <main className="container">
+        //   <h1 className="text-white text-uppercase text-center my-4">Toolz Swap</h1>
+        //   <div className="row">
+        //     <div className="col-md-6 col-sm-10 mx-auto p-0">
+        //       <div className="card p-3">
+        //         <div className="mb-4">
+        //           <button
+        //             className="btn btn-primary"
+        //             onClick={this.createItem}
+        //           >
+        //             List Tool
+        //           </button>
+        //         </div>
+        //         {this.renderTabList()}
+        //         <ul className="list-group list-group-flush border-top-0">
+        //           {this.renderItems()}
+        //         </ul>
+        //       </div>
+        //     </div>
+        //   </div>
+        //   {this.state.modal ? (
+        //     <Modal
+        //       activeItem={this.state.activeItem}
+        //       toggle={this.toggle}
+        //       onSave={this.handleSubmit}
+        //     />
+        //   ) : null}
+        // </main>
       );
     }
   
   
   export default SearchPage;
+
+  //                 <span className="tool-make-model">
+  //                   {toolName}
+  //                 </span>
+  //                 <span className="tool-year">
+  //                   1999
+  //                 </span>

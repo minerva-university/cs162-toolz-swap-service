@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import "../stylesheets/createRequest.css";
 import axios from 'axios'
 
@@ -8,10 +8,12 @@ const CreateRequest =()=> {
     const requester = window.sessionStorage.getItem('userId')
     const params = useParams()
     const navigate = useNavigate()
+    const location = useLocation()
+    const {renting_start, renting_end} = location.state
     const [request, setRequest] = useState({
             "body": "",
-            "renting_start": '',
-            "renting_end": '',
+            "renting_start": renting_start,
+            "renting_end": renting_end,
             "approved": false,
             "listing": params.tool_id,
             "author": requester,
@@ -49,6 +51,7 @@ const CreateRequest =()=> {
     }
     useEffect(() => {
         console.log(params)
+        console.log(renting_start, renting_end)
     }, [])
         return(
             <div>
