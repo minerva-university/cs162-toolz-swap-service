@@ -1,5 +1,11 @@
 .list {
     background-color: whitesmoke;
-    color: black
+    color: black;
+    margin: auto;
+    width: 60%;
 
+}
+
+.regular {
+    width: 35em
 }

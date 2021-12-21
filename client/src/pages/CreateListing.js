@@ -4,7 +4,11 @@ import React, { Component, useState, useEffect } from "react";
 import headerProvider from '../apis/headerProvider';
 import { useNavigate, Route, Routes, Link } from "react-router-dom"
 import axios from 'axios' 
-
+import LogIn from '../auth_pages/Login.js'
+import SignUp from '../auth_pages/Register.js'
+/* TODO: make certain fields dependent upon others. For example, only neighborhoods within a city should be allowed to be selected
+    not just all neighborhoods. Same for model->brand relations etc. 
+*/
 export default function CreateListing () {
   const owner = window.sessionStorage.getItem('userId')
   const [inputField , setInputField] = useState({
@@ -61,12 +65,12 @@ export default function CreateListing () {
   },[])
 
   const inputsHandler = (e) =>{
-    console.log(e.target.name, e.target.value)
+    // console.log(e.target.name, e.target.value)
     setInputField({
         ...inputField,
         [e.target.name]: e.target.value
       })
-    console.log(inputField)
+    // console.log(inputField)
     }  
   
   const handleImageChange = (e) => {
@@ -213,10 +217,10 @@ export default function CreateListing () {
       <div>
         <h2>Please Sign In to Create Listing</h2>
         <Link to='/signup'>
-          <button>Register</button>
+          <button class="regular">Register</button>
         </Link>
         <Link to='/login'>
-          <button>Login</button>
+          <button class="regular">Login</button>
         </Link>
         <Routes>
             <Route path='login' element={<LogIn />} />

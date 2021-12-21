@@ -197,11 +197,11 @@ class ListingRequest(models.Model):
     """
     request_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
-    created_on = models.DateTimeField()
+    created_on = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author')
     recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipient')
     body = models.TextField()
-    renting_start = models.DateTimeField(auto_now_add=True)
+    renting_start = models.DateTimeField()
     renting_end = models.DateTimeField()
     approved = models.BooleanField()
 

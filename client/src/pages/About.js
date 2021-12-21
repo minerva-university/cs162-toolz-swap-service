@@ -10,7 +10,7 @@ class About extends Component {
                 <Link
                 to={{ pathname: "/SearchPage" }}
                 >
-                <button>Click here to go to SearchPage</button>
+                <button class="regular ">Click here to go to SearchPage</button>
                 </Link>
             </div>
         )

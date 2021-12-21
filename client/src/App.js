@@ -13,8 +13,8 @@ import SavedListings from "./pages/SavedListings";
 import UserProfile from "./pages/UserProfile";
 import UpdateProfile from "./pages/UpdateProfile";
 import SignUp from './auth_pages/Register';
-import Login from './auth_pages/Login'
-import LoginFail from './auth_pages/LoginFail'
+import Login from './auth_pages/Login';
+import LoginFail from './auth_pages/LoginFail';
 
 import {
   BrowserRouter as Router,
@@ -45,9 +45,9 @@ class App extends Component {
             <Route element={<SearchPage />} path="/SearchPage" />
             <Route element={<About />} path="/About" />
             <Route element={<CreateListing />} path="/CreateListing" />
-            <Route element={<CreateRequest />} path="/CreateRequest" />
+            <Route element={<CreateRequest />} path="/CreateRequest/:tool_id/:title/:owner/:owner_name" />
             <Route element={<EditListing />} path="/EditListing" />
-            <Route element={<ListingExpanded />} path="/ListingExpanded/:tool_id" />
+            <Route element={<ListingExpanded />} path="/ListingExpanded/:tool_id/" />
             <Route element={<MyListings />} path="/MyListings" />
             <Route element={<MyRequests />} path="/MyRequests" />
             <Route element={<Requests />} path="/Requests" />

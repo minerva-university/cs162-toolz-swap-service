@@ -1,7 +1,8 @@
 from .models import *
 from django.db.models import Avg
 
-
+# TODO query neighborhoods by cities, will be used for front end filters
+# TODO general search function for listings by data. Main search page functionality
 def get_user_by_id(user_id):
     """
     Returns the user given the id
