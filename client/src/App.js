@@ -42,7 +42,7 @@ class App extends Component {
       </header>
         <Routes>
             <Route element={<HomePage />}  path="/" />
-            <Route element={<SearchPage />} path="/SearchPage" />
+            <Route element={<SearchPage />} path="/SearchPage/" />
             <Route element={<About />} path="/About" />
             <Route element={<CreateListing />} path="/CreateListing" />
             <Route element={<CreateRequest />} path="/CreateRequest/:tool_id/:title/:owner/:owner_name" />

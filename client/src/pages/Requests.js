@@ -1,7 +1,7 @@
 // Requests that the user MADE
 
 import React, { Component, useState, useEffect } from "react";
-import { useNavigate, Route, Routes, Link } from "react-router-dom"
+import { useNavigate, Route, Routes, Link, useLocation } from "react-router-dom"
 import HomePage from '../pages/HomePage.js'
 import SearchPage from '../pages/SearchPage.js'
 import headerProvider from '../apis/headerProvider';

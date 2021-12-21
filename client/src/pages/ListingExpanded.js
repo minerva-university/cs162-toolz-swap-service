@@ -1,28 +1,35 @@
 import React, { useState, useEffect, Component } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import "../stylesheets/listingExpanded.css";
 import  star from "../images/star.png";
 import axios from 'axios'
 import headerProvider from '../apis/headerProvider';
 import { serverURL } from '../config'
-const ListingExpanded =()=> {
 
+const is_user = () => {
+  if (window.sessionStorage.getItem("jwtToken") !== null) {
+    return true
+  } else {
+    return false
+  }
+}
+
+function ListingExpanded () {
+    const isLoggedin = is_user()
     const params = useParams()
     const url = "http://localhost:8000/router/listing/"+params.tool_id.toString()+"/"
-    // console.log(url)
-    //console.log(params)
+    const location = useLocation()
 
+    const {renting_start, renting_end} = location.state
     const [tool, setTool] = useState({})
     useEffect(() => {
+        console.log(renting_start)
         axios.get(url)
         .then((response)=>{
             setTool(response.data)
         // axios returns API response body in .data
         })
     }, []) 
-    const requestHandler = (e) =>{
-
-    }
 
     return (
         <div className="tool-show-container">
@@ -192,18 +199,29 @@ const ListingExpanded =()=> {
                 <img className="tool-show-add-fav-icon" src="https://github.com/fsiino/thuro/blob/master/app/assets/images/add-fav-transp.png?raw=true"/>&nbsp;Add to Saved
               </button>
               &nbsp;&nbsp;&nbsp;&#160;
-              <Link
-                     to={`/CreateRequest/${tool.listing_id}/${tool.title}/${tool.owner}/${tool.owner_name}`}
-                     params={{
-                        "tool_id": tool.listing_id,
-                        "title": tool.title,
-                        "owner": tool.owner,
-                        "owner_name": tool.owner_name,
-                    }}>
-              <button className="regular" >
-                Request
-              </button>
-              </Link>
+              {isLoggedin ? (
+                    <Link  className="regular"
+                            to={`/CreateRequest/${tool.listing_id}/${tool.title}/${tool.owner}/${tool.owner_name}`}
+                            state= {{renting_start: renting_start, renting_end: renting_end}}
+                            params={{
+                              "tool_id": tool.listing_id,
+                              "title": tool.title,
+                              "owner": tool.owner,
+                              "owner_name": tool.owner_name,
+                          }}
+                          >
+                    <button>
+                      Request
+                    </button>
+                    </Link>
+              ): (
+                <Link to='/login' className="regular">
+                <button>
+                  Please Log In to Request
+                </button>
+                </Link>
+              )}
+              
               <br/>
 
             </div> 

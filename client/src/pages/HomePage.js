@@ -86,7 +86,12 @@ function HomePage () {
 
                 </div>
 
-                <Link to={"/SearchPage"}>
+                <Link 
+                    to={`/SearchPage`} 
+                    params={{
+                    "city": inputField.city,
+                    }}
+                    state={{ city: inputField.city, renting_start: inputField.renting_start, renting_end: inputField.renting_end }}>
                 <button className="search-button"/>
                 </Link>
                 
