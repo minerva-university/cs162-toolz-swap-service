@@ -13,6 +13,7 @@ function HomePage () {
         renting_end: "",
         city: "",
         allCities: [],
+
     })
     const inputsHandler = (e) =>{
         // console.log(e.target.name, e.target.value)
@@ -23,6 +24,7 @@ function HomePage () {
         console.log(inputField)
         } 
     useEffect(()=>{
+        
         let urls = [
           "http://localhost:8000/router/cities/"
     

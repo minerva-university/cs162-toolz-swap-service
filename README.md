@@ -36,8 +36,10 @@ Please reach out for the DJANGO_SECRET_KEY and IMG_BB variable
 
 ### Docker-Compose Setup (recommended)
 
-Make sure database HOST in toolz_swap_back/toolz_app/settings.py is set to os.environ.get("DB_HOST_DOCKER")
-Make sure database NAME in toolz_swap_back/toolz_app/settings.py is set to os.environ.get("TOOLZ_APP_DB_DOCKER")
+Make sure that in your .env file (at root of directory):
+```
+IS_LOCAL_SETUP=true
+```
 
 1. Install Docker for you device
 2. In a bash terminal at root of project, run the following. This might take a minute or so. When completed will exit terminal
@@ -60,11 +62,12 @@ python manage.py makemigrations
 ```bash
 python manage.py migrate
 ```
-7. Going back to previous terminal, pres CTRL+C to exit "docker-compose up" job
-8. Reload by running "docker-compose up" again
-9. You should be able to open app at http://localhost:8000 
-10. You should be able to visit react client app at http://localhost:3000
-11. After you finish with the app, you should tear it all down and remove unecessary volumes:
+7. Because of docker bind mount, you shouldn't need to reload, but in case you do: 
+    a. Go back to previous terminal, pres CTRL+C to exit "docker-compose up" job
+    b. Reload by running "docker-compose up" again
+8. You should be able to open app at http://localhost:8000 . Follow allowed urls
+9. You should be able to visit react client app at http://localhost:3000
+10. After you finish with the app, you should tear it all down and remove unecessary volumes:
 ```bash
 docker-compose down
 docker volume rm <volume_id>
@@ -72,15 +75,15 @@ docker volume rm <volume_id>
 
 ### Local Django setup
 
-If you already have postgres installed and working, this way is probably faster:
-
-Make sure database HOST in toolz_swap_back/toolz_app/settings.py is set to os.environ.get("DB_HOST")
-Make sure database NAME in toolz_swap_back/toolz_app/settings.py is set to os.environ.get("TOOLZ_APP_DB")
+Make sure that in your .env file (at root of directory):
+```
+IS_LOCAL_SETUP=true
+```
 
 1. Install and setup postgres. Create a database called "toolz_app_db_local". For help, see here: https://www.youtube.com/watch?
 v=uoJjDbL-Y_E
 2. Enter virtual environment (see above)
-3. Enter toolz_swap_back directory:
+3. Enter server directory:
 ```bash
 cd server
 ```

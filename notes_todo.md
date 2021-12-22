@@ -34,3 +34,5 @@ TOOLZ_APP_DB -> TOOLZ_APP_DB_DOCKER
 
 # get all listing reviews given the listing_id
 # http://127.0.0.1:8000/filter/listing/reviews/?listing_id=159be4a6-c309-4e5b-8dc7-fadde32568cb
+
+search for "TODO" there's a lot left to do.

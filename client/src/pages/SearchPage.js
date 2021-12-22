@@ -105,7 +105,7 @@ const SearchPage =()=> {
               <button class="dropdown-btn">City
                 <i class="fas fa-caret-down"></i>
               </button>
-              <select name="city" onChange={handleChange}>
+              <select name="city" onChange={handleChange} value={city}>
                 <option value="" disabled selected>Select your option</option>
                 {allTools.allCities.map(city => (<option value={city.city_id}>{city.name}</option>))}
               </select>
