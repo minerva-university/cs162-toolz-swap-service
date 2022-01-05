@@ -121,13 +121,13 @@ export default function CreateListing () {
         <br/>
         <label>Address
           <input 
-          type="text" 
+          className="address" 
           name="address"
           placeholder="Address" 
           onChange={inputsHandler} 
           value={inputField.address}>
           </input>
-        </label>
+        </label><br/><br/>
 
         <label>Choose a City:</label>
         <select name="city" onChange={inputsHandler} value={inputField.city}>
@@ -171,13 +171,13 @@ export default function CreateListing () {
         <br/>
         <label>Title
           <input 
-          type="text" 
+          className="title"  
           name="title"
           placeholder="Title" 
           onChange={inputsHandler} 
           value={inputField.title}>
           </input>
-        </label>
+        </label><br/><br/>
 
         <label>Price (per hour)
           <input 
@@ -191,7 +191,7 @@ export default function CreateListing () {
         <br/><br/>
         <label>Description
           <textarea 
-          type="text" 
+          className="description" 
           name="description"
           placeholder="Add a description" 
           onChange={inputsHandler} 
