@@ -14,23 +14,51 @@ const is_user = () => {
   }
 }
 
+
 function ListingExpanded () {
     const isLoggedin = is_user()
     const params = useParams()
-    const url = "http://localhost:8000/router/listing/"+params.tool_id.toString()+"/"
+    const user_id = window.sessionStorage.getItem("userId")
+    const url_listing = "http://localhost:8000/router/listing/"+params.tool_id.toString()+"/"
+    const url_user = "http://localhost:8000/router/user_detail/" + user_id + "/"
     const location = useLocation()
-
     const {renting_start, renting_end} = location.state
     const [tool, setTool] = useState({})
+    const [saved, setSaved] = useState([])
     useEffect(() => {
-        console.log(renting_start)
-        axios.get(url)
+        axios.get(url_listing)
         .then((response)=>{
-            setTool(response.data)
-        // axios returns API response body in .data
+          setTool(response.data)
+        })
+        axios.get(url_user)
+        .then((response)=>{
+          setSaved(response.data.saved_places)
         })
     }, []) 
 
+    const handleSave = (e, tool_id, save_status) =>{
+      let new_saved = saved
+      new_saved = new_saved.concat(tool_id)
+      e.preventDefault();
+      if (save_status == false) {
+        const patch_url = "http://localhost:8000/router/user_detail/" + user_id + "/"
+        let res_patch = axios.patch(patch_url, {"saved_places": new_saved})
+        window.location.reload(false);
+      }
+    }
+
+    const handleUnsave = (e, tool_id, save_status) =>{
+      let new_saved = saved
+      new_saved = new_saved.filter(item => item !== tool_id)
+      e.preventDefault();
+      if (save_status == true) {
+        const patch_url = "http://localhost:8000/router/user_detail/" + user_id + "/"
+        let res_patch = axios.patch(patch_url, {"saved_places": new_saved})
+        window.location.reload(false);
+      }
+    }
+    // console.log(saved)
+    // console.log(tool)
     return (
         <div className="tool-show-container">
 
@@ -194,13 +222,18 @@ function ListingExpanded () {
                 <div className="tool-show-insurance-co">
                 </div>
               </div>
-                
-              <button className="tool-show-add-fav-btn">
-                <img className="tool-show-add-fav-icon" src="https://github.com/fsiino/thuro/blob/master/app/assets/images/add-fav-transp.png?raw=true"/>&nbsp;Add to Saved
-              </button>
+              {saved.includes(tool.listing_id) ? (
+                <button className="tool-show-add-fav-btn" onClick={(e) => {handleUnsave(e, tool.listing_id, true)}}>
+                  Unsave &#9829;
+                </button>
+              ) : (
+                <button className="tool-show-add-fav-btn" onClick={(e) => {handleSave(e, tool.listing_id, false)}}>
+                  Add to Saved &#9825;
+                </button>
+              )}
               &nbsp;&nbsp;&nbsp;&#160;
               {isLoggedin ? (
-                    <Link  className="regular"
+                    <Link className="regular"
                             to={`/CreateRequest/${tool.listing_id}/${tool.title}/${tool.owner}/${tool.owner_name}`}
                             state= {{renting_start: renting_start, renting_end: renting_end}}
                             params={{
@@ -214,7 +247,7 @@ function ListingExpanded () {
                       Request
                     </button>
                     </Link>
-              ): (
+              ) : (
                 <Link to='/login' className="regular">
                 <button>
                   Please Log In to Request
