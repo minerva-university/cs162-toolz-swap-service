@@ -222,15 +222,20 @@ function ListingExpanded () {
                 <div className="tool-show-insurance-co">
                 </div>
               </div>
-              {saved.includes(tool.listing_id) ? (
+              {isLoggedin && saved.includes(tool.listing_id) ? (
                 <button className="tool-show-add-fav-btn" onClick={(e) => {handleUnsave(e, tool.listing_id, true)}}>
                   Unsave &#9829;
                 </button>
-              ) : (
+              ) :  isLoggedin && !saved.includes(tool.listing_id) ? (
                 <button className="tool-show-add-fav-btn" onClick={(e) => {handleSave(e, tool.listing_id, false)}}>
                   Add to Saved &#9825;
                 </button>
-              )}
+              ) : (
+                <button>
+                  Log In to Save
+                </button>
+              )
+              }
               &nbsp;&nbsp;&nbsp;&#160;
               {isLoggedin ? (
                     <Link className="regular"
