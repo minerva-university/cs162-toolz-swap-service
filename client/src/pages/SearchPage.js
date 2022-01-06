@@ -1,13 +1,9 @@
 import React, {useState, useEffect, Component } from "react";
 import {Link, useNavigate, useParams, useLocation } from "react-router-dom";
-import {Form, Row, Col} from "react-bootstrap";
 import Modal from "../components/Modal";
 import axios from "axios";
 import uuid from 'react-uuid';
-import "../App.css";
-import "../stylesheets/SearchPage.css";
-import  rating_star from "../images/rating_star.png";
-import "@fortawesome/fontawesome-svg-core/styles.css"; // import Font Awesome CSS
+import "../stylesheets/searchpage.css";
 
 // TODO: Search page is very rudimentary. Should be able to switch filters back and forth, but can't so far
 // ideally we should be storing filters set, looping over those each time. But this will do for now
@@ -149,44 +145,41 @@ const SearchPage =()=> {
             
           </div>
         </div>
-                <div className="search-listings-container">
-                  {allTools.filtered.map(tool => (
-                  <div className="tool-tile-container">
-                    <Link
-                     to={`/ListingExpanded/${tool.listing_id}`}
-                     state= {{ renting_start: renting_start, renting_end: renting_end}}
-                     params={{
-                        "tool_id": tool.listing_id,
-                        "title": tool.title,
-                    }}>
-                      <div className="tool-index-photo-wrapper">
-                        {tool.item_image_url === null ? (
-                        <img className="tool-index-photo" alt="tool photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} /> 
-                          ) : (
-                            <img className="tool-index-photo" alt="tool photo" src={tool.item_image_url} /> 
-                          )}
-                        <div className="tool-price">
-                          ${tool.price}<span className="price-per-day"> /day</span>
-                        </div>
-                      </div>
-                    </Link>
-                    <div className="tool-make-model-year-container">
-                    <div className="tool-rating">
-                        3.5 <img src={rating_star}/>
-                        / 5
-                        
-                      </div>
-                      <span className="tool-make-model">
-                        {tool.title}
-                        
-                      </span>
-                    </div>
-                  </div>
-                  ))}
+        <div className="search-listings-container">
+          {allTools.filtered.map(tool => (
+            <div className="tool-tile-container">
+              <Link
+                to={`/ListingExpanded/${tool.listing_id}`}
+                state= {{ renting_start: null, renting_end: null}}
+                params={{
+                  "tool_id": tool.listing_id,
+                  "title": tool.title,
+              }}>
+              <div className="tool-index-photo-wrapper">
+                {tool.item_image_url === null ? (
+                <img className="tool-index-photo" alt="tool photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} /> 
+                  ) : (
+                    <img className="tool-index-photo" alt="tool photo" src={tool.item_image_url} /> 
+                  )}
+                <div className="tool-price">
+                  ${tool.price}<span className="price-per-day"> /day</span>
                 </div>
+              <div className="bottom-bar">
+                <p className="tool-name">
+                  {tool.title}
+                </p>
+                <p className="tool-rating">
+                  {tool.rating_average}/4 &#11088;
+                </p>
+              </div>
+              </div>
+              </Link>
             </div>
-      );
-    }
+          ))}
+        </div>
+    </div>
+  );
+}
   
   
   export default SearchPage;

@@ -1,3 +1,44 @@
+
+
+.tool-tile-container {
+  height: 30vh;
+  width: 35%;
+}
+
+.tool-index-photo-wrapper {
+  position: absolute;
+  height: 80%;
+}
+.tool-index-photo {
+  width: 100%;
+  height: 100%;
+}
+
+.tool-name {
+  position: absolute;
+  padding-left: 5%;
+  padding-top: 2%;
+  text-align: left;
+  color: black;
+  font-size: 28px;
+  max-width: 65%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.tool-rating {
+  padding-top: 0%;
+  padding-right: 1%;
+  text-align: right;
+  color: black;
+  font-size: 28px;
+}
+
+.bottom-bar {
+  position: absolute;
+  height: 25%;
+  width: 100%;
+}
+
 .my-listings-container {
     width: 100%;
     height: 100%;
@@ -12,6 +53,10 @@
     padding: 3%
   }
 
+.another-tool {
+  text-align: center;
+  margin: auto
+}
 .top-btn {
     color: black;
     background-color: darkolivegreen;

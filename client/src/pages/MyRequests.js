@@ -5,9 +5,9 @@ import { useNavigate, Route, Routes, Link } from "react-router-dom"
 import HomePage from '../pages/HomePage.js'
 import SearchPage from '../pages/SearchPage.js'
 import headerProvider from '../apis/headerProvider';
-
 import "../stylesheets/MyRequests.css";
 import axios from 'axios'
+
 export default function MyRequests (){
     const username = window.sessionStorage.getItem("username")
     const user_id = window.sessionStorage.getItem("userId")
@@ -45,8 +45,7 @@ export default function MyRequests (){
         }
     }
     const listItems = myrequests.map((d) => 
-    <div className="list">
-        <article >
+        <article className="regular">
         <header>
         <div>
             <Link 
@@ -70,12 +69,12 @@ export default function MyRequests (){
         <button style={{backgroundColor:d.approved==true?"green":""}} onClick={(e) => {handleApprove_approve(e, d.request_id, d.approved)}}> Approve</button>
         <button style={{backgroundColor:d.approved==false?"red":""}} onClick={(e) => {handleApprove_disapprove(e, d.request_id, d.approved)}}> Not Approved</button>
     </article>
-    </div>);
+    );
    // console.log(myrequests)
     return (
         <div>
             <div>
-                <h2>Requests Made to You</h2>
+                <h2 className="centered">Requests Made to You</h2>
             </div>
             <div>
                 {listItems}

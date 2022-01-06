@@ -6,8 +6,9 @@ import HomePage from '../pages/HomePage.js'
 import SearchPage from '../pages/SearchPage.js'
 import headerProvider from '../apis/headerProvider';
 
-import "../stylesheets/MyRequests.css";
+import "../stylesheets/requests.css";
 import axios from 'axios'
+
 export default function Requests (){
     const username = window.sessionStorage.getItem("username")
     const user_id = window.sessionStorage.getItem("userId")
@@ -56,7 +57,7 @@ export default function Requests (){
     return (
         <div>
             <div>
-                <h2>Requests That I've Made</h2>
+                <h2 className = "center">Requests That I've Made</h2>
             </div>
             <div>
                 {listItems}
