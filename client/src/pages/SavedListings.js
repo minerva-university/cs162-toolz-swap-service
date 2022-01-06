@@ -47,7 +47,6 @@ export default function SavedListings () {
       return (
         <div className="my-listings-container">
             {details.map(tool => (
-              
               <div className="tool-tile-container">
                 <Link
                   to={`/ListingExpanded/${tool.listing_id}`}
@@ -57,7 +56,11 @@ export default function SavedListings () {
                     "title": tool.title,
                 }}>
                 <div className="tool-index-photo-wrapper">
-                  <img className="tool-index-photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} />
+                  {tool.item_image_url === null ? (
+                        <img className="tool-index-photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} /> 
+                          ) : (
+                            <img className="tool-index-photo" src={tool.item_image_url} /> 
+                          )}
                   <div className="tool-price">
                     ${tool.price}<span className="price-per-day"> /day</span>
                   </div>

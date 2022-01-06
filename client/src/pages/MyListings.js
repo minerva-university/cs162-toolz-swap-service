@@ -27,50 +27,50 @@ export default function MyListings (){
         console.log(allTools)
         return(
           <div>
-            <button className="top-btn">
-            <Link to={`/CreateListing`}>
-                List Another Tool
-            </Link>
-            </button>
+            <div className="another-tool">
+              <button className="top-btn">
+              <Link to={`/CreateListing`}>
+                  List Another Tool
+              </Link>
+              </button>
+            </div>
             <div className="my-listings-container">
-                  {allTools.data.map(tool => (
-                  <div className="tool-tile-container">
-                    <Link
-                        to={`/ListingExpanded/${tool.listing_id}`}
-                        params={{
-                            "tool_id": tool.listing_id,
-                            "title": tool.title
-                        }}>
-                      <div className="tool-index-photo-wrapper">
-                      {tool.item_image_url ? (
-                          <img className="tool-index-photo" src={tool.item_image_url} />
-                        ) : (
-                          <img className="tool-index-photo" src={"https://www.stanleytools.com/NA/product/images/3000x3000x96/STHT51457/STHT51457_2.jpg"} />
-                        )}
-                        <img className="tool-index-photo" src={tool.item_image_url} />
-                        <div className="tool-price">
-                          ${tool.price}<span className="price-per-day"> /day</span>
-                        </div>
-                      </div>
-                    </Link>
-                    <div className="tool-make-model-year-container">
-                    <div className="tool-rating">
-                        3.5 / 5 <img src={rating_star}/>
-                        
-                      </div>
-                      <span className="tool-make-model">
-                        {tool.title}
-                        
-                      </span>
+              {allTools.data.map(tool => (
+                <div className="tool-tile-container">
+                  <Link
+                    to={`/ListingExpanded/${tool.listing_id}`}
+                    state= {{ renting_start: null, renting_end: null}}
+                    params={{
+                      "tool_id": tool.listing_id,
+                      "title": tool.title,
+                  }}>
+                  <div className="tool-index-photo-wrapper">
+                    {tool.item_image_url === null ? (
+                          <img className="tool-index-photo" src={"https://lda.lowes.com/is/image/Lowes/DP18-102358_NPC_BG_Wrench_AH?scl=1"} /> 
+                            ) : (
+                              <img className="tool-index-photo" src={tool.item_image_url} /> 
+                            )}
+                    <div className="tool-price">
+                      ${tool.price}<span className="price-per-day"> /day</span>
                     </div>
+                  <div className="bottom-bar">
+                    <p className="tool-name">
+                      {tool.title}
+                    </p>
+                    <p className="tool-rating">
+                      {tool.rating_average}/5 &#11088;
+                    </p>
                   </div>
+                  </div>
+                  </Link>
+                </div>
                   ))}
                 </div>
                 </div>
         )
       } else {
         return (
-          <div>
+          <div className="another-tool">
             <p> Create Your First Listing</p>
             <button className="top-btn">
             <Link to={`/CreateListing`}>
