@@ -10,7 +10,6 @@ import {
   Input,
   Label,
 } from "reactstrap";
-import "../stylesheets/SearchPage.css";
 
 export default class CustomModal extends Component {
   constructor(props) {
