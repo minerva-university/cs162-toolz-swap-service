@@ -65,7 +65,7 @@ export default function SignUp (){
     return (
         <div>
             <input 
-            type="text" 
+            type="first_name" 
             name="first_name" 
             onChange={inputsHandler} 
             placeholder="First Name" 
@@ -74,7 +74,7 @@ export default function SignUp (){
             <br/>
 
             <input 
-            type="text" 
+            type="last_name" 
             name="last_name" 
             onChange={inputsHandler} 
             placeholder="Last Name" 
